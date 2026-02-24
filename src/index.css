@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "Clash Display";
+    src: url("/fonts/ClashDisplay-Variable.ttf") format("truetype");
+    font-weight: 300 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Blackheat";
+    src: url("/fonts/Blackheat.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+}
+@theme {
+    --font-clash-display: "Clash Display";
+    --font-blackheat: "Blackheat";
+}
