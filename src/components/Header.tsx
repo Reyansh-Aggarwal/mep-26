@@ -1,5 +1,3 @@
-import {FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faReadme } from '@fortawesome/free-brands-svg-icons';
 export const Header = () => {
     return (
         <div className = "h-fit w-full py-2 font-clash-display text-white items-center fixed">
