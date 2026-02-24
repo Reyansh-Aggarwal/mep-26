@@ -15,4 +15,5 @@
 @theme {
     --font-clash-display: "Clash Display";
     --font-blackheat: "Blackheat";
+    --background-image-grid: url('./assets/blackGrid.png');
 }
