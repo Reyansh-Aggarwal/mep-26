@@ -3,8 +3,8 @@ import { Suspense, useRef, useState } from "react";
 import { useCursor } from '@react-three/drei'
 import { Group} from "three";
 import { useGLTF } from '@react-three/drei'
-import { lerp } from "three/src/math/MathUtils.js";
-
+//import { lerp } from "three/src/math/MathUtils.js";
+import { easing } from 'maath'
 /*const Cube = ({position}: any) => {
     const ref = useRef<Mesh>(null);
     const [isHovered, setIsHovered] = useState(false);
@@ -61,222 +61,126 @@ import { lerp } from "three/src/math/MathUtils.js";
 }; */
 
 interface GlassProps {
-  position: [number, number, number];
-  scale: number;
-  num: 1 | 2 | 3 | 4;  // Union for safety
-  rotation?: [number, number, number];
+    position: [number, number, number];
+    scale: number;
+    num: 1 | 2 | 3 | 4;  // Union for safety
+    rotation?: [number, number, number];
 }
 
 function Glass({ position, scale, num}: GlassProps) {
-  let modelPath: string;
-  let defRotation: [number, number, number];
+    let modelPath: string;
+    let defRotation: [number, number, number];
+    let rotOffset : number = 0;
+    if (num === 1) {
+        modelPath = '/glass1-temp.glb';
+        defRotation = [Math.PI / 2, -Math.PI / 3, 0];
+        rotOffset = -Math.PI/8;
+    
+    } else if (num === 2) {
+        modelPath = '/glass2-temp.glb';
+        defRotation = [Math.PI/2, -Math.PI/2 - Math.PI/10, 0]; 
+        rotOffset = Math.PI/8;
 
-  if (num === 1) {
-    modelPath = '/glass1-temp.glb';
-    defRotation = [Math.PI / 2, -Math.PI / 3, 0];
-  } else if (num === 2) {
-    modelPath = '/glass2-temp.glb';
-    defRotation = [Math.PI/2, -Math.PI/2 - Math.PI/10, 0]; 
-  } else if (num === 3) {
-    modelPath = '/glass3-temp.glb';
-    defRotation = [Math.PI/2 , -Math.PI/2 + Math.PI/3, 0];  
-  } else if (num === 4) {
-    modelPath = '/glass4-temp.glb';
-    defRotation = [Math.PI/2, Math.PI/2, 0]; 
-  }else {
-    return <></>;  // Handle invalid num
-  }
+    } else if (num === 3) {
+        modelPath = '/glass3-temp.glb';
+        defRotation = [Math.PI/2 , -Math.PI/2 + Math.PI/3, 0];  
+        rotOffset = -Math.PI/16;
+    } else if (num === 4) {
+        modelPath = '/glass4-temp.glb';
+        defRotation = [Math.PI/2, Math.PI/2, 0]; 
+        rotOffset = -Math.PI/16;
+    }else {
+        //this isnt needed but removing it is breaking something
+        return <></>;  // Handle invalid num
+    } 
 
-  const ref = useRef<Group>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  // The "Original" Y rotation from your defRotation array
-  const originalX = defRotation[0];
-  // The "Hovered" target (Original + 180 degrees)
-  const targetX = originalX + Math.PI;
+    const ref = useRef<Group>(null);
+    const [isHovered, setIsHovered] = useState(false);
+    const targetZ = 0.65;
+    const originalZ = 0;
+    const originalRoto = (num == 4 || num == 3) ? defRotation[0] : defRotation[1];
+    const targetRoto = originalRoto + rotOffset;
+    useCursor(isHovered);
 
-  useCursor(isHovered);
+    useFrame((state, delta) => {
+        if (!ref.current) return;
 
-  useFrame(() => {
-    if (ref.current) {
-      // 1. Determine which angle we are aiming for
-      const destination = isHovered ? targetX : originalX;
+        const destinationZ = isHovered ? targetZ : originalZ;
+        const finalRoto = isHovered ? targetRoto : originalRoto;
 
-      // 2. Smoothly interpolate (Lerp) towards that destination
-      // The '0.1' is the smoothing factor. Increase for faster rotation.
-      ref.current.rotation.x = lerp(
-        ref.current.rotation.x,
-        destination,
-        0.03
-      );
+        easing.damp3(ref.current.position, [position[0], position[1], destinationZ], 0.2, delta);
+
+        if (num === 3 || num === 4) {
+            easing.damp(ref.current.rotation, 'x', finalRoto, 0.2, delta);
+        } else {
+            easing.damp(ref.current.rotation, 'y', finalRoto, 0.2, delta);
+        }
+
+        if (isHovered) {
+            const time = state.clock.getElapsedTime();
+            ref.current.position.y += Math.sin(time * 2) * 0.002; // Tiny vertical float
+            ref.current.rotation.z += Math.cos(time * 1) * 0.001; // Tiny tilt wobble
+        }
+
+        //Increasing size (slightly)
+        const targetScale = isHovered ? scale * 1.05 : scale;
+        easing.damp3(ref.current.scale, [targetScale, targetScale, targetScale], 0.15, delta);
+    });
+
+    const { scene } = useGLTF(modelPath);
+
+    const redirect = ()  => {
+        let id;
+        if (num == 1){
+            id = "aboutUs";
+        } else if (num == 2){
+            
+        } else if (num == 3){
+
+        } else if (num == 4){
+
+        } 
+        const element = document.getElementById(id ? id : "aboutUs");
+        if (element) {
+                element.scrollIntoView({ 
+                behavior: 'smooth', // Makes it glide instead of jumping
+                block: 'start'      // Aligns the top of the element to the top of the viewport
+                });
+            }
     }
-  });
 
-  const { scene } = useGLTF(modelPath);
-
-  return (
-    <group
-      ref={ref}
-      position={position}
-      rotation={defRotation}
-      scale={scale}
-      // Use pointerOver/Out for better stability with complex models
-      onPointerOver={(e) => {
-        e.stopPropagation();
-        setIsHovered(true);
-      }}
-      onPointerOut={() => {
-        setIsHovered(false);
-      }}
-    >
-      <primitive object={ scene } />
-    </group>
-  );
+    return (
+        <group
+        ref={ref}
+        position={position}
+        rotation={defRotation}
+        scale={scale}
+        // Use pointerOver/Out for better stability with complex models
+        onPointerOver={(e) => {
+            e.stopPropagation();
+            setIsHovered(true);
+        }}
+        onPointerOut={() => {
+            setIsHovered(false);
+        }}
+        onClick={redirect}
+        >
+        <primitive object={ scene } />
+        </group>
+    );
 }
-function Glass2({ position, scale, num}: GlassProps) {
-  let modelPath: string;
-  let defRotation: [number, number, number];
 
-  if (num === 1) {
-    modelPath = '/glass1-temp.glb';
-    defRotation = [Math.PI / 2, -Math.PI / 3, 0];
-  } else if (num === 2) {
-    modelPath = '/glass2-temp.glb';
-    defRotation = [Math.PI/2, -Math.PI/2 - Math.PI/10, 0]; 
-  } else if (num === 3) {
-    modelPath = '/glass3-temp.glb';
-    defRotation = [Math.PI/2 , -Math.PI/2 + Math.PI/3, 0];  
-  } else if (num === 4) {
-    modelPath = '/glass4-temp.glb';
-    defRotation = [Math.PI/2, Math.PI/2, 0]; 
-  }else {
-    return <></>;  // Handle invalid num
-  }
-
-  const ref = useRef<Group>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const targetZ = 1;
-  const originalZ = 0;
-  // The "Original" Y rotation from your defRotation array
-  useCursor(isHovered);
-
-  useFrame(() => {
-    if (ref.current) {
-      // 1. Determine which angle we are aiming for
-      const destination = isHovered ? targetZ : originalZ;
-
-      // 2. Smoothly interpolate (Lerp) towards that destination
-      // The '0.1' is the smoothing factor. Increase for faster rotation.
-      ref.current.position.z = lerp(
-        ref.current.position.z,
-        destination,
-        0.03
-      );
-    }
-  });
-
-  const { scene } = useGLTF(modelPath);
-
-  return (
-    <group
-      ref={ref}
-      position={position}
-      rotation={defRotation}
-      scale={scale}
-      // Use pointerOver/Out for better stability with complex models
-      onPointerOver={(e) => {
-        e.stopPropagation();
-        setIsHovered(true);
-      }}
-      onPointerOut={() => {
-        setIsHovered(false);
-      }}
-    >
-      <primitive object={ scene } />
-    </group>
-  );
-}
-function Glass3({ position, scale, num}: GlassProps) {
-  let modelPath: string;
-  let defRotation: [number, number, number];
-
-  if (num === 1) {
-    modelPath = '/glass1-temp.glb';
-    defRotation = [Math.PI / 2, -Math.PI / 3, 0];
-  } else if (num === 2) {
-    modelPath = '/glass2-temp.glb';
-    defRotation = [Math.PI/2, -Math.PI/2 - Math.PI/10, 0]; 
-  } else if (num === 3) {
-    modelPath = '/glass3-temp.glb';
-    defRotation = [Math.PI/2 , -Math.PI/2 + Math.PI/3, 0];  
-  } else if (num === 4) {
-    modelPath = '/glass4-temp.glb';
-    defRotation = [Math.PI/2, Math.PI/2, 0]; 
-  }else {
-    return <></>;  // Handle invalid num
-  }
-
-  const ref = useRef<Group>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const targetZ = 1;
-  const originalZ = 0;
-  const originalY = defRotation[0];
-  const targetY = originalY + Math.PI;
-  // The "Original" Y rotation from your defRotation array
-  useCursor(isHovered);
-
-  useFrame(() => {
-    if (ref.current) {
-      // 1. Determine which angle we are aiming for
-      const destination = isHovered ? targetZ : originalZ;
-      const finalRoto = isHovered ? targetY : originalY;
-      // 2. Smoothly interpolate (Lerp) towards that destination
-      // The '0.1' is the smoothing factor. Increase for faster rotation.
-      ref.current.position.z = lerp(
-        ref.current.position.z,
-        destination,
-        0.03
-      );
-      ref.current.rotation.x = lerp(
-        ref.current.rotation.x,
-        finalRoto,
-        0.03
-      );
-    }
-  });
-
-  const { scene } = useGLTF(modelPath);
-
-  return (
-    <group
-      ref={ref}
-      position={position}
-      rotation={defRotation}
-      scale={scale}
-      // Use pointerOver/Out for better stability with complex models
-      onPointerOver={(e) => {
-        e.stopPropagation();
-        setIsHovered(true);
-      }}
-      onPointerOut={() => {
-        setIsHovered(false);
-      }}
-    >
-      <primitive object={ scene } />
-    </group>
-  );
-}
 export const Canvas3D = () => {
-
     return(
-    <div className = "w-full h-dvh fixed top-0 z-40 pointer-events-none">
-        <Canvas className = "w-full bg-transparent">
+    <div className = "w-full h-dvh absolute top-0 z-40 pointer-events-none ">
+        <Canvas className = "w-fit bg-transparent invisible md:visible">
             <directionalLight position = {[0,0,1]}  />
             <ambientLight />
             <Suspense fallback={null}>
-                <Glass position={[-2.5,2,0]} scale={10} num = {1} />
-                <Glass3 position={[2.5,2,0]} scale={10} num = {2} />
-                <Glass3 position={[-2.5,-2,0]} scale={10} num = {3} />
-                <Glass2 position={[2.5,-2,0]} scale={10} num = {4} />
+                <Glass position={[-3,2,0]} scale={10} num = {1} />
+                <Glass position={[3,2,0]} scale={10} num = {2} />
+                <Glass position={[-3,-2,0]} scale={10} num = {3} />
+                <Glass position={[3,-2,0]} scale={10} num = {4} />
             </Suspense>
         </Canvas>
     </div>

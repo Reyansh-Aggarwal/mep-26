@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { NotFound } from './pages/NotFound.tsx'
 import { Matrix } from './pages/Matrix.tsx'
@@ -10,7 +10,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route index element = {<Home />} />
+          <Route index element = {<Navigate to="/home" replace />} />
+          <Route path = "home" element = {<Home />} />
           <Route path = "matrix" element = {<Matrix />} />
           <Route path = "ecommbuzz" element = {<Ecomm />} />
           <Route path = "psynapse" element = {<Psynapse />} />
