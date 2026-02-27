@@ -1,12 +1,11 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useRef, useState } from "react";
-import { Center, Stage, useCursor } from '@react-three/drei'
-import { Group, type Mesh } from "three";
+import { useCursor } from '@react-three/drei'
+import { Group} from "three";
 import { useGLTF } from '@react-three/drei'
-import type { Path } from "react-router-dom";
 import { lerp } from "three/src/math/MathUtils.js";
 
-const Cube = ({position}: any) => {
+/*const Cube = ({position}: any) => {
     const ref = useRef<Mesh>(null);
     const [isHovered, setIsHovered] = useState(false);
     
@@ -59,7 +58,8 @@ const Cube = ({position}: any) => {
             <meshStandardMaterial color={isHovered ? "orange" : "blue"} />
         </mesh>
     );
-};
+}; */
+
 interface GlassProps {
   position: [number, number, number];
   scale: number;
@@ -67,7 +67,7 @@ interface GlassProps {
   rotation?: [number, number, number];
 }
 
-function Glass({ position, scale, num, rotation: propRotation }: GlassProps) {
+function Glass({ position, scale, num}: GlassProps) {
   let modelPath: string;
   let defRotation: [number, number, number];
 
@@ -96,7 +96,7 @@ function Glass({ position, scale, num, rotation: propRotation }: GlassProps) {
 
   useCursor(isHovered);
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (ref.current) {
       // 1. Determine which angle we are aiming for
       const destination = isHovered ? targetX : originalX;
@@ -124,7 +124,7 @@ function Glass({ position, scale, num, rotation: propRotation }: GlassProps) {
         e.stopPropagation();
         setIsHovered(true);
       }}
-      onPointerOut={(e) => {
+      onPointerOut={() => {
         setIsHovered(false);
       }}
     >
@@ -132,7 +132,7 @@ function Glass({ position, scale, num, rotation: propRotation }: GlassProps) {
     </group>
   );
 }
-function Glass2({ position, scale, num, rotation: propRotation }: GlassProps) {
+function Glass2({ position, scale, num}: GlassProps) {
   let modelPath: string;
   let defRotation: [number, number, number];
 
@@ -159,7 +159,7 @@ function Glass2({ position, scale, num, rotation: propRotation }: GlassProps) {
   // The "Original" Y rotation from your defRotation array
   useCursor(isHovered);
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (ref.current) {
       // 1. Determine which angle we are aiming for
       const destination = isHovered ? targetZ : originalZ;
@@ -187,7 +187,7 @@ function Glass2({ position, scale, num, rotation: propRotation }: GlassProps) {
         e.stopPropagation();
         setIsHovered(true);
       }}
-      onPointerOut={(e) => {
+      onPointerOut={() => {
         setIsHovered(false);
       }}
     >
@@ -195,7 +195,7 @@ function Glass2({ position, scale, num, rotation: propRotation }: GlassProps) {
     </group>
   );
 }
-function Glass3({ position, scale, num, rotation: propRotation }: GlassProps) {
+function Glass3({ position, scale, num}: GlassProps) {
   let modelPath: string;
   let defRotation: [number, number, number];
 
@@ -224,7 +224,7 @@ function Glass3({ position, scale, num, rotation: propRotation }: GlassProps) {
   // The "Original" Y rotation from your defRotation array
   useCursor(isHovered);
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (ref.current) {
       // 1. Determine which angle we are aiming for
       const destination = isHovered ? targetZ : originalZ;
@@ -257,7 +257,7 @@ function Glass3({ position, scale, num, rotation: propRotation }: GlassProps) {
         e.stopPropagation();
         setIsHovered(true);
       }}
-      onPointerOut={(e) => {
+      onPointerOut={() => {
         setIsHovered(false);
       }}
     >
