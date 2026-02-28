@@ -84,8 +84,8 @@ function Glass({ position, scale, num}: GlassProps) {
         rotOffset = Math.PI/8;
 
     } else if (num === 3) {
-        modelPath = '/glass3-temp.glb';
-        defRotation = [Math.PI/2 , -Math.PI/2 + Math.PI/3, 0];  
+        modelPath = '/glass5-temp.glb';
+        defRotation = [Math.PI/2 , 0.1, 0];  
         rotOffset = -Math.PI/16;
     } else if (num === 4) {
         modelPath = '/glass4-temp.glb';
@@ -197,7 +197,7 @@ export const Canvas3D = () => {
             <Suspense fallback={null}>
                 <Glass position={[-3,2,0]} scale={10} num = {1} />
                 <Glass position={[3,2,0]} scale={10} num = {2} />
-                <Glass position={[-3,-2,0]} scale={10} num = {3} />
+                <Glass position={[-3,-1.75,0]} scale={13} num = {3} />
                 <Glass position={[3,-2,0]} scale={10} num = {4} />
             </Suspense>
         </Canvas>
