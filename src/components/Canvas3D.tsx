@@ -1,10 +1,11 @@
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useLayoutEffect, useRef, useState } from "react";
 import { useCursor } from '@react-three/drei'
-import { Group} from "three";
+import { DoubleSide, Group, Mesh} from "three";
 import { useGLTF } from '@react-three/drei'
 //import { lerp } from "three/src/math/MathUtils.js";
 import { easing } from 'maath'
+
 /*const Cube = ({position}: any) => {
     const ref = useRef<Mesh>(null);
     const [isHovered, setIsHovered] = useState(false);
@@ -68,6 +69,7 @@ interface GlassProps {
 }
 
 function Glass({ position, scale, num}: GlassProps) {
+
     let modelPath: string;
     let defRotation: [number, number, number];
     let rotOffset : number = 0;
@@ -129,6 +131,23 @@ function Glass({ position, scale, num}: GlassProps) {
 
     const { scene } = useGLTF(modelPath);
 
+    useLayoutEffect(() => {
+        scene.traverse((child) => {
+        if (child instanceof Mesh) {
+            child.material.transparent = true;
+
+            child.material.depthWrite = false;
+            child.material.side = DoubleSide;
+            
+            if (child.material.map) {
+            child.material.alphaMap = child.material.map;
+            }
+
+            child.material.needsUpdate = true;
+        }
+        });
+    }, [scene]);
+
     const redirect = ()  => {
         let id;
         if (num == 1){
@@ -165,7 +184,7 @@ function Glass({ position, scale, num}: GlassProps) {
         }}
         onClick={redirect}
         >
-        <primitive object={ scene } />
+            <primitive object={ scene } />
         </group>
     );
 }
@@ -175,7 +194,6 @@ export const Canvas3D = () => {
     <div className = "w-full h-dvh absolute top-0 z-40 pointer-events-none ">
         <Canvas className = "w-fit bg-transparent invisible md:visible">
             <directionalLight position = {[0,0,1]}  />
-            <ambientLight />
             <Suspense fallback={null}>
                 <Glass position={[-3,2,0]} scale={10} num = {1} />
                 <Glass position={[3,2,0]} scale={10} num = {2} />

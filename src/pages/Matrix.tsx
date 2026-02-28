@@ -1,4 +1,5 @@
 import { Header } from "../components/Header";
+import { MatrixHero } from "../components/MatrixHero";
 
 export const Matrix = () => {
     return (
@@ -6,6 +7,7 @@ export const Matrix = () => {
                 
                 <Header />
 
+                <MatrixHero />
                 
             </div>
     );

@@ -1,8 +1,9 @@
 import { cn } from "../utils"
 
 export const AboutUs = () => {
+
     return (
-        <div id = "aboutUs" className = "min-h-dvh">
+        <div  id = "aboutUs" className = "min-h-dvh">
             <div className = {cn(
                 "h-full flex flex-col gap-0 text-center md:text-left",
                 "font-blackheat text-[6rem] md:text-[8rem] xl:text-[10rem]",
@@ -10,10 +11,14 @@ export const AboutUs = () => {
                 )}>
             <span>About Us</span>
             <span id = "content"
-            className = "text-xl md:text-2xl xl:text-3xl font-clash-display md:-mt-8">
-                Founded in 2000, the Matrix Clan at Mount St. Mary School, Delhi Cantt., has grown into a leading technology club in Delhi. While led by students from classes XI and XII, it actively involves all Marians in exploring new tech frontiers. Its strong presence at inter-school events highlights its reputation for innovation and technological excellence.
-                At the heart of its initiatives is Matrix Ecomm Psynapse, an annual event co-founded by the club that anchors the school’s tech calendar. This event not only showcases student talent but also offers a platform for creative expression. Beyond events, the club supports various school tech and design projects, contributing richly to its digital environment.
-                Guided by its motto—"to make a dent in the universe, one keystroke at a time"—the Matrix Clan fosters innovation, creativity, and leadership, making a lasting impact on both everyday projects and major school initiatives.
+            className = {cn(
+                "text-xl md:text-2xl xl:text-3xl font-clash-display md:-mt-8"
+            )}>
+                The wait is over. The 25th Bro. Aloysius Matrix Ecomm Psynapse Fest is back—bigger, bolder, and more thrilling than ever. This isn’t just an event; it’s the highlight of the year.
+                Celebrating sharp minds and standout skills across Computer Science, Economics, and Psychology. Participants will take on intense challenges in tech, business, and behavioral science—designed to discover the best young talent out there.
+                What sets this fest apart? No hand-holding. It’s all you—your skill, your grit, your game. Only the exceptional will rise, making this a true test of mastery.
+                This year promises to be unforgettable—a space to learn, connect, and shine.
+                This isn’t just an event—it’s a journey of growth. Step in, rise up, and remember: every moment counts.
             </span>
             </div>
         </div>
