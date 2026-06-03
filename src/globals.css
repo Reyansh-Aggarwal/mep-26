@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Modern scrollbar and focus ring behaviors */
+/* Define the font-face */
+@font-face {
+  font-family: 'Clash Display';
+  src: url('assets/fonts/ClashDisplay-Variable.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  /* Supports everything from Thin to Black */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Eternalo';
+  src: url('assets/fonts/Eternalo.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  /* Supports everything from Thin to Black */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('assets/fonts/HelveticaNeueLight.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@theme {
+  /* For Tailwind v4.0+ */
+  --font-clash: "Clash Display", sans-serif;
+  --font-eternalo: "Eternalo", serif;
+  --font-helvetical: "Helvetica Neue", helvetica;
+
+  --color-myblack: #161616;
+  --color-green: #00ff6b;
+  --color-blue: #11a8cd;
+  --color-pink: #ff006e;
+
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+Canvas {
+  height: 100dvh;
+}
