@@ -122,7 +122,7 @@ export const AboutSection = () => {
                 {
                     opacity: 1,
                     pointerEvents: "auto",
-                    duration: 1,
+                    duration: 0.6,
                     ease: "power2.out",
                 },
                 "expand+=0.3"
