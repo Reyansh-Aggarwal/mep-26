@@ -47,13 +47,7 @@ export const Navbar = () => {
                     <img src={mepLogo} className="h-12" alt="MEP Logo" />
                 </div>
             </div>
-            <div
-                className={cn(
-                    "flex justify-center items-center p-2",
-                    "transition-all duration-300 ease-in-out",
-                    isScrolled ? "bg-black rounded-full" : "")}>
-                <img src={schoolLogo} />
-            </div>
+
 
         </div >
     );

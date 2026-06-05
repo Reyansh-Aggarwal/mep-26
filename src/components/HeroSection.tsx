@@ -1,18 +1,68 @@
 import halftone_bg from "../assets/halftone.png";
+import { cn } from "../utils";
+import small_glass from "../assets/images/glass_small.png";
 
 export const HeroSection = () => {
     return (
         <div className="min-h-dvh w-full bg-myblack overflow-hidden flex text-center items-center justify-center ">
             <img src={halftone_bg} className="absolute w-full h-full object-cover z-0" alt="Halftone Background" />
-            <div className="md:text-[10rem] font-eternalo flex flex-col w-full px-2 md:px-8 select-none z-10 leading-40">
-                <span className="hover:text-green transition-all duration-300 ease-in-out">
+            <div className="text-[9rem] md:text-[10rem] font-eternalo flex flex-col w-full select-none z-10 leading-40">
+                <span id="Matrix"
+                    className={cn(
+                        "text-green md:text-white hover:text-green",
+                        "transition-all duration-300 ease-in-out"
+                    )}>
                     Matrix
+                    <div className="absolute left-1/2 -translate-y-[6rem] ">
+                        <div id="glassShard1"
+                            className={cn(
+                                "w-[120px] h-[120px] ",
+                                "bg-black/10 backdrop-blur-xs md:scale-80",
+                                "[mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]",
+
+                            )}
+                            style={{
+                                maskImage: `url(${small_glass})`,
+                                WebkitMaskImage: `url(${small_glass})`
+                            }}
+                        />
+                    </div>
+
+
                 </span>
-                <span className="hover:text-blue transition-all duration-300 ease-in-out">
+                <span id="Ecomm"
+                    className={cn(
+                        "text-blue md:text-white hover:text-blue",
+                        " transition-all duration-300 ease-in-out"
+                    )}>
                     Ecomm
+                    <div id="glassShard1"
+                        className={cn(
+                            "absolute left-1/2 -translate-x-[100%] -translate-y-[6rem] w-[120px] h-[120px] ",
+                            "bg-black/10 backdrop-blur-xs md:scale-80 rotate-45",
+                            "[mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]")}
+                        style={{
+                            maskImage: `url(${small_glass})`,
+                            WebkitMaskImage: `url(${small_glass})`
+                        }}
+                    />
                 </span>
-                <span className="hover:text-pink transition-all duration-300 ease-in-out">
+                <span id="Psynapse"
+                    className={cn(
+                        "text-pink md:text-white hover:text-pink",
+                        "transition-all duration-300 ease-in-out"
+                    )}>
                     Psynapse
+                    <div id="glassShard1"
+                        className={cn(
+                            "absolute left-1/2 translate-x-[2rem] -translate-y-[9rem] w-[120px] h-[120px] ",
+                            "bg-black/10 backdrop-blur-xs md:scale-80 rotate-240",
+                            "[mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]")}
+                        style={{
+                            maskImage: `url(${small_glass})`,
+                            WebkitMaskImage: `url(${small_glass})`
+                        }}
+                    />
                 </span>
             </div>
         </div >
