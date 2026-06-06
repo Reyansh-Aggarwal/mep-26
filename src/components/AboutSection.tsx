@@ -4,6 +4,7 @@ import mepLogo from "../assets/logos/mep_logo.png";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { HalftoneBg } from "./HalftoneBg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -89,7 +90,7 @@ export const AboutSection = () => {
             tl.to(title, {
                 scale: 0.8,
                 transformOrigin: "center center",
-                translateX: 0,
+                xPercent: 20,
                 yPercent: -200,
                 duration: 0.6,
                 ease: "power1.out",
@@ -111,11 +112,7 @@ export const AboutSection = () => {
             ref={sectionRef}
             className="min-h-dvh w-full bg-[#070707] overflow-hidden flex text-center items-center justify-center relative"
         >
-            <img
-                src={halftone_bg}
-                className="absolute w-full h-full object-cover z-0"
-                alt="Halftone Background"
-            />
+            <HalftoneBg />
 
             {/* ── Wrapper that holds title + content together ── */}
             <div className="relative w-full flex flex-col items-center justify-center md:px-8 select-text">
@@ -181,8 +178,8 @@ export const AboutSection = () => {
                         "z-10 ")}
                 >
                     <p className={cn(
-                        "animate-fade-in font-helvetical basis-1/2",
-                        "px-16 text-left pt-16")}>
+                        "animate-fade-in font-helvetical lg:basis-1/2 ",
+                        "px-16 text-left pt-16 h-1/3")}>
                         The wait is over. The 26th Bro. Aloysius Matrix Ecomm Psynapse Fest is back—bigger, bolder, and more thrilling than ever. This isn’t just an event; it’s the highlight of the year.
                         Celebrating sharp minds and standout skills across Computer Science, Economics, and Psychology. Participants will take on intense challenges in tech, business, and behavioral science—designed to discover the best young talent out there.
                         What sets this fest apart? No hand-holding. It’s all you—your skill, your grit, your game. Only the exceptional will rise, making this a true test of mastery.

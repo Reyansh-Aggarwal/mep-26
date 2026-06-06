@@ -1,11 +1,11 @@
-import halftone_bg from "../assets/halftone.png";
 import { cn } from "../utils";
 import small_glass from "../assets/images/glass_small.png";
+import { HalftoneBg } from "./HalftoneBg";
 
 export const HeroSection = () => {
     return (
         <div className="min-h-dvh w-full bg-myblack overflow-hidden flex text-center items-center justify-center ">
-            <img src={halftone_bg} className="absolute w-full h-full object-cover z-0" alt="Halftone Background" />
+            <HalftoneBg />
             <div className="text-[9rem] md:text-[10rem] font-eternalo flex flex-col w-full select-none z-10 leading-40">
                 <span id="Matrix"
                     className={cn(
