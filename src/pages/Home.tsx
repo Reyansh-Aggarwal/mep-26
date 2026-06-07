@@ -5,6 +5,7 @@ import { AboutSection } from "../components/AboutSection";
 import { HeroSection } from "../components/HeroSection";
 import { Navbar } from "../components/Navbar";
 import { Gallery } from "../components/Gallery";
+import { BriefingSection } from "../components/BriefingSection";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -21,6 +22,7 @@ export const Home = () => {
                 <HeroSection />
                 <AboutSection />
                 <Gallery />
+                <BriefingSection />
             </div>
         </div>
     );

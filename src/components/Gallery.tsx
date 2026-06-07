@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HalftoneBg } from "./HalftoneBg";
-import mepLogo from "../assets/logos/mep_logo.png";
 import Underline from "../assets/images/text_underline.png"
 import { cn } from "../utils";
 // Register the plugin
@@ -23,7 +22,8 @@ export const Gallery = () => {
         // Create the GSAP tween
         const ctx = gsap.context(() => {
             gsap.to(container, {
-                backgroundColor: "#efefef", // Tailwind's indigo-950
+                backgroundColor: "#ffffff",
+                opacity: 1,
                 scrollTrigger: {
                     trigger: triggerSection,
                     start: "top 40%",
@@ -32,12 +32,21 @@ export const Gallery = () => {
                     markers: false,
                 },
             });
-
+            gsap.to(triggerSection, {
+                opacity: 1,
+                scrollTrigger: {
+                    trigger: triggerSection,
+                    start: "top 30%",
+                    end: "top 20%",
+                    scrub: 0.8,
+                    markers: false,
+                },
+            });
             gsap.to(nav, {
                 opacity: 1, // GSAP uses 0 to 1 for opacity values
                 scrollTrigger: {
                     trigger: triggerSection,
-                    start: "top 60%",
+                    start: "top 40%",
                     end: "top 20%",
                     scrub: 0.8,
                 },
@@ -49,31 +58,11 @@ export const Gallery = () => {
 
     return (
         // We use standard inline style or hex colors for GSAP to interpolate smoothly
-        <div ref={containerRef} className="bg-[#070707] text-white transition-colors duration-300 h-dvh overflow-hidden">
+        <div ref={containerRef} className="bg-[#070707] text-white transition-colors duration-300 h-dvh overflow-hidden ">
             <HalftoneBg />
-            <div ref={navRef}
-                className="absolute top-6 w-full opacity-0 flex justify-center items-center">
-                {/* White layer */}
-
-
-                {/* Main layer */}
-                <div
-                    className={cn(
-                        "flex justify-center items-center w-fit",
-                        "px-8 bg-myblack z-10",
-                        " outline-4 outline-black",
-                    )}
-                >
-                    <img
-                        src={mepLogo}
-                        className="h-24 lg:h-[10rem]"
-                        alt="MEP Logo"
-                    />
-                </div>
-            </div>
             <section
                 ref={triggerSectionRef}
-                className="h-screen flex flex-col items-center justify-center border-t border-slate-700"
+                className="h-screen flex flex-col items-center justify-center opacity-0"
             >
                 <div id="title"
                     className="w-full font-eternalo text-myblack text-8xl md:text-8xl text-center">

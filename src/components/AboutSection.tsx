@@ -185,9 +185,7 @@ export const AboutSection = () => {
                         What sets this fest apart? No hand-holding. It’s all you—your skill, your grit, your game. Only the exceptional will rise, making this a true test of mastery.
 
                     </p>
-                    <div className="animate-fade-in flex justify-center items-center basis-1/2">
-                        whatever graphic
-                    </div>
+
                 </div>
             </div>
         </div >
