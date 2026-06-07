@@ -10,13 +10,11 @@ gsap.registerPlugin(ScrollTrigger);
 export const BriefingSection = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const triggerSectionRef = useRef<HTMLDivElement>(null);
-    const navRef = useRef<HTMLDivElement>(null);
 
 
     useEffect(() => {
         const container = containerRef.current;
         const triggerSection = triggerSectionRef.current;
-        const nav = navRef.current;
         if (!container || !triggerSection) return;
 
         // Create the GSAP tween

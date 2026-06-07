@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HalftoneBg } from "./HalftoneBg";
 import Underline from "../assets/images/text_underline.png"
-import { cn } from "../utils";
+
 // Register the plugin
 gsap.registerPlugin(ScrollTrigger);
 

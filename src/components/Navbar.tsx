@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { cn } from "../utils";
 import mepLogo from "../assets/logos/mep_logo.png";
-import schoolLogo from "../assets/logos/school_logo.png";
 export const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
 

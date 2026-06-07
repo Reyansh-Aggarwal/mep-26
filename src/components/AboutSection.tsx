@@ -1,4 +1,3 @@
-import halftone_bg from "../assets/halftone.png";
 import { cn } from "../utils";
 import mepLogo from "../assets/logos/mep_logo.png";
 import { useEffect, useRef } from "react";
