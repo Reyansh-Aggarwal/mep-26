@@ -15,6 +15,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
     const navigate = useNavigate();
     const registerClicked = () => {
         const registerButton = registerRef.current;
+        if (!registerButton) { return; }
         registerButton.classList.add("mr-7", "mt-7");
 
         console.log("Register clicked");
@@ -25,6 +26,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
     }
     const brochureClicked = () => {
         const brochureButton = brochureRef.current;
+        if (!brochureButton) { return; }
         brochureButton.classList.add("mr-7", "mt-7");
 
         console.log("brochure clicked");
