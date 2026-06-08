@@ -1,11 +1,11 @@
 import { cn } from "../utils";
 import small_glass from "../assets/images/glass_small.png";
-import { HalftoneBg } from "./HalftoneBg";
+import { forwardRef } from "react";
 
-export const HeroSection = () => {
+export const HeroSection = forwardRef<HTMLDivElement>((_, ref) => {
     return (
-        <div className="min-h-dvh w-full bg-myblack overflow-hidden flex text-center items-center justify-center ">
-            <HalftoneBg />
+        <div ref={ref} className="min-h-dvh w-full ioverflow-hidden flex text-center items-center justify-center ">
+
             <div className="text-[9rem] md:text-[10rem] font-eternalo flex flex-col w-full select-none z-10 leading-40">
                 <span id="Matrix"
                     className={cn(
@@ -67,4 +67,4 @@ export const HeroSection = () => {
             </div>
         </div >
     );
-}
+});

@@ -1,14 +1,13 @@
 import { cn } from "../utils";
 import mepLogo from "../assets/logos/mep_logo.png";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, forwardRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { HalftoneBg } from "./HalftoneBg";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const AboutSection = () => {
-    const sectionRef = useRef<HTMLDivElement>(null);
+export const AboutSection = forwardRef<HTMLDivElement>((_, ref) => {
+    const containerRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLDivElement>(null);
     const whatRef = useRef<HTMLSpanElement>(null);
     const questionRef = useRef<HTMLSpanElement>(null);
@@ -19,7 +18,7 @@ export const AboutSection = () => {
         const mm = gsap.matchMedia();
 
         mm.add("(min-width: 768px)", () => {
-            const section = sectionRef.current;
+            const section = containerRef.current;
             const title = titleRef.current;
             const whatEl = whatRef.current;
             const questionEl = questionRef.current;
@@ -108,10 +107,13 @@ export const AboutSection = () => {
 
     return (
         <div
-            ref={sectionRef}
-            className="min-h-dvh w-full bg-[#070707] overflow-hidden flex text-center items-center justify-center relative"
+            ref={(node) => {
+                containerRef.current = node;
+                if (typeof ref === 'function') ref(node);
+                else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+            }}
+            className="min-h-dvh w-full overflow-hidden flex text-center items-center justify-center relative py-12"
         >
-            <HalftoneBg />
 
             {/* ── Wrapper that holds title + content together ── */}
             <div className="relative w-full flex flex-col items-center justify-center md:px-8 select-text">
@@ -124,7 +126,7 @@ export const AboutSection = () => {
                         "relative md:absolute ",
                         "flex flex-row flex-wrap items-center justify-center z-10 ",
                         "pt-20 md:pt-0 gap-3 md:gap-0",
-                        "text-5xl md:text-8xl lg:text-[10rem] font-eternalo"
+                        "text-5xl md:text-8xl lg:text-[9rem] font-eternalo"
                     )}
                 >
                     {/* "What is" */}
@@ -153,7 +155,7 @@ export const AboutSection = () => {
                         >
                             <img
                                 src={mepLogo}
-                                className="h-32 lg:h-[10rem]"
+                                className="h-32 lg:h-[9rem]"
                                 alt="MEP Logo"
                             />
                         </div>
@@ -177,7 +179,7 @@ export const AboutSection = () => {
                         "z-10 ")}
                 >
                     <p className={cn(
-                        "animate-fade-in font-helvetical lg:basis-1/2 ",
+                        "animate-fade-in font-helvetical ",
                         "px-16 text-left pt-16 h-1/3")}>
                         The wait is over. The 26th Bro. Aloysius Matrix Ecomm Psynapse Fest is back—bigger, bolder, and more thrilling than ever. This isn’t just an event; it’s the highlight of the year.
                         Celebrating sharp minds and standout skills across Computer Science, Economics, and Psychology. Participants will take on intense challenges in tech, business, and behavioral science—designed to discover the best young talent out there.
@@ -189,4 +191,4 @@ export const AboutSection = () => {
             </div>
         </div >
     );
-};
+});

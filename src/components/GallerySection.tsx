@@ -1,56 +1,33 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, forwardRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { HalftoneBg } from "./HalftoneBg";
 import Underline from "../assets/images/text_underline.png"
-
 // Register the plugin
 gsap.registerPlugin(ScrollTrigger);
 
-export const Gallery = () => {
+export const GallerySection = forwardRef<HTMLDivElement>((_, ref) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const triggerSectionRef = useRef<HTMLDivElement>(null);
-    const navRef = useRef<HTMLDivElement>(null);
 
 
     useEffect(() => {
-        const container = containerRef.current;
+
         const triggerSection = triggerSectionRef.current;
-        const nav = navRef.current;
-        if (!container || !triggerSection) return;
+        if (!triggerSection) return;
 
         // Create the GSAP tween
         const ctx = gsap.context(() => {
-            gsap.to(container, {
-                backgroundColor: "#ffffff",
-                opacity: 1,
-                scrollTrigger: {
-                    trigger: triggerSection,
-                    start: "top 40%",
-                    end: "top 20%",
-                    scrub: 0.8,
-                    markers: false,
-                },
-            });
             gsap.to(triggerSection, {
                 opacity: 1,
                 scrollTrigger: {
                     trigger: triggerSection,
                     start: "top 30%",
-                    end: "top 20%",
+                    end: "top 0%",
                     scrub: 0.8,
                     markers: false,
                 },
             });
-            gsap.to(nav, {
-                opacity: 1, // GSAP uses 0 to 1 for opacity values
-                scrollTrigger: {
-                    trigger: triggerSection,
-                    start: "top 40%",
-                    end: "top 20%",
-                    scrub: 0.8,
-                },
-            });
+
         });
 
         return () => ctx.revert(); // Clean up on unmount to prevent memory leaks
@@ -58,8 +35,12 @@ export const Gallery = () => {
 
     return (
         // We use standard inline style or hex colors for GSAP to interpolate smoothly
-        <div ref={containerRef} className="bg-[#070707] text-white transition-colors duration-300 h-dvh overflow-hidden ">
-            <HalftoneBg />
+        <div ref={(node) => {
+            containerRef.current = node;
+            if (typeof ref === 'function') ref(node);
+            else if (ref) (ref as React.RefObject<HTMLDivElement | null>).current = node;
+        }}
+            className="text-white transition-colors duration-300 min-h-dvh overflow-hidden ">
             <section
                 ref={triggerSectionRef}
                 className="h-screen flex flex-col items-center justify-center opacity-0"
@@ -77,4 +58,4 @@ export const Gallery = () => {
 
         </div >
     );
-}
+});
