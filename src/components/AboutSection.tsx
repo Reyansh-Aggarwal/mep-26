@@ -130,9 +130,9 @@ export const AboutSection = forwardRef<HTMLDivElement>((_, ref) => {
                     id="title"
                     className={cn(
                         "relative md:absolute ",
-                        "flex flex-row flex-wrap items-center justify-center z-10 ",
-                        "pt-20 md:pt-0 gap-3 md:gap-0",
-                        "text-5xl md:text-8xl lg:text-[9rem] font-eternalo"
+                        "flex flex-col md:flex-row flex-wrap items-center justify-center z-10 ",
+                        "pt-20 md:pt-0 gap-3 md:gap-0 px-4",
+                        "text-8xl md:text-8xl lg:text-[9rem] font-eternalo"
                     )}
                 >
                     {/* "What is" */}
@@ -142,45 +142,41 @@ export const AboutSection = forwardRef<HTMLDivElement>((_, ref) => {
                     >
                         What is
                     </span>
-
-                    {/* mepLabel */}
-                    <div id="mepLabel"
-                        ref={mepLabelRef}
-                        className="relative flex justify-center items-center z-10"
-                    >
-                        {/* White layer */}
-
-
-                        {/* Main layer */}
-                        <div
-                            className={cn(
-                                "flex justify-center items-center w-fit",
-                                "px-8 bg-myblack z-10",
-                                "outline-solid outline-4 outline-black",
-                            )}
+                    <div className="flex flex-row gap-2">
+                        {/* mepLabel */}
+                        <div id="mepLabel"
+                            ref={mepLabelRef}
+                            className="relative flex justify-center items-center z-10"
                         >
-                            <img
-                                src={mepLogo}
-                                className="h-[5rem] md:h-[7rem] lg:h-[9rem]"
-                                alt="MEP Logo"
-                            />
+                            <div
+                                className={cn(
+                                    "flex justify-center items-center w-fit",
+                                    "px-8 bg-myblack z-10",
+                                    "outline-solid outline-4 outline-black",
+                                )}
+                            >
+                                <img
+                                    src={mepLogo}
+                                    className="h-[6rem] md:h-[7rem] lg:h-[9rem]"
+                                    alt="MEP Logo"
+                                />
+                            </div>
                         </div>
+
+                        {/* "?" */}
+                        <span
+                            ref={questionRef}
+                            className="relative md:absolute md:left-full md:ml-6 text-white overflow-hidden whitespace-nowrap z-0"
+                        >
+                            ?
+                        </span>
                     </div>
-
-                    {/* "?" */}
-                    <span
-                        ref={questionRef}
-                        className="relative md:absolute md:left-full md:ml-6 text-white overflow-hidden whitespace-nowrap z-0"
-                    >
-                        ?
-                    </span>
                 </div>
-
                 {/* ── CONTENT — fades in during phase 3 ── */}
                 <div id="content"
                     ref={contentRef}
                     className={cn(
-                        "mt-12 w-full flex flex-col md:flex-row",
+                        "md:mt-12 w-full flex flex-col md:flex-row",
                         " text-white text-xl md:text-2xl leading-relaxed ",
                         "z-10 ")}
                 >

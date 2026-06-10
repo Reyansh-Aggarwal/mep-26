@@ -16,7 +16,11 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
     const registerClicked = () => {
         const registerButton = registerRef.current;
         if (!registerButton) { return; }
-        registerButton.classList.add("mr-7", "mt-7");
+        if (window.innerWidth >= 768) {
+            registerButton.classList.add("mr-7", "mt-7");
+        } else {
+            registerButton.classList.add("mt-7");
+        }
 
         console.log("Register clicked");
         setTimeout(() => {
@@ -27,7 +31,11 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
     const brochureClicked = () => {
         const brochureButton = brochureRef.current;
         if (!brochureButton) { return; }
-        brochureButton.classList.add("mr-7", "mt-7");
+        if (window.innerWidth >= 768) {
+            brochureButton.classList.add("mr-7", "mt-7");
+        } else {
+            brochureButton.classList.add("mt-7");
+        }
 
         console.log("brochure clicked");
         setTimeout(() => {
@@ -75,12 +83,12 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                             "flex justify-center items-center w-fit",
                             "px-8 md:px-24 bg-white z-10",
                             "outline-solid outline-4 outline-black",
-                            "absolute mr-8 mt-8"
+                            "absolute mr-10 mt-4"
                         )}
                     >
                         <img
                             src={mepLogo}
-                            className="h-48 md:h-56 lg:h-[16rem]"
+                            className="h-42 md:h-56 lg:h-[16rem]"
                             alt="MEP Logo"
                         />
                     </div>
@@ -94,32 +102,32 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                     >
                         <img
                             src={mepLogo}
-                            className="h-48 md:h-56 lg:h-[16rem]"
+                            className="h-42 md:h-56 lg:h-[16rem]"
                             alt="MEP Logo"
                         />
                     </div>
                 </div>
 
                 <div id="title"
-                    className="w-full font-eternalo text-myblack text-5xl md:text-8xl text-center">
+                    className="w-full font-eternalo text-myblack text-6xl md:text-8xl text-center py-2 md:py-0">
                     what are we waiting for?
 
                 </div>
                 <div id="buttons"
                     className={cn(
-                        "flex flex-col md:flex-row gap-40 md:gap-12",
-                        "md:justify-around w-full px-24",
+                        "flex flex-col md:flex-row gap-6 md:gap-12",
+                        "md:justify-around w-full px-16 md:px-24",
                         "text-2xl font-anime md:text-4xl")}>
                     <button id="register" onClick={registerClicked}
                         className="w-full md:w-fit ">
                         <div
-                            className="items-center justify-center flex w-full md:w-fit p-2">
+                            className="relative items-center justify-center flex w-full md:w-fit md:p-2">
                             <div
                                 className={cn(
-                                    "flex justify-center items-center md:w-fit",
-                                    "px-32 py-8 md:p-12 bg-white z-10",
+                                    "relative flex justify-center items-center md:w-fit",
+                                    "px-28 md:px-32 py-8 md:p-12 bg-white z-10",
                                     "outline-solid outline-4 outline-black",
-                                    "absolute mr-7 mt-7",
+                                    "md:mr-7 mt-7",
 
                                 )}
                             >
@@ -130,10 +138,10 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                                 ref={registerRef}
                                 className={cn(
                                     "flex justify-center items-center md:w-fit",
-                                    "px-32 py-8  md:p-12 bg-myblack z-10",
+                                    "px-28 md:px-32 py-8 md:p-12 bg-myblack z-10",
                                     "outline-solid outline-4 outline-black",
                                     "md:text-left absolute",
-                                    "transition-all duration-100 ease-out "
+                                    "transition-all duration-100 ease-out"
                                 )}
                             >
                                 REGISTER <br /> NOW!
@@ -147,9 +155,9 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                             <div
                                 className={cn(
                                     "flex justify-center items-center md:w-fit",
-                                    "px-32 py-8 md:p-12 bg-white z-10",
+                                    "px-28 md:px-32 py-8 md:p-12 bg-white z-10",
                                     "outline-solid outline-4 outline-black",
-                                    "absolute mr-7 mt-7"
+                                    "md:mr-7 mt-7"
 
                                 )}
                             >
@@ -160,7 +168,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                                 ref={brochureRef}
                                 className={cn(
                                     "flex justify-center items-center md:w-fit",
-                                    "px-32 py-8  md:p-12 bg-myblack z-10",
+                                    "px-28 md:px-32 py-8 md:p-12 bg-myblack z-10",
                                     "outline-solid outline-4 outline-black",
                                     "md:text-left absolute",
                                     "transition-all duration-100 ease-out"
