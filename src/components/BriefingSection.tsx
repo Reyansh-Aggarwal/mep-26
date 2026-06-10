@@ -32,7 +32,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
         console.log("brochure clicked");
         setTimeout(() => {
             navigate('/brochure');
-        }, 200);
+        }, 150);
     }
     useEffect(() => {
         const container = containerRef.current;
@@ -80,7 +80,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                     >
                         <img
                             src={mepLogo}
-                            className="h-56 lg:h-[16rem]"
+                            className="h-48 md:h-56 lg:h-[16rem]"
                             alt="MEP Logo"
                         />
                     </div>
@@ -94,7 +94,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                     >
                         <img
                             src={mepLogo}
-                            className="h-56 lg:h-[16rem]"
+                            className="h-48 md:h-56 lg:h-[16rem]"
                             alt="MEP Logo"
                         />
                     </div>
@@ -107,9 +107,9 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                 </div>
                 <div id="buttons"
                     className={cn(
-                        "flex flex-col md:flex-row gap-12 ",
+                        "flex flex-col md:flex-row gap-40 md:gap-12",
                         "md:justify-around w-full px-24",
-                        "text-3xl font-anime md:text-4xl")}>
+                        "text-2xl font-anime md:text-4xl")}>
                     <button id="register" onClick={registerClicked}
                         className="w-full md:w-fit ">
                         <div
@@ -132,7 +132,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                                     "flex justify-center items-center md:w-fit",
                                     "px-32 py-8  md:p-12 bg-myblack z-10",
                                     "outline-solid outline-4 outline-black",
-                                    "md:text-left absolute ",
+                                    "md:text-left absolute",
                                     "transition-all duration-100 ease-out "
                                 )}
                             >

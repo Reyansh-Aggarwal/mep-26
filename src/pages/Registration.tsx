@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HalftoneBg } from "../components/HalftoneBg";
 import { FilloutStandardEmbed } from "@fillout/react";
 import { cn } from "../utils";
+import { Footer } from "../components/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,6 +40,7 @@ export const Registration = () => {
                     className="w-4/5 h-dvh pb-12 z-50">
                     <FilloutStandardEmbed filloutId="397tsy8vJjus" />
                 </div>
+                <Footer />
             </div>
         </div>
     );

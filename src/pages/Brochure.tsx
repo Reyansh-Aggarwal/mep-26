@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HalftoneBg } from "../components/HalftoneBg";
+import { Footer } from "../components/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,7 +32,10 @@ export const Brochure = () => {
                 <span className="text-white text-8xl font-eternalo text-center w-full">
                     BROCHURE
                 </span>
+
+
             </div>
+            <Footer />
         </div>
     );
 };

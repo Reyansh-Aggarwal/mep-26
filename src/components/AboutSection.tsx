@@ -23,14 +23,14 @@ export const AboutSection = forwardRef<HTMLDivElement>((_, ref) => {
             const whatEl = whatRef.current;
             const questionEl = questionRef.current;
             const contentEl = contentRef.current;
-
+            const mepLabel = mepLabelRef.current;
             if (!section || !title || !whatEl || !questionEl || !contentEl) return;
 
             // ─── Initial state ───────────────────────────────────────────────
             gsap.set(whatEl, { opacity: 0, x: 500, clipPath: "inset(0 100% 0 0)" });
             gsap.set(questionEl, { opacity: 0, x: -200, clipPath: "inset(0 0 0 100%)" });
             gsap.set(contentEl, { opacity: 0, pointerEvents: "none" });
-
+            gsap.set(mepLabel, { scale: 1.2 });
             gsap.set(title, {
                 xPercent: 0,
                 yPercent: 0,
@@ -50,15 +50,21 @@ export const AboutSection = forwardRef<HTMLDivElement>((_, ref) => {
             });
 
             // Phase 0 → Phase 1 
-            tl.to({}, { duration: 0.15 });
+            tl.to({}, { duration: 0.15, ease: "power2.out", });
 
             // Phase 1 → Phase 2 
-            tl.to(whatEl, {
-                opacity: 1,
-                x: 0,
-                duration: 0.4,
-                ease: "power2.out",
-            }, "reveal")
+            tl.to(mepLabel,
+                {
+                    scale: 1,
+                    ease: "power2.out",
+                    duration: 0.3
+                })
+                .to(whatEl, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.4,
+                    ease: "power2.out",
+                }, "reveal")
                 .to(questionEl, {
                     opacity: 1,
                     x: 0,
@@ -89,7 +95,7 @@ export const AboutSection = forwardRef<HTMLDivElement>((_, ref) => {
                 scale: 0.8,
                 transformOrigin: "center center",
                 xPercent: 20,
-                yPercent: -200,
+                yPercent: -150,
                 duration: 0.6,
                 ease: "power1.out",
             }, "expand");
@@ -132,7 +138,7 @@ export const AboutSection = forwardRef<HTMLDivElement>((_, ref) => {
                     {/* "What is" */}
                     <span
                         ref={whatRef}
-                        className="relative md:absolute md:right-full md:mr-6 text-white overflow-hidden whitespace-nowrap"
+                        className="relative md:absolute md:right-full md:mr-6 text-white overflow-hidden whitespace-nowrap z-0"
                     >
                         What is
                     </span>
@@ -140,7 +146,7 @@ export const AboutSection = forwardRef<HTMLDivElement>((_, ref) => {
                     {/* mepLabel */}
                     <div id="mepLabel"
                         ref={mepLabelRef}
-                        className="relative flex justify-center items-center"
+                        className="relative flex justify-center items-center z-10"
                     >
                         {/* White layer */}
 
@@ -155,7 +161,7 @@ export const AboutSection = forwardRef<HTMLDivElement>((_, ref) => {
                         >
                             <img
                                 src={mepLogo}
-                                className="h-32 lg:h-[9rem]"
+                                className="h-[5rem] md:h-[7rem] lg:h-[9rem]"
                                 alt="MEP Logo"
                             />
                         </div>
@@ -164,7 +170,7 @@ export const AboutSection = forwardRef<HTMLDivElement>((_, ref) => {
                     {/* "?" */}
                     <span
                         ref={questionRef}
-                        className="relative md:absolute md:left-full md:ml-6 text-white overflow-hidden whitespace-nowrap"
+                        className="relative md:absolute md:left-full md:ml-6 text-white overflow-hidden whitespace-nowrap z-0"
                     >
                         ?
                     </span>
@@ -175,7 +181,7 @@ export const AboutSection = forwardRef<HTMLDivElement>((_, ref) => {
                     ref={contentRef}
                     className={cn(
                         "mt-12 w-full flex flex-col md:flex-row",
-                        " text-white text-2xl md:text-2xl leading-relaxed ",
+                        " text-white text-xl md:text-2xl leading-relaxed ",
                         "z-10 ")}
                 >
                     <p className={cn(

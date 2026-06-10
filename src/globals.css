@@ -63,3 +63,7 @@
 Canvas {
   height: 100dvh;
 }
+
+.text-inner-shadow {
+  filter: url(#text-inner-shadow);
+}

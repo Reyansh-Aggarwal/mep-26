@@ -7,6 +7,7 @@ import { Navbar } from "../components/Navbar";
 import { GallerySection } from "../components/GallerySection";
 import { BriefingSection } from "../components/BriefingSection";
 import { HalftoneBg } from "../components/HalftoneBg";
+import { Footer } from "../components/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,39 +27,66 @@ export const Home = () => {
 
         // Create the GSAP tween
         const ctx = gsap.context(() => {
-            gsap.to(container, {
-                backgroundColor: "#161616", //myblack
-                opacity: 1,
-                scrollTrigger: {
-                    trigger: heroSection,
-                    start: "top 60%",
-                    end: "top 20%",
-                    scrub: 0.8,
-                    markers: false,
-                },
-            });
-            gsap.to(container, {
-                backgroundColor: "#070707",
-                opacity: 1,
-                scrollTrigger: {
-                    trigger: aboutSection,
-                    start: "top 80%",
-                    end: "top 20%",
-                    scrub: 0.8,
-                    markers: false,
-                },
-            });
-            gsap.to(container, {
-                backgroundColor: "#ffffff",
-                opacity: 1,
-                scrollTrigger: {
-                    trigger: gallerySection,
-                    start: "top 50%",
-                    end: "top 20%",
-                    scrub: 0.8,
-                    markers: false,
-                },
-            });
+            gsap.fromTo(container,
+                { backgroundColor: "#161616" },
+                {
+                    backgroundColor: "#161616",
+                    opacity: 1,
+                    immediateRender: false,
+                    scrollTrigger: {
+                        trigger: heroSection,
+                        start: "top 60%",
+                        end: "top 20%",
+                        scrub: 0.8,
+                        markers: false,
+                    },
+                }
+            );
+            gsap.fromTo(container,
+                { backgroundColor: "#161616" },
+                {
+                    backgroundColor: "#070707",
+                    opacity: 1,
+                    immediateRender: false,
+                    scrollTrigger: {
+                        trigger: aboutSection,
+                        start: "top 80%",
+                        end: "top 20%",
+                        scrub: 0.8,
+                        markers: false,
+                    },
+                }
+            );
+            gsap.fromTo(container,
+                { backgroundColor: "#070707" },
+                {
+                    backgroundColor: "#cfcfcf",
+                    opacity: 1,
+                    immediateRender: false,
+                    scrollTrigger: {
+                        trigger: gallerySection,
+                        start: "top 80%",
+                        end: "top 20%",
+                        scrub: 0.8,
+                        markers: false,
+                    },
+                }
+            );
+            gsap.fromTo(container,
+                { backgroundColor: "#cfcfcf" },
+                {
+                    backgroundColor: "#ffffff",
+                    opacity: 1,
+                    immediateRender: false,
+                    scrollTrigger: {
+                        trigger: briefingSection,
+                        start: "top 80%",
+                        end: "top 20%",
+                        scrub: 0.8,
+                        markers: false,
+                    },
+                }
+            );
         });
 
         return () => ctx.revert(); // Clean up on unmount to prevent memory leaks
@@ -77,6 +105,7 @@ export const Home = () => {
                 <GallerySection ref={galleryRef} />
                 <BriefingSection ref={briefingRef} />
             </div>
+            <Footer />
         </div>
     );
 };
