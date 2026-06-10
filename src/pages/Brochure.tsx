@@ -29,7 +29,7 @@ export const Brochure = () => {
             >
 
                 <HalftoneBg />
-                <span className="text-white text-8xl font-eternalo text-center w-full">
+                <span className="text-white text-6xl md:text-8xl font-eternalo text-center w-full">
                     BROCHURE
                 </span>
 

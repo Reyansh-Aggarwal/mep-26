@@ -83,12 +83,12 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                             "flex justify-center items-center w-fit",
                             "px-8 md:px-24 bg-white z-10",
                             "outline-solid outline-4 outline-black",
-                            "absolute mr-10 mt-4"
+                            "absolute mr-6 mt-4"
                         )}
                     >
                         <img
                             src={mepLogo}
-                            className="h-42 md:h-56 lg:h-[16rem]"
+                            className="h-36 md:h-56 lg:h-[16rem]"
                             alt="MEP Logo"
                         />
                     </div>
@@ -102,7 +102,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                     >
                         <img
                             src={mepLogo}
-                            className="h-42 md:h-56 lg:h-[16rem]"
+                            className="h-36 md:h-56 lg:h-[16rem]"
                             alt="MEP Logo"
                         />
                     </div>
@@ -116,7 +116,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                 <div id="buttons"
                     className={cn(
                         "flex flex-col md:flex-row gap-6 md:gap-12",
-                        "md:justify-around w-full px-16 md:px-24",
+                        "md:justify-around w-full px-4 md:px-24",
                         "text-2xl font-anime md:text-4xl")}>
                     <button id="register" onClick={registerClicked}
                         className="w-full md:w-fit ">
@@ -125,7 +125,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                             <div
                                 className={cn(
                                     "relative flex justify-center items-center md:w-fit",
-                                    "px-28 md:px-32 py-8 md:p-12 bg-white z-10",
+                                    "w-full md:px-32 py-8 md:p-12 bg-white z-10",
                                     "outline-solid outline-4 outline-black",
                                     "md:mr-7 mt-7",
 
@@ -138,7 +138,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                                 ref={registerRef}
                                 className={cn(
                                     "flex justify-center items-center md:w-fit",
-                                    "px-28 md:px-32 py-8 md:p-12 bg-myblack z-10",
+                                    "w-full md:px-32 py-8 md:p-12 bg-myblack z-10",
                                     "outline-solid outline-4 outline-black",
                                     "md:text-left absolute",
                                     "transition-all duration-100 ease-out"
@@ -151,11 +151,11 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                     <button id="brochure" onClick={brochureClicked}
                         className="w-full md:w-fit">
                         <div
-                            className="items-center justify-center flex w-full md:w-fit p-2">
+                            className="relative items-center justify-center flex w-full md:w-fit md:p-2">
                             <div
                                 className={cn(
-                                    "flex justify-center items-center md:w-fit",
-                                    "px-28 md:px-32 py-8 md:p-12 bg-white z-10",
+                                    "relative flex justify-center items-center md:w-fit",
+                                    "w-full md:px-32 py-8 md:p-12 bg-white z-10",
                                     "outline-solid outline-4 outline-black",
                                     "md:mr-7 mt-7"
 
@@ -168,7 +168,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                                 ref={brochureRef}
                                 className={cn(
                                     "flex justify-center items-center md:w-fit",
-                                    "px-28 md:px-32 py-8 md:p-12 bg-myblack z-10",
+                                    "w-full md:px-32 py-8 md:p-12 bg-myblack z-10",
                                     "outline-solid outline-4 outline-black",
                                     "md:text-left absolute",
                                     "transition-all duration-100 ease-out"
@@ -180,7 +180,7 @@ export const BriefingSection = forwardRef<HTMLDivElement>((_, ref) => {
                     </button>
                 </div>
 
-            </section>
+            </section >
 
         </div >
     );

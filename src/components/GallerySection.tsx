@@ -47,9 +47,9 @@ export const GallerySection = forwardRef<HTMLDivElement>((_, ref) => {
             >
                 <div id="title"
                     className="w-full font-eternalo text-myblack text-8xl md:text-8xl text-center">
-                    the gallery
+                    <span className="hidden md:block">the</span>gallery
                     <img src={Underline}
-                        className="absolute left-1/2 -translate-x-1/5 w-[12rem] translate-y-2" />
+                        className="absolute left-1/2 -translate-x-1/2 md:-translate-x-1/5 w-[12rem] translate-y-2" />
                 </div>
 
                 <div className="bg-transparent rounded-2xl border-2 border-myblack md:h-[32rem] w-11/12 max-w-6xl mt-16" id="galleryContainer">

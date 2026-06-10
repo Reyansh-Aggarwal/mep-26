@@ -6,7 +6,7 @@ export const HeroSection = forwardRef<HTMLDivElement>((_, ref) => {
     return (
         <div ref={ref} className="min-h-dvh w-full ioverflow-hidden flex text-center items-center justify-center ">
 
-            <div className="text-[7rem] md:text-[10rem] font-eternalo flex flex-col w-full select-none z-10 leading-28 md:leading-40">
+            <div className="text-[6rem] md:text-[10rem] font-eternalo flex flex-col w-full select-none z-10 leading-28 md:leading-40">
                 <span id="Matrix"
                     className={cn(
                         "text-green md:text-white hover:text-green",
@@ -16,7 +16,7 @@ export const HeroSection = forwardRef<HTMLDivElement>((_, ref) => {
                     <div className="absolute left-1/2 -translate-y-[6rem] ">
                         <div id="glassShard1"
                             className={cn(
-                                "w-[120px] h-[120px] ",
+                                "w-[80px] h-[80px] md:w-[120px] md:h-[120px] ",
                                 "bg-black/10 backdrop-blur-xs md:scale-80",
                                 "[mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]",
 
@@ -38,7 +38,7 @@ export const HeroSection = forwardRef<HTMLDivElement>((_, ref) => {
                     Ecomm
                     <div id="glassShard1"
                         className={cn(
-                            "absolute left-1/2 -translate-x-[100%] -translate-y-[6rem] w-[120px] h-[120px] ",
+                            "absolute left-1/2 -translate-x-[100%] -translate-y-[6rem]  w-[80px] h-[80px] md:w-[120px] md:h-[120px]",
                             "bg-black/10 backdrop-blur-xs md:scale-80 rotate-45",
                             "[mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]")}
                         style={{
@@ -55,7 +55,7 @@ export const HeroSection = forwardRef<HTMLDivElement>((_, ref) => {
                     Psynapse
                     <div id="glassShard1"
                         className={cn(
-                            "absolute left-1/2 translate-x-[2rem] -translate-y-[9rem] w-[120px] h-[120px] ",
+                            "absolute left-1/2 translate-x-[2rem] -translate-y-[7rem] md:-translate-y-[9rem] w-[80px] h-[80px] md:w-[120px] md:h-[120px]",
                             "bg-black/10 backdrop-blur-xs md:scale-80 rotate-240",
                             "[mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]")}
                         style={{

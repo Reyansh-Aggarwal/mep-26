@@ -32,7 +32,7 @@ export const Footer = () => {
                     Matrix'26
                 </span>
                 <hr className="md:hidden" />
-                <div className="flex flex-row gap-4 md:gap-2 justify-around w-full">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-2 justify-around w-full">
                     <div
                         className="flex flex-col">
                         <span className="text-[#b6b6b6] text-4xl text-inner-shadow text-wrap">
