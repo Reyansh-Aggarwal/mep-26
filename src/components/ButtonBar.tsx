@@ -45,7 +45,7 @@ export const ButtonBar = () => {
                     <div
                         className={cn(
                             "bg-yellow/20 text-yellow/5",
-                            "py-2 px-8 hover:underline cursor-pointer",
+                            "py-2 px-4 md:px-8 hover:underline cursor-pointer",
                             "absolute top-1 pointer-events-none")
                         }>
                         VIEW BROCHURE
@@ -53,7 +53,7 @@ export const ButtonBar = () => {
                     <button
                         className={cn(
                             "bg-yellow text-black z-10",
-                            "py-2 px-8 hover:underline cursor-pointer",
+                            "py-2 px-4 md:px-8 hover:underline cursor-pointer",
                             "active:mt-1 active:underline ")
                         }>
                         VIEW BROCHURE
@@ -65,7 +65,7 @@ export const ButtonBar = () => {
                     <div
                         className={cn(
                             "bg-yellow/20 text-yellow/5",
-                            "py-2 px-8 hover:underline cursor-pointer",
+                            "py-2 px-4 md:px-8 hover:underline cursor-pointer",
                             "absolute top-1 pointer-events-none")
                         }>
                         REGISTER NOW
@@ -73,7 +73,7 @@ export const ButtonBar = () => {
                     <button
                         className={cn(
                             "bg-yellow text-black z-10",
-                            "py-2 px-8 hover:underline cursor-pointer",
+                            "py-2 px-4 md:px-8 hover:underline cursor-pointer",
                             "active:mt-1 active:underline ")
                         }>
                         REGISTER NOW

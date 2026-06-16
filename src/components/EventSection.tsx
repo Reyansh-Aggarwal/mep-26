@@ -135,7 +135,7 @@ export const EventSection = () => {
                     <button id="matrix"
                         onClick={() => setClub("matrix")}
                         className={cn(
-                            "px-8 py-2 text-center",
+                            "px-4 md:px-8 py-2 text-center",
                             "bg-matrix text-black",
                             "transition-color duration-50 ease-in",
                             "font-secondary font-bold",
@@ -146,7 +146,7 @@ export const EventSection = () => {
                     <button id="ecomm"
                         onClick={() => setClub("ecomm")}
                         className={cn(
-                            "px-8 py-2 text-center",
+                            "px-4 md:px-8 py-2 text-center",
                             "bg-ecomm text-black",
                             "transition-color duration-50 ease-in",
                             "font-secondary font-bold",
@@ -157,7 +157,7 @@ export const EventSection = () => {
                     <button id="psynapse"
                         onClick={() => setClub("psynapse")}
                         className={cn(
-                            "px-8 py-2 text-center",
+                            "px-4 md:px-8 py-2 text-center",
                             "bg-psynapse text-black",
                             "transition-color duration-50 ease-in",
                             "font-secondary font-bold",

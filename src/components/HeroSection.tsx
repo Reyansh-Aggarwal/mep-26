@@ -88,13 +88,13 @@ export const HeroSection = forwardRef<HTMLDivElement>((_, ref) => {
                     "w-full"
                 )}
             >
-                <div ref={matrixRef} className="w-full bg-matrix text-left px-8">
+                <div ref={matrixRef} className="w-full bg-matrix text-center px-8">
                     MATRIX
                 </div>
                 <div ref={ecommRef} className="w-full bg-ecomm text-center px-8">
                     ECOMMBUZZ
                 </div>
-                <div ref={psynapseRef} className="w-full bg-psynapse text-right px-8">
+                <div ref={psynapseRef} className="w-full bg-psynapse text-center px-8">
                     PSYNAPSE
                 </div>
             </div>
