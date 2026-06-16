@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { cn } from "../utils"
 import gsap from "gsap";
-import { Link } from "react-router";
 export const ButtonBar = () => {
     const mainRef = useRef<HTMLDivElement>(null);
 

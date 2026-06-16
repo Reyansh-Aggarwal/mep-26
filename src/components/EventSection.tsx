@@ -1,6 +1,5 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { cn } from "../utils";
-import gsap from "gsap";
 interface Event {
     id: number,
     name: string,
