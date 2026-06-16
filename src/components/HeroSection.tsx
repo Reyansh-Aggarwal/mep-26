@@ -1,70 +1,103 @@
 import { cn } from "../utils";
-import small_glass from "../assets/images/glass_small.png";
-import { forwardRef } from "react";
+import { forwardRef, useRef, useEffect } from "react";
+import gsap from "gsap";
 
 export const HeroSection = forwardRef<HTMLDivElement>((_, ref) => {
+    const matrixRef = useRef<HTMLDivElement>(null);
+    const ecommRef = useRef<HTMLDivElement>(null);
+    const psynapseRef = useRef<HTMLDivElement>(null);
+    const addOnRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+            // Phase 1: Set initial states before animation
+            gsap.set([matrixRef.current, psynapseRef.current], {
+                xPercent: -120,
+                opacity: 0,
+            });
+            gsap.set(ecommRef.current, {
+                xPercent: 120,
+                opacity: 0,
+            });
+            gsap.set(addOnRef.current, {
+                yPercent: 100,
+                opacity: 0,
+                y: () =>
+                    (matrixRef.current?.offsetHeight ?? 0) +
+                    (addOnRef.current?.offsetHeight ?? 0),
+            });
+
+            // Phase 2: Slide in all three title blocks simultaneously
+            tl.to(
+                [matrixRef.current, psynapseRef.current],
+                {
+                    xPercent: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                },
+                0
+            ).to(
+                ecommRef.current,
+                {
+                    xPercent: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                },
+                0
+            );
+
+            tl.to(
+                addOnRef.current,
+                {
+                    yPercent: 0,
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.7,
+                    ease: "power2.out",
+                },
+                "-=0.15"
+            );
+        });
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <div ref={ref} className="min-h-dvh w-full ioverflow-hidden flex text-center items-center justify-center ">
-
-            <div className="text-[6rem] md:text-[10rem] font-eternalo flex flex-col w-full select-none z-10 leading-28 md:leading-40">
-                <span id="Matrix"
-                    className={cn(
-                        "text-green md:text-white hover:text-green",
-                        "transition-all duration-300 ease-in-out"
-                    )}>
-                    Matrix
-                    <div className="absolute left-1/2 -translate-y-[6rem] ">
-                        <div id="glassShard1"
-                            className={cn(
-                                "w-[80px] h-[80px] md:w-[120px] md:h-[120px] ",
-                                "bg-black/10 backdrop-blur-xs md:scale-80",
-                                "[mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]",
-
-                            )}
-                            style={{
-                                maskImage: `url(${small_glass})`,
-                                WebkitMaskImage: `url(${small_glass})`
-                            }}
-                        />
-                    </div>
-
-
-                </span>
-                <span id="Ecomm"
-                    className={cn(
-                        "text-blue md:text-white hover:text-blue",
-                        " transition-all duration-300 ease-in-out"
-                    )}>
-                    Ecomm
-                    <div id="glassShard1"
-                        className={cn(
-                            "absolute left-1/2 -translate-x-[100%] -translate-y-[6rem]  w-[80px] h-[80px] md:w-[120px] md:h-[120px]",
-                            "bg-black/10 backdrop-blur-xs md:scale-80 rotate-45",
-                            "[mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]")}
-                        style={{
-                            maskImage: `url(${small_glass})`,
-                            WebkitMaskImage: `url(${small_glass})`
-                        }}
-                    />
-                </span>
-                <span id="Psynapse"
-                    className={cn(
-                        "text-pink md:text-white hover:text-pink",
-                        "transition-all duration-300 ease-in-out"
-                    )}>
-                    Psynapse
-                    <div id="glassShard1"
-                        className={cn(
-                            "absolute left-1/2 translate-x-[2rem] -translate-y-[7rem] md:-translate-y-[9rem] w-[80px] h-[80px] md:w-[120px] md:h-[120px]",
-                            "bg-black/10 backdrop-blur-xs md:scale-80 rotate-240",
-                            "[mask-size:contain] [mask-repeat:no-repeat] [mask-position:center]")}
-                        style={{
-                            maskImage: `url(${small_glass})`,
-                            WebkitMaskImage: `url(${small_glass})`
-                        }}
-                    />
-                </span>
+        <div
+            ref={ref}
+            className={cn(
+                "min-h-dvh w-full overflow-hidden",
+                "text-center items-center justify-center",
+                "flex flex-col"
+            )}
+        >
+            <div
+                ref={addOnRef}
+                className={cn(
+                    "font-secondary text-white text-2xl w-full mb-4",
+                    "drop-shadow-[0_0_4px_#fff] shadow-sm"
+                )}
+            >
+                26th Bro. Aloysius
             </div>
-        </div >
+            <div
+                className={cn(
+                    "font-primary text-black text-9xl lg:text-[11rem]",
+                    "w-full"
+                )}
+            >
+                <div ref={matrixRef} className="w-full bg-matrix text-left px-8">
+                    MATRIX
+                </div>
+                <div ref={ecommRef} className="w-full bg-ecomm text-center px-8">
+                    ECOMMBUZZ
+                </div>
+                <div ref={psynapseRef} className="w-full bg-psynapse text-right px-8">
+                    PSYNAPSE
+                </div>
+            </div>
+        </div>
     );
 });

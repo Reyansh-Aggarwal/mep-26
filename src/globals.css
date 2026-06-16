@@ -3,8 +3,8 @@
 /* Modern scrollbar and focus ring behaviors */
 /* Define the font-face */
 @font-face {
-  font-family: 'Clash Display';
-  src: url('assets/fonts/ClashDisplay-Variable.ttf') format('truetype-variations');
+  font-family: 'Clash Grotesk';
+  src: url('assets/fonts/ClashGrotesk-Variable.ttf') format('truetype-variations');
   font-weight: 100 900;
   /* Supports everything from Thin to Black */
   font-style: normal;
@@ -12,40 +12,25 @@
 }
 
 @font-face {
-  font-family: 'Eternalo';
-  src: url('assets/fonts/Eternalo.ttf') format('truetype-variations');
+  font-family: 'Blackheat';
+  src: url('assets/fonts/Blackheat.ttf') format('truetype-variations');
   font-weight: 100 900;
   /* Supports everything from Thin to Black */
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('assets/fonts/HelveticaNeueLight.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Anime Ace';
-  src: url('assets/fonts/animeace2_bld.ttf') format('truetype');
-  font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
 
 @theme {
   /* For Tailwind v4.0+ */
-  --font-clash: "Clash Display", sans-serif;
-  --font-eternalo: "Eternalo", serif;
-  --font-helvetical: "Helvetica Neue", helvetica;
-  --font-anime: "Anime Ace", sans;
-  --color-myblack: #161616;
-  --color-green: #00ff6b;
-  --color-blue: #11a8cd;
-  --color-pink: #ff006e;
+  --font-secondary: 'Clash Grotesk', sans;
+  --font-primary: 'Blackheat', sans-serif;
+  --color-black: #0D0F12;
+  --color-yellow: #FFD23F;
+  --color-offwhite: #FFFDF5;
+  --color-matrix: #517eff;
+  --color-ecomm: #00C52A;
+  --color-psynapse: #FF008C;
+  --color-quiz: #990bff;
 
   --animate-fade-in: fade-in 0.6s ease-out forwards;
 }

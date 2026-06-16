@@ -1,111 +1,48 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { AboutSection } from "../components/AboutSection";
+import { ReactLenis } from "lenis/react";
+import "lenis/dist/lenis.css";
+
 import { HeroSection } from "../components/HeroSection";
-import { Navbar } from "../components/Navbar";
-import { GallerySection } from "../components/GallerySection";
-import { BriefingSection } from "../components/BriefingSection";
-import { HalftoneBg } from "../components/HalftoneBg";
+import dotBg from "../assets/images/dot-background.png";
 import { Footer } from "../components/Footer";
+import { ButtonBar } from "../components/ButtonBar";
+import { Navbar } from "../components/Navbar";
+import { EventSection } from "../components/EventSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const Home = () => {
-    const heroRef = useRef<HTMLDivElement>(null);
-    const aboutRef = useRef<HTMLDivElement>(null);
-    const galleryRef = useRef<HTMLDivElement>(null);
-    const briefingRef = useRef<HTMLDivElement>(null);
-    const mainRef = useRef<HTMLDivElement>(null);
+    const lenisRef = useRef<any>(null);
+
     useEffect(() => {
-        const container = mainRef.current;
-        const aboutSection = aboutRef.current;
-        const heroSection = heroRef.current;
-        const gallerySection = galleryRef.current;
-        const briefingSection = briefingRef.current;
-        if (!container || !aboutSection || !heroSection || !gallerySection || !briefingSection) return;
+        function update(time: number) {
+            lenisRef.current?.lenis?.raf(time * 1000);
+        }
 
-        // Create the GSAP tween
-        const ctx = gsap.context(() => {
-            gsap.fromTo(container,
-                { backgroundColor: "#161616" },
-                {
-                    backgroundColor: "#161616",
-                    opacity: 1,
-                    immediateRender: false,
-                    scrollTrigger: {
-                        trigger: heroSection,
-                        start: "top 60%",
-                        end: "top 20%",
-                        scrub: 0.8,
-                        markers: false,
-                    },
-                }
-            );
-            gsap.fromTo(container,
-                { backgroundColor: "#161616" },
-                {
-                    backgroundColor: "#070707",
-                    opacity: 1,
-                    immediateRender: false,
-                    scrollTrigger: {
-                        trigger: aboutSection,
-                        start: "top 80%",
-                        end: "top 20%",
-                        scrub: 0.8,
-                        markers: false,
-                    },
-                }
-            );
-            gsap.fromTo(container,
-                { backgroundColor: "#070707" },
-                {
-                    backgroundColor: "#cfcfcf",
-                    opacity: 1,
-                    immediateRender: false,
-                    scrollTrigger: {
-                        trigger: gallerySection,
-                        start: "top 80%",
-                        end: "top 20%",
-                        scrub: 0.8,
-                        markers: false,
-                    },
-                }
-            );
-            gsap.fromTo(container,
-                { backgroundColor: "#cfcfcf" },
-                {
-                    backgroundColor: "#ffffff",
-                    opacity: 1,
-                    immediateRender: false,
-                    scrollTrigger: {
-                        trigger: briefingSection,
-                        start: "top 80%",
-                        end: "top 20%",
-                        scrub: 0.8,
-                        markers: false,
-                    },
-                }
-            );
-        });
+        gsap.ticker.add(update);
 
-        return () => ctx.revert(); // Clean up on unmount to prevent memory leaks
+        return () => {
+            gsap.ticker.remove(update);
+        };
     }, []);
-    return (
 
-        <div className="w-full min-h-screen bg-myblack"
-            ref={mainRef}>
-            <div
-                className="w-full relative transition-colors duration-300 ease-in-out"
-            >
-                <HalftoneBg />
-                <Navbar />
-                <HeroSection ref={heroRef} />
-                <AboutSection ref={aboutRef} />
-                <GallerySection ref={galleryRef} />
-                <BriefingSection ref={briefingRef} />
+    return (
+        <ReactLenis root ref={lenisRef} autoRaf={false}>
+            <div className="relative min-h-screen bg-black font-secondary ">
+                <img src={dotBg} className="fixed top-0 left-0 w-full z-0" />
+
+                {/* Main content floats above and scrolls off */}
+                <div className="relative z-10">
+                    <Navbar />
+                    <HeroSection />
+                    <hr className="h-[3px] mx-8 bg-offwhite/10 mx-4 rounded" />
+                    <EventSection />
+                    <ButtonBar />
+                    <Footer />
+                </div>
             </div>
-            <Footer />
-        </div>
+        </ReactLenis>
     );
 };

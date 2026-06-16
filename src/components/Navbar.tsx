@@ -1,53 +1,62 @@
-import { useEffect, useState } from "react";
-import { cn } from "../utils";
-import mepLogo from "../assets/logos/mep_logo.png";
+import { cn } from "../utils"
+
 export const Navbar = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
-
     return (
-        <div id="Navbar"
+        <div id="navbar"
             className={cn(
-                "w-full fixed top-0 z-50 transition-all duration-300 ease-in-out flex justify-center items-center pt-4",
+                "fixed top-0 left-0 w-full h-fit px-8 py-4 z-20"
             )}>
-            <div
-                className={cn(
-                    "hidden",
-                )}>
-                <div className={cn(
-                    "flex justify-center items-center w-fit transition-all duration-300 ease-out ",
-                    "px-8 bg-myblack z-10",
-                    "outline-solid outline-4 outline-black",
-                    "transition-all duration-600 ease-in-out",
-                    isScrolled ? "opacity-100" : "opacity-0",
+            <div className={cn(
+                "flex flex-row justify-between w-full lg:gap-32",
+            )}>
+                <button id="logo"
+                    className={cn(
+                        "px-4 py-2",
+                        "text-white rounded-2xl bg-black",
+                        "shadow-[0_4px_0_#333333]",
+                        "active:translate-y-[4px] active:shadow-[0_0_0_0]"
+                    )}>
+                    <img alt="MEP" />
 
-                )}>
-                    <img src={mepLogo} className={cn(
-                        "h-12 transition-all duration-600 ease-in-out",
-                        isScrolled ? "opacity-100" : "opacity-0",
-                    )} alt="MEP Logo" />
+                </button>
+                <div id="scrollButtons"
+                    className={cn(
+                        "flex flex-row gap-4 bg-black px-4 py-2",
+                        "text-white rounded-2xl w-full lg:justify-between",
+                        "shadow-[0_4px_0_#333333]")}>
+                    <button id="gallery"
+                        className={cn(
+                            "active:shadow-[0_-2px_0_#333333]",
+                            "active:translate-y-[4px]",
+                            "px-2 rounded-lg basis-1/3")}>
+                        gallery
+                    </button>
+                    <button id="mep"
+                        className={cn(
+                            "active:shadow-[0_-2px_0_#333333]",
+                            "active:translate-y-[4px]",
+                            "px-2 rounded-lg basis-1/3")}>
+                        mep'26
+                    </button>
+                    <button id="team"
+                        className={cn(
+                            "active:shadow-[0_-2px_0_#333333]",
+                            "active:translate-y-[4px]",
+                            "px-2 rounded-lg basis-1/3")}>
+                        our team
+                    </button>
                 </div>
-                <div className={cn(
-                    "flex justify-center items-center w-fit transition-all duration-300 ease-out",
-                    "px-8 bg-white z-0",
-                    "outline outline-solid outline-4 outline-black",
-                    "transition-all duration-600 ease-in-out absolute",
-                    isScrolled ? "opacity-100 mt-4 mr-4" : "opacity-0",
-                )}>
-                    <img src={mepLogo} className="h-12" alt="MEP Logo" />
-                </div>
+                <button id="alumni"
+                    className={cn(
+                        "px-4 py-2",
+                        "text-white rounded-2xl bg-black",
+                        "shadow-[0_4px_0_#333333]",
+                        "active:translate-y-[4px] active:shadow-[0_0_0_0]",
+                    )}>
+                    alumni
+
+                </button>
             </div>
-
-
-        </div >
-    );
+        </div>
+    )
 }

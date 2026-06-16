@@ -3,13 +3,15 @@ import { cn } from "../utils"
 
 export const Footer = () => {
     const navigate = useNavigate();
+
     const navTo = (path: string) => {
         navigate("/" + path);
     }
 
     return (
-        <div id="Footer"
-            className="h-fit w-full bg-[#090909]">
+        <div
+            className={cn(
+                "h-fit w-full bg-[#090909] overflow-hidden pb-[15dvh]")}>
             {/* SVG Filter for Text Inner Shadow */}
             <svg width="0" height="0" style={{ position: 'absolute', width: 0, height: 0, pointerEvents: 'none' }}>
                 <defs>
@@ -26,7 +28,7 @@ export const Footer = () => {
             <div className={cn(
                 "flex flex-col md:flex-row text-2xl gap-4 md:gap-2",
                 "w-full px-8 py-8",
-                "font-eternalo text-[#8a8a8a]"
+                "font-clash text-[#8a8a8a]"
             )}>
                 <span className="text-[#b6b6b6] text-6xl md:basis-1/2 text-inner-shadow">
                     Matrix'26
@@ -73,4 +75,4 @@ export const Footer = () => {
             </div>
         </div>
     )
-}
+};

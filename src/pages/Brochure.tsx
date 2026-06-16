@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { HalftoneBg } from "../components/HalftoneBg";
 import { Footer } from "../components/Footer";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -22,14 +21,13 @@ export const Brochure = () => {
     }, []);
     return (
 
-        <div className="w-full min-h-screen bg-myblack"
+        <div className="w-full min-h-screen bg-black"
             ref={mainRef}>
             <div
                 className="w-full relative transition-colors duration-300 ease-in-out min-h-dvh"
             >
 
-                <HalftoneBg />
-                <span className="text-white text-6xl md:text-8xl font-eternalo text-center w-full">
+                <span className="text-white text-6xl md:text-8xl font-primary text-center w-full">
                     BROCHURE
                 </span>
 
