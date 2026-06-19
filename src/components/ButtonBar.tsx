@@ -4,35 +4,16 @@ import gsap from "gsap";
 export const ButtonBar = () => {
     const mainRef = useRef<HTMLDivElement>(null);
 
+    // Start hidden — Home.tsx drives the scroll-reveal animation
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-            const main = mainRef.current;
-            // Phase 1: Set initial states before animation
-            gsap.set(main, {
-                yPercent: 120,
-                opacity: 0,
-            });
-            // Phase 2: Slide in all three title blocks simultaneously
-            tl.to({}, { duration: 1.2 })
-            tl.to(
-                main,
-                {
-                    yPercent: 0,
-                    opacity: 1,
-                    duration: 0.7,
-                }
-            );
-
-        });
-
-        return () => ctx.revert();
+        if (!mainRef.current) return;
+        gsap.set(mainRef.current, { yPercent: 120, opacity: 0 });
     }, []);
 
     return (
         <div ref={mainRef} id="buttonBar"
             className={cn(
-                "fixed bottom-0 h-[12dvh] w-full z-30 ",
+                "bottom-0 h-[12dvh] w-full z-30 mt-[90dvh] ",
                 "shadow-[0_-4px_0_#333333]",
                 "rounded-t-3xl bg-black")}>
             <div id="buttonContainer"

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+body {
+  background-color: #0D0F12;
+}
+
 /* Modern scrollbar and focus ring behaviors */
 /* Define the font-face */
 @font-face {
@@ -51,4 +55,9 @@ Canvas {
 
 .text-inner-shadow {
   filter: url(#text-inner-shadow);
+}
+
+
+.glass-shard-glow {
+  filter: drop-shadow(0 0 12px rgba(81, 126, 255, 0.45)) drop-shadow(0 0 25px rgba(255, 0, 140, 0.25));
 }

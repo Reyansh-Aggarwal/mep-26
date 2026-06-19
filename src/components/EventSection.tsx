@@ -1,5 +1,9 @@
 import { useState, useRef } from "react";
 import { cn } from "../utils";
+import matrixLogo from "../assets/logos/matrix_logo.png";
+import ecommLogo from "../assets/logos/ecomm_logo.png";
+import psynapseLogo from "../assets/logos/psynapse_logo.png";
+
 interface Event {
     id: number,
     name: string,
@@ -109,68 +113,74 @@ export const EventSection = () => {
     return (
         <div
             className={cn(
-                "h-fit w-full overflow-hidden",
-                "text-center items-center justify-between",
-                "flex flex-col my-12"
+                "min-h-dvh w-full overflow-hidden gap-4",
+                "text-center items-center justify-around",
+                "flex flex-col bg-black pt-12"
             )}
         >
             <div id="header"
-                className="font-primary text-9xl lg:text-[11rem] text-offwhite">
-                <span className={cn(
-                    "transition-color duration-100 ease-in",
-                    club == "matrix" ? "text-matrix" : "")}>M</span>
-                <span className={cn(
-                    "transition-color duration-100 ease-in",
-                    club == "ecomm" ? "text-ecomm" : "")}>E</span>
-                <span className={cn(
-                    "transition-color duration-100 ease-in",
-                    club == "psynapse" ? "text-psynapse" : "")}>P</span>
-                '26
+                className={cn(
+                    "font-primary text-9xl lg:text-[11rem] text-offwhite",
+                    "transform-3d w-full ",
+                    "h-40 flex flex-row justify-center gap-12 items-center")}>
+                <img src={matrixLogo}
+                    className={cn(
+                        "transition-all duration-300 ease-out absolute  opacity-30 h-16",
+                        club == "matrix" ? "h-32 lg:h-48 opacity-100" : club == "ecomm" ? "-translate-x-[23dvw] -translate-z-8" : "-translate-x-[46dvw] opacity-0"
+                    )} />
+                <img src={ecommLogo}
+                    className={cn(
+                        "transition-all duration-300 ease-out absolute opacity-30 h-16",
+                        club == "matrix" ? "translate-x-[23dvw] -translate-z-8" : club == "psynapse" ? "-translate-x-[23dvw] -translate-z-8 " : "h-32 lg:h-48 opacity-100"
+                    )} />
+                <img src={psynapseLogo}
+                    className={cn("transition-all duration-300 ease-out absolute opacity-30 h-16",
+                        club == "matrix" ? "translate-x-[46dvw] -translate-z-8 opacity-0" : club == "ecomm" ? "translate-x-[23dvw] -translate-z-8 " : "h-32 lg:h-48 opacity-100")} />
             </div>
-
+            <div id="buttons"
+                className="flex flex-row w-full justify-center items-center md:items-left gap-4">
+                <button id="matrix"
+                    onClick={() => setClub("matrix")}
+                    className={cn(
+                        "px-4 md:px-8 py-2 text-center",
+                        "bg-matrix text-black",
+                        "transition-color duration-50 ease-in",
+                        "font-secondary font-bold",
+                        club == "matrix" ? "translate-y-[4px]" : "shadow-[0_4px_0_#1e2b4d]"
+                    )}>
+                    MATRIX
+                </button>
+                <button id="ecomm"
+                    onClick={() => setClub("ecomm")}
+                    className={cn(
+                        "px-4 md:px-8 py-2 text-center",
+                        "bg-ecomm text-black",
+                        "transition-color duration-50 ease-in",
+                        "font-secondary font-bold",
+                        club == "ecomm" ? "translate-y-[4px]" : "shadow-[0_4px_0_#0a3c18]"
+                    )}>
+                    ECOMM
+                </button>
+                <button id="psynapse"
+                    onClick={() => setClub("psynapse")}
+                    className={cn(
+                        "px-4 md:px-8 py-2 text-center",
+                        "bg-psynapse text-black",
+                        "transition-color duration-50 ease-in",
+                        "font-secondary font-bold",
+                        club == "psynapse" ? "translate-y-[4px]" : "shadow-[0_4px_0_#4a0b30]"
+                    )}>
+                    PSYNAPSE
+                </button>
+            </div>
             <div id="content"
                 className="w-full h-full px-4 md:px-12 flex flex-col gap-4">
-                <div id="buttons"
-                    className="flex flex-row w-full items-center md:items-left gap-4">
-                    <button id="matrix"
-                        onClick={() => setClub("matrix")}
-                        className={cn(
-                            "px-4 md:px-8 py-2 text-center",
-                            "bg-matrix text-black",
-                            "transition-color duration-50 ease-in",
-                            "font-secondary font-bold",
-                            club == "matrix" ? "translate-y-[4px]" : "shadow-[0_4px_0_#1e2b4d]"
-                        )}>
-                        MATRIX
-                    </button>
-                    <button id="ecomm"
-                        onClick={() => setClub("ecomm")}
-                        className={cn(
-                            "px-4 md:px-8 py-2 text-center",
-                            "bg-ecomm text-black",
-                            "transition-color duration-50 ease-in",
-                            "font-secondary font-bold",
-                            club == "ecomm" ? "translate-y-[4px]" : "shadow-[0_4px_0_#0a3c18]"
-                        )}>
-                        ECOMM
-                    </button>
-                    <button id="psynapse"
-                        onClick={() => setClub("psynapse")}
-                        className={cn(
-                            "px-4 md:px-8 py-2 text-center",
-                            "bg-psynapse text-black",
-                            "transition-color duration-50 ease-in",
-                            "font-secondary font-bold",
-                            club == "psynapse" ? "translate-y-[4px]" : "shadow-[0_4px_0_#4a0b30]"
-                        )}>
-                        PSYNAPSE
-                    </button>
-                </div>
+
                 <div id="events"
                     className="flex flex-col lg:flex-row gap-4 w-full justify-between h-full">
                     <div id="mepContainer"
                         ref={mepContainerRef}
-                        className="flex flex-col md:grid md:grid-cols-2 gap-2 lg:basis-2/3">
+                        className="flex flex-col md:grid md:grid-cols-2 gap-2 md:gap-4 lg:basis-2/3">
                         {events.map((event) => (
                             <div key={event.id}
                                 className={cn(
@@ -242,7 +252,7 @@ export const EventSection = () => {
                                     QUIZ
                                 </span>
                                 <span className="text-sm">
-                                    xx
+                                    Think Fast. Answer Faster.
                                 </span>
                             </div>
                             <div id="details"
@@ -272,7 +282,6 @@ export const EventSection = () => {
                     </div>
                 </div>
             </div>
-
         </div >
     );
 }
