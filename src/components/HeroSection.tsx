@@ -2,7 +2,7 @@ import { cn } from "../utils";
 import { forwardRef, useRef, useEffect } from "react";
 import gsap from "gsap";
 
-export const HeroSection = forwardRef<HTMLDivElement>((_, ref) => {
+export const HeroSection = forwardRef<HTMLDivElement>((_) => {
     const matrixRef = useRef<HTMLDivElement>(null);
     const ecommRef = useRef<HTMLDivElement>(null);
     const psynapseRef = useRef<HTMLDivElement>(null);
