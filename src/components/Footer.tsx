@@ -77,8 +77,7 @@ export const Footer = () => {
 
             {/* Bottom Copyright */}
             <div className="w-full max-w-7xl px-8 mt-24 flex flex-col md:flex-row items-center justify-between font-secondary text-xs text-offwhite/30 uppercase tracking-widest relative z-10 border-t border-white/5 pt-8">
-                <span>© 2026 Matrix Clan. All rights reserved.</span>
-                <span className="mt-4 md:mt-0">Designed for the future</span>
+                <span>2026 Matrix Clan.</span>
             </div>
         </div>
     )
