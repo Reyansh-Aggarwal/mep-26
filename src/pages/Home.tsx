@@ -11,6 +11,7 @@ import { ButtonBar } from "../components/ButtonBar";
 import { Navbar } from "../components/Navbar";
 import { EventSection } from "../components/EventSection";
 import { GallerySection } from "../components/GallerySection";
+import { MembersSection } from "../components/MembersSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,70 +29,33 @@ export const Home = () => {
         lenisRef.current?.lenis?.stop();
 
         let revealTl: gsap.core.Timeline | null = null;
-        let progress = 0;
-        let wheelHandler: ((e: WheelEvent) => void) | null = null;
-        let touchHandler: ((e: TouchEvent) => void) | null = null;
-        let lastTouchY = 0;
 
         const handleHeroComplete = () => {
             const navbar = document.getElementById("navbar");
             const buttonBar = document.getElementById("buttonBar");
             if (!navbar || !buttonBar) return;
 
-            // Build a paused timeline to scrub through
-            revealTl = gsap.timeline({ paused: true });
+            // Build a timeline to play automatically with a 1.5s delay
+            revealTl = gsap.timeline({
+                delay: 1.5,
+                onComplete: () => {
+                    lenisRef.current?.lenis?.start();
+                }
+            });
+
             revealTl
                 .to(navbar, {
                     yPercent: 0,
                     opacity: 1,
-                    duration: 1,
-                    ease: "none",
+                    duration: 1.2,
+                    ease: "power3.out",
                 }, 0)
                 .to(buttonBar, {
                     yPercent: 0,
                     opacity: 1,
-                    duration: 1,
-                    ease: "none",
+                    duration: 1.2,
+                    ease: "power3.out",
                 }, 0);
-
-            wheelHandler = (e: WheelEvent) => {
-                e.preventDefault();
-                // Normalize delta: ~100px of scroll = full reveal
-                progress = Math.min(1, Math.max(0, progress + e.deltaY / 300));
-                revealTl!.progress(progress);
-
-                if (progress >= 1) {
-                    window.removeEventListener("wheel", wheelHandler!, true);
-                    window.removeEventListener("touchstart", touchStartHandler as any);
-                    window.removeEventListener("touchmove", touchHandler!, true);
-                    lenisRef.current?.lenis?.start();
-                }
-            };
-
-            const touchStartHandler = (e: TouchEvent) => {
-                lastTouchY = e.touches[0].clientY;
-            };
-
-            touchHandler = (e: TouchEvent) => {
-                e.preventDefault();
-                const currentY = e.touches[0].clientY;
-                const deltaY = lastTouchY - currentY; // positive = scroll down
-                lastTouchY = currentY;
-
-                progress = Math.min(1, Math.max(0, progress + deltaY / 200));
-                revealTl!.progress(progress);
-
-                if (progress >= 1) {
-                    window.removeEventListener("wheel", wheelHandler!, true);
-                    window.removeEventListener("touchstart", touchStartHandler as any);
-                    window.removeEventListener("touchmove", touchHandler!, true);
-                    lenisRef.current?.lenis?.start();
-                }
-            };
-
-            window.addEventListener("wheel", wheelHandler, { capture: true, passive: false });
-            window.addEventListener("touchstart", touchStartHandler, { passive: true });
-            window.addEventListener("touchmove", touchHandler, { capture: true, passive: false });
         };
 
         window.addEventListener("heroAnimationComplete", handleHeroComplete);
@@ -99,8 +63,6 @@ export const Home = () => {
         return () => {
             gsap.ticker.remove(update);
             window.removeEventListener("heroAnimationComplete", handleHeroComplete);
-            if (wheelHandler) window.removeEventListener("wheel", wheelHandler, true);
-            if (touchHandler) window.removeEventListener("touchmove", touchHandler, true);
         };
     }, []);
 
@@ -117,6 +79,7 @@ export const Home = () => {
                     <ButtonBar />
                     <EventSection />
                     <GallerySection />
+                    <MembersSection />
                     <Footer />
                 </div>
             </div>

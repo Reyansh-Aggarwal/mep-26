@@ -1,21 +1,21 @@
 import { cn } from "../utils";
 import { forwardRef, useRef, useEffect } from "react";
 import gsap from "gsap";
+import matrixShard from "../assets/images/matrix-shard-landing.png";
+import ecommShard from "../assets/images/ecomm-shard-landing.png";
+import psynapseShard from "../assets/images/psynapse-shard-landing.png";
 
 export const HeroSection = forwardRef<HTMLDivElement>((_) => {
     const matrixRef = useRef<HTMLDivElement>(null);
     const ecommRef = useRef<HTMLDivElement>(null);
     const psynapseRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const shardsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const isMobile = window.matchMedia("(max-width: 768px)").matches;
-        let handleInteraction: () => void;
-
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({
                 defaults: { ease: "power3.out" },
-                paused: !isMobile,
                 onComplete: () => {
                     window.dispatchEvent(new CustomEvent("heroAnimationComplete"));
                 }
@@ -49,21 +49,27 @@ export const HeroSection = forwardRef<HTMLDivElement>((_) => {
                 }
             )
 
-            // Set random rotation on each letter
+            // Set initial state for shards wrapper
+            gsap.set(shardsRef.current, { opacity: 0, visibility: "hidden", scale: 0.3 });
+
+            // Set random rotation on each letter and remove text shadow initially
             gsap.set(matrixLetters, {
                 rotation: () => gsap.utils.random(-180, 180),
                 transformOrigin: "center center",
-                color: '#0D0F12'
+                color: '#0D0F12',
+                textShadow: "0px 0px 0px rgba(255, 255, 255, 0)"
             });
             gsap.set(ecommLetters, {
                 rotation: () => gsap.utils.random(-180, 180),
                 transformOrigin: "center center",
-                color: '#0D0F12'
+                color: '#0D0F12',
+                textShadow: "0px 0px 0px rgba(255, 255, 255, 0)"
             });
             gsap.set(psynapseLetters, {
                 rotation: () => gsap.utils.random(-180, 180),
                 transformOrigin: "center center",
-                color: '#0D0F12'
+                color: '#0D0F12',
+                textShadow: "0px 0px 0px rgba(255, 255, 255, 0)"
             });
 
             // Phase 2: Slide in all three title blocks sequentially
@@ -92,7 +98,7 @@ export const HeroSection = forwardRef<HTMLDivElement>((_) => {
                         opacity: 1,
                         duration: 1.2,
                     },
-                    "+=0.4"
+
                 )
                 .to(
                     ecommLetters,
@@ -118,11 +124,11 @@ export const HeroSection = forwardRef<HTMLDivElement>((_) => {
                         rotation: 0,
                         duration: 1,
                         ease: "back.out(1.2)",
-                        stagger: 0.05,
+                        stagger: 0,
                     },
                     "<" // runs simultaneously with the psynapseRef sliding up
                 )
-                .to([], { duration: 0.4 })
+                .to([], { duration: 0.1 })
                 .to(
                     [matrixRef.current, ecommRef.current, psynapseRef.current],
                     {
@@ -134,11 +140,12 @@ export const HeroSection = forwardRef<HTMLDivElement>((_) => {
                     [matrixLetters, ecommLetters, psynapseLetters],
                     {
                         color: "#fffdf5",
+                        textShadow: "0px 0px 8px rgba(255, 255, 255, 0.56)",
                         duration: 0.5,
                         ease: "power3.out",
                     },
                     "<"
-                ).to([], { duration: 0.3 })
+                )
                 .to(
                     containerRef.current,
                     {
@@ -146,27 +153,28 @@ export const HeroSection = forwardRef<HTMLDivElement>((_) => {
                         duration: 1.2,
                         ease: "power3.out"
                     },
+                )
+                .to(
+                    shardsRef.current,
+                    {
+                        opacity: 1,
+                        visibility: "visible",
+                        duration: 1.0,
+                        ease: "power2.out",
+                        scale: 1
+                    },
+                    "-=0.8"
                 );
-
-            if (!isMobile) {
-                handleInteraction = () => {
-                    tl.play();
-                    window.removeEventListener("click", handleInteraction);
-                };
-                window.addEventListener("click", handleInteraction);
-            }
         });
 
         return () => {
             ctx.revert();
-            if (handleInteraction) {
-                window.removeEventListener("click", handleInteraction);
-            }
         };
     }, []);
 
     return (
         <div
+            id="heroSection"
             ref={containerRef}
             className={cn(
                 "min-h-dvh w-full overflow-hidden z-10",
@@ -179,7 +187,7 @@ export const HeroSection = forwardRef<HTMLDivElement>((_) => {
                 ref={matrixRef}
                 className={cn(
                     "font-primary text-black text-9xl",
-                    "w-full h-full absolute pt-24 lg:pt-24 left-0 "
+                    "w-full h-full absolute pt-24 left-0 "
                 )}
             >
                 <span id="MATRIX"
@@ -215,6 +223,14 @@ export const HeroSection = forwardRef<HTMLDivElement>((_) => {
                         </span>
                     </div>
                 </div>
+            </div>
+            <div ref={shardsRef} className="w-full self-stretch z-20">
+                <img src={matrixShard}
+                    className="absolute top-[-50dvh] left-[-10dvh] lg:top-[-45dvh] lg:left-1/6 w-[200px] lg:w-[250px] h-auto animate-shard-float" />
+                <img src={ecommShard}
+                    className="absolute top-0 -translate-y-[20%] md:-translate-y-[50%] lg:-translate-y-24 lg:right-42 right-[-40px] md:right-[-20px] w-[200px] lg:w-[250px] h-auto animate-shard-float-1" />
+                <img src={psynapseShard}
+                    className="absolute top-[20dvh] left-[-5dvh] lg:bottom-16 lg:left-1/5 w-[200px] lg:w-[250px] h-auto animate-shard-float-2" />
             </div>
         </div>
     );
