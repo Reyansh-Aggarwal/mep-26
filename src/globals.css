@@ -2,15 +2,14 @@
 
 body {
   background-color: #0D0F12;
+  padding: 0;
+  margin: 0;
 }
 
-/* Modern scrollbar and focus ring behaviors */
-/* Define the font-face */
 @font-face {
   font-family: 'Clash Grotesk';
   src: url('assets/fonts/ClashGrotesk-Variable.ttf') format('truetype-variations');
   font-weight: 100 900;
-  /* Supports everything from Thin to Black */
   font-style: normal;
   font-display: swap;
 }
@@ -35,7 +34,7 @@ body {
 @theme {
   /* For Tailwind v4.0+ */
   --font-secondary: 'Clash Grotesk', sans;
-  --font-primary: 'Blackheat', sans-serif;
+  --font-primary: 'Tomorrow', sans-serif;
   --color-black: #0D0F12;
   --color-yellow: #FFD23F;
   --color-offwhite: #FFFDF5;
@@ -49,7 +48,8 @@ body {
   --animate-shard-float-1: float-slow 6.5s ease-in-out infinite;
   --animate-shard-float-2: float-slow 6.7s ease-in-out infinite;
   --animate-shard-float-3: float-slow 6.6s ease-in-out infinite;
-  --animate-marquee: marquee 30s linear infinite;
+  --animate-marquee: marquee 90s linear infinite;
+  --animate-reverse-marquee: reverse-marquee 90s linear infinite;
 }
 
 @keyframes fade-in {
@@ -66,8 +66,20 @@ body {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
+  }
+}
+
+
+@keyframes reverse-marquee {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
   }
 }
 
@@ -79,7 +91,7 @@ body {
   }
 
   50% {
-    transform: translateY(-4px) rotate(3deg);
+    transform: translateY(-8px) rotate(5deg);
   }
 }
 

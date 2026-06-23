@@ -4,14 +4,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 
-import { HeroSection } from "../components/HeroSection";
+import { HeroSection } from "../components/Home/HeroSection";
 import dotBg from "../assets/images/dot-background.png";
 import { Footer } from "../components/Footer";
-import { ButtonBar } from "../components/ButtonBar";
 import { Navbar } from "../components/Navbar";
-import { EventSection } from "../components/EventSection";
-import { GallerySection } from "../components/GallerySection";
-import { MembersSection } from "../components/MembersSection";
+import { EventSection } from "../components/Home/EventSection";
+import { GallerySection } from "../components/Home/GallerySection";
+import { MembersSection } from "../components/Home/MembersSection";
+import { Cursor } from "../components/Cursor";
+import { Ribbon } from "../components/Ribbon";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -67,19 +68,27 @@ export const Home = () => {
     }, []);
 
     return (
-        <ReactLenis root ref={lenisRef} autoRaf={false}>
-            <div className="relative min-h-screen bg-black font-secondary ">
-                <img src={dotBg} className="fixed top-0 left-0 w-full z-0" />
+        <ReactLenis root ref={lenisRef} options={{ autoRaf: false }}>
+            <div className="relative min-h-screen bg-black font-secondary w-full cursor-none">
+                <div className="fixed inset-0 w-full h-full z-0 opacity-30 pointer-events-none">
+                    <img
+                        src={dotBg}
+                        alt=""
+                        className="w-full h-full object-cover"
+                    />
+                </div>
 
-                {/* Main content floats above and scrolls off */}
-                <HeroSection />
-                <div className="relative z-20">
+                <div className="relative z-10 w-full flex flex-col">
                     <Navbar />
-
-                    <ButtonBar />
+                    <Cursor />
+                    <HeroSection />
+                    <Ribbon content={"EVENTS"} />
                     <EventSection />
+                    <Ribbon content={"EVENTS"} />
                     <GallerySection />
+                    <Ribbon content={"MEET OUR TEAM"} />
                     <MembersSection />
+                    <Ribbon content={"MEET OUR TEAM"} />
                     <Footer />
                 </div>
             </div>

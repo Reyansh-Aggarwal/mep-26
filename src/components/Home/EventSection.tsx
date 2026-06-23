@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-import { cn } from "../utils";
-import matrixLogo from "../assets/logos/matrix_logo.png";
-import ecommLogo from "../assets/logos/ecomm_logo.png";
-import psynapseLogo from "../assets/logos/psynapse_logo.png";
+import { cn, useInView } from "../../utils";
+import matrixLogo from "../../assets/logos/matrix_logo.png";
+import ecommLogo from "../../assets/logos/ecomm_logo.png";
+import psynapseLogo from "../../assets/logos/psynapse_logo.png";
 
-import matrixShard1 from "../assets/images/matrix-shard1.png";
-import matrixShard2 from "../assets/images/matrix-shard2.png";
-import matrixShard3 from "../assets/images/matrix-shard3.png";
-import matrixShard4 from "../assets/images/matrix-shard4.png";
+import matrixShard1 from "../../assets/images/matrix-shard1.png";
+import matrixShard2 from "../../assets/images/matrix-shard2.png";
+import matrixShard3 from "../../assets/images/matrix-shard3.png";
+import matrixShard4 from "../../assets/images/matrix-shard4.png";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -103,39 +103,45 @@ const clubConfig = {
     matrix: {
         color: "var(--color-matrix)",
         textClass: "text-matrix",
-        bgClass: "bg-matrix",
-        shadowColor: "#1e2b4d",
+        bgClass: "bg-matrix/30",
+        hoverClass: "hover:bg-matrix",
+        shadowClass: "shadow-[0_4px_0_#1e2b4d]",
         glowShadow: "0 0 12px #0000ff60",
         borderHover: "hover:border-matrix/50",
         numColor: "text-matrix/10",
         gradientFrom: "from-matrix/10",
+        royalBgClass: "bg-royal-blue"
     },
     ecomm: {
         color: "var(--color-ecomm)",
         textClass: "text-ecomm",
-        bgClass: "bg-ecomm",
-        shadowColor: "#0a3c18",
+        bgClass: "bg-ecomm/30",
+        hoverClass: "hover:bg-ecomm",
+        shadowClass: "shadow-[0_4px_0_#0a3c18]",
         glowShadow: "0 0 12px #00ff0060",
         borderHover: "hover:border-ecomm/50",
         numColor: "text-ecomm/10",
         gradientFrom: "from-ecomm/10",
+        royalBgClass: "bg-royal-green"
     },
     psynapse: {
         color: "var(--color-psynapse)",
         textClass: "text-psynapse",
-        bgClass: "bg-psynapse",
-        shadowColor: "#4a0b30",
+        bgClass: "bg-psynapse/30",
+        hoverClass: "hover:bg-psynapse",
+        shadowClass: "shadow-[0_4px_0_#4a0b30]",
         glowShadow: "0 0 12px #ff000060",
         borderHover: "hover:border-psynapse/50",
         numColor: "text-psynapse/10",
         gradientFrom: "from-psynapse/10",
+        royalBgClass: "bg-royal-pink"
     },
 } as const;
 
 export const EventSection = () => {
     const [club, setClub] = useState<"matrix" | "ecomm" | "psynapse">("matrix");
     const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
-    const sectionRef = useRef<HTMLDivElement>(null);
+    const { ref, isVisible } = useInView({ threshold: 0.01 });
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
     const events = club == "matrix" ? matrixEvents :
@@ -144,50 +150,32 @@ export const EventSection = () => {
 
     const config = clubConfig[club];
 
-    // GSAP scroll-reveal for event cards (desktop only)
     useEffect(() => {
-        const mm = gsap.matchMedia();
-
-        mm.add("(min-width: 768px)", () => {
-            cardsRef.current.forEach((card, i) => {
-                if (!card) return;
-                gsap.fromTo(card,
-                    {
-                        opacity: 0,
-                        y: 60,
-                        scale: 0.95,
-                    },
-                    {
-                        opacity: 1,
-                        y: 0,
-                        scale: 1,
-                        duration: 0.6,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: card,
-                            start: "top 85%",
-                            toggleActions: "play none none reverse",
-                        },
-                        delay: i * 0.08,
-                    }
-                );
+        if (isVisible) {
+            gsap.fromTo("#header", {
+                opacity: 0,
+                y: 200
+            }, {
+                opacity: 1,
+                y: 0,
+                duration: 3,
+                ease: "power3.out"
             });
-        });
 
-        return () => mm.revert();
-    }, [club]);
+        }
+    }, [isVisible]);
 
     return (
         <div
             id="eventSection"
-            ref={sectionRef}
+            ref={ref}
             className={cn(
                 "min-h-dvh w-full overflow-hidden relative",
                 "text-center items-center justify-start",
-                "flex flex-col bg-black py-24 gap-12 select-none"
+                "flex flex-col py-24 gap-12 select-none",
             )}
         >
-            {/* Ambient backdrop glow layers */}
+
             <div
                 className="absolute w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none top-1/4 left-0 transition-colors duration-700"
                 style={{ backgroundColor: `color-mix(in srgb, ${config.color} 8%, transparent)` }}
@@ -197,21 +185,11 @@ export const EventSection = () => {
                 style={{ backgroundColor: `color-mix(in srgb, ${config.color} 6%, transparent)` }}
             />
 
-            {/* Section Header */}
-            <div className="text-center relative z-10 px-4 select-none">
-                <h2 className="font-primary text-7xl md:text-9xl text-offwhite tracking-wider uppercase text-shadow-[0_0_8px_#ffffff50]">
-                    EVENTS
-                </h2>
-                <p className="font-secondary text-yellow text-sm md:text-base tracking-[0.25em] uppercase mt-3">
-                    THE WINNERS TAKE IT ALL
-                </p>
-            </div>
-
             {/* Logo Carousel Header */}
             <div id="header"
                 className={cn(
                     "font-primary text-9xl lg:text-[11rem] text-offwhite",
-                    "transform-3d w-full ",
+                    "transform-3d w-full",
                     "h-64 md:h-96 flex flex-row justify-center gap-12 items-center relative")}>
                 <img src={matrixLogo}
                     className={cn(
@@ -227,38 +205,27 @@ export const EventSection = () => {
                     className={cn("transition-all duration-300 ease-out absolute opacity-30 h-16",
                         club == "matrix" ? "translate-x-[46dvw] -translate-z-8 opacity-0" : club == "ecomm" ? "translate-x-[23dvw] -translate-z-8 " : "h-32 lg:h-48 opacity-100")} />
 
-                <div className="">
-                    <img src={matrixShard1}
-                        className="h-16 lg:h-24 absolute top-[-4px] lg:top-[-26px] right-1/2 translate-x-[200%] animate-shard-float" />
-                    <img src={matrixShard2}
-                        className="h-16 lg:h-24 absolute bottom-0 right-1/2 lg:bottom-[-35px] translate-x-[-100%] animate-shard-float-1" />
-
-                    <img src={matrixShard3}
-                        className="h-16 lg:h-24 absolute bottom-0 left-1/2 lg:bottom-[-30px] translate-x-[90%] animate-shard-float-2" />
-
-                    <img src={matrixShard4}
-                        className="h-16 lg:h-24 absolute top-2 lg:top-[-40px] right-1/2 translate-x-[-100%] animate-shard-float-3" />
-
-                </div>
             </div>
 
             {/* Club Selector Buttons */}
             <div id="buttons"
-                className="flex flex-row w-full justify-center items-center gap-4 relative z-10">
+                className={cn(
+                    "flex flex-row w-full justify-center items-center gap-4 relative z-10",)}>
                 {(["matrix", "ecomm", "psynapse"] as const).map((c) => (
-                    <button key={c}
+                    <div key={c} id="button"
                         onClick={() => setClub(c)}
                         className={cn(
                             "px-6 md:px-10 py-2.5 text-center",
-                            `bg-${c} text-black`,
-                            "transition-all duration-100 ease-in",
+                            ` text-white/40  bg-blue-100/20 backdrop-blur-md`,
+                            ` border border-white/20 rounded-full`,
                             "font-secondary font-bold tracking-wider uppercase",
+                            `hover:${config.bgClass}`,
                             club === c
-                                ? "translate-y-[4px] shadow-none"
-                                : `shadow-[0_4px_0_${clubConfig[c].shadowColor}]`
+                                ? `translate-y-[4px] shadow-none bg-${c} text-offwhite`
+                                : `shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]`,
                         )}>
-                        {c === "psynapse" ? "PSYNAPSE" : c.toUpperCase()}
-                    </button>
+                        {c}
+                    </div>
                 ))}
             </div>
 
@@ -284,7 +251,6 @@ export const EventSection = () => {
                                     "p-6 md:p-8",
                                     "flex flex-col justify-between",
                                     "min-h-[180px] md:min-h-[220px]",
-                                    "cursor-pointer"
                                 )}
                                 onClick={() => setSelectedEvent(event)}>
 
@@ -306,7 +272,7 @@ export const EventSection = () => {
                                 <div className="relative z-10 flex flex-col gap-2">
                                     <span
                                         className={cn(
-                                            "font-primary text-5xl md:text-6xl lg:text-7xl tracking-wide transition-all duration-300",
+                                            "font-primary text-4xl md:text-5xl lg:text-4xl w-full transition-all duration-300",
                                             config.textClass
                                         )}
                                         style={{ textShadow: config.glowShadow }}>
@@ -369,7 +335,7 @@ export const EventSection = () => {
             {/* Modal Overlay */}
             {selectedEvent && (
                 <div
-                    className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-fade-in"
+                    className="fixed inset-0 z-[50] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-fade-in"
                     onClick={() => setSelectedEvent(null)}
                 >
                     <div
@@ -377,12 +343,12 @@ export const EventSection = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         {/* Close button */}
-                        <button
+                        <div
                             className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors text-2xl outline-none"
                             onClick={() => setSelectedEvent(null)}
                         >
                             ✕
-                        </button>
+                        </div>
 
                         <div className="flex flex-col gap-4 mt-4">
                             <span

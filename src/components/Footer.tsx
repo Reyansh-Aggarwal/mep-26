@@ -15,9 +15,7 @@ export const Footer = () => {
                 "flex flex-col items-center justify-center pt-24 pb-12 z-10"
             )}>
 
-            {/* Ambient backdrop glow layers */}
-            <div className="absolute w-[500px] h-[500px] bg-[var(--color-matrix)]/10 rounded-full blur-[140px] pointer-events-none top-0 left-[-10%]" />
-            <div className="absolute w-[400px] h-[400px] bg-[var(--color-psynapse)]/10 rounded-full blur-[120px] pointer-events-none bottom-[-20%] right-[-10%]" />
+
 
             {/* Top Divider */}
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent" />
@@ -26,7 +24,7 @@ export const Footer = () => {
 
                 {/* Left: Branding */}
                 <div className="flex flex-col gap-4 basis-1/2">
-                    <span className="font-primary text-6xl md:text-8xl text-offwhite uppercase tracking-wider text-shadow-[0_0_8px_#ffffff50]">
+                    <span className="font-primary text-6xl md:text-7xl lg:text-8xl text-offwhite uppercase tracking-wider text-shadow-[0_0_8px_#ffffff50]">
                         MATRIX'26
                     </span>
 

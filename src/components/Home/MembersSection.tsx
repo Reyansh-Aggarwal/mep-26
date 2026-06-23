@@ -1,4 +1,4 @@
-import { cn } from "../utils";
+import { cn } from "../../utils";
 
 const clubs = [
     {
@@ -27,7 +27,7 @@ const clubs = [
         members: [
             { role: "President", name: "Mahi Agrawal" },
             { role: "Vice-President", name: "Anishka Patel" },
-            { role: "General Secretary", name: "" },
+            { role: "General Secretary", name: "Rutvija Mohite" },
             { role: "Joint Secretary", name: "Mariah Robins" },
         ]
     }
@@ -35,7 +35,7 @@ const clubs = [
 
 export const MembersSection = () => {
     return (
-        <div id="membersSection" className="min-h-screen w-full bg-black flex flex-col items-center relative overflow-hidden py-24 z-10">
+        <div id="membersSection" className="min-h-screen w-full flex flex-col items-center relative overflow-hidden py-24 z-10">
             {/* Ambient backdrop glow layers */}
             <div className="absolute w-[500px] h-[500px] bg-[var(--color-matrix)]/5 rounded-full blur-[140px] pointer-events-none top-10 left-10" />
             <div className="absolute w-[400px] h-[400px] bg-[var(--color-ecomm)]/5 rounded-full blur-[120px] pointer-events-none top-1/2 right-10" />
@@ -43,12 +43,7 @@ export const MembersSection = () => {
 
             {/* Header */}
             <div className="text-center mb-20 relative z-10 px-4 select-none">
-                <h2 className="font-primary text-7xl md:text-9xl text-offwhite tracking-wider uppercase text-shadow-[0_0_8px_#ffffff50]">
-                    OUR TEAM
-                </h2>
-                <p className="font-secondary text-yellow text-sm md:text-base tracking-[0.25em] uppercase mt-3">
-                    The minds behind it all
-                </p>
+
             </div>
 
             {/* Clubs Grid */}
@@ -57,7 +52,7 @@ export const MembersSection = () => {
                     <div key={idx} className="flex flex-col gap-8">
                         {/* Club Title */}
                         <div className="flex items-center justify-center md:justify-start gap-4">
-                            <h3 className={cn("font-primary text-8xl md:text-7xl uppercase", club.colorClass)}>
+                            <h3 className={cn("font-primary text-6xl md:text-7xl uppercase", club.colorClass)}>
                                 {club.name}
                             </h3>
                             <div className="h-[2px] flex-grow bg-white/10 hidden md:block rounded-full"></div>
@@ -66,7 +61,7 @@ export const MembersSection = () => {
                         {/* Members Grid */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                             {club.members.map((member, mIdx) => (
-                                <div key={mIdx} className="flex flex-col items-center group cursor-pointer">
+                                <div key={mIdx} className="flex flex-col items-center group ">
                                     {/* Photo Placeholder */}
                                     <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl bg-white/5 border border-white/10 overflow-hidden relative mb-4 transition-all duration-300 group-hover:border-yellow/50 group-hover:scale-105">
                                         <div className="absolute inset-0 flex items-center justify-center text-white/20">
@@ -92,9 +87,14 @@ export const MembersSection = () => {
 
             {/* View More Button */}
             <div className="mt-24 relative z-10">
-                <button className="bg-yellow px-8 py-4 text-black hover:underline font-bold cursor-pointer shadow-[0_4px_0_#837600] transition-all duration-100 ease-in active:translate-y-[4px] active:shadow-[0_0_0_#837600]">
+                <div className={cn(
+                    "bg-yellow px-8 py-4",
+                    "text-black font-bold",
+                    "shadow-[0_4px_0_#837600]",
+                    "transition-all duration-100 ease-in",
+                    "active:translate-y-[4px] active:shadow-[0_0_0_#837600]")}>
                     VIEW MORE
-                </button>
+                </div>
             </div>
         </div>
     );
