@@ -8,7 +8,7 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
-export const HeroSection = ((_) => {
+export const HeroSection = (() => {
     const matrixRef = useRef<HTMLDivElement>(null);
     const ecommRef = useRef<HTMLDivElement>(null);
     const psynapseRef = useRef<HTMLDivElement>(null);

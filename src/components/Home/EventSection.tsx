@@ -3,12 +3,6 @@ import { cn, useInView } from "../../utils";
 import matrixLogo from "../../assets/logos/matrix_logo.png";
 import ecommLogo from "../../assets/logos/ecomm_logo.png";
 import psynapseLogo from "../../assets/logos/psynapse_logo.png";
-
-import matrixShard1 from "../../assets/images/matrix-shard1.png";
-import matrixShard2 from "../../assets/images/matrix-shard2.png";
-import matrixShard3 from "../../assets/images/matrix-shard3.png";
-import matrixShard4 from "../../assets/images/matrix-shard4.png";
-
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
