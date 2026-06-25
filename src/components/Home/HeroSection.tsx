@@ -228,7 +228,7 @@ export const HeroSection = (() => {
                     className="w-full h-full text-center flex flex-col justify-center"
                 >
                     <span id="ECOMM"
-                        className="text-[25dvw] md:text-[12rem]">
+                        className="text-[25dvw] md:text-[12.5rem]">
                         {"ECOMM".split("").map((char, i) => (
                             <span key={i} className="inline-block ecomm-letter">
                                 {char}
@@ -239,7 +239,7 @@ export const HeroSection = (() => {
                         ref={psynapseRef}
                         className="w-full h-full text-center flex justify-center ">
                         <span id="PSYNAPSE"
-                            className="text-[17.4dvw] md:text-[8.5rem]">
+                            className="text-[17.4dvw] md:text-[8.55rem]">
                             {"PSYNAPSE".split("").map((char, i) => (
                                 <span key={i} className="inline-block psynapse-letter">
                                     {char}
@@ -252,20 +252,20 @@ export const HeroSection = (() => {
             <div ref={shardsRef} className="w-full h-full z-20">
                 <img src={matrixShard}
                     className={cn(
-                        "absolute top-[10dvh] left-[0] w-[200px] ",
+                        "absolute top-[10dvh] left-[0] w-[175px] ",
                         "md:w-[225px] md:top-[20dvh] md:left-0",
                         "lg:top-[12dvh] lg:left-[16dvw]  lg:w-[275px]",
                         "h-auto animate-shard-float")} />
                 <img src={ecommShard}
                     className={cn(
-                        "absolute top-[40dvh] -translate-y-[20%] right-[-40px] w-[200px] ",
-                        "md:right-0 md:w-[225px] md:top-[40dvh] ",
+                        "absolute top-[40dvh] -translate-y-[20%] right-[-40px] w-[175px] ",
+                        "md:right-[-5dvw] md:w-[225px] md:top-[50dvh] ",
                         "lg:top-1/3 lg:right-[10dvw] lg:w-[275px]",
                         "h-auto animate-shard-float-1")} />
                 <img src={psynapseShard}
                     className={cn(
-                        "absolute bottom-[25dvh] left-[0dvh] w-[200px] ",
-                        "md:bottom-[20dvh]  md:left-0 md:w-[225px] ",
+                        "absolute bottom-[25dvh] left-[0dvh] w-[175px] ",
+                        "md:bottom-[0] md:left-0 md:w-[225px] ",
                         "lg:bottom-[20dvh] lg:left-[10dvw] lg:w-[275px]",
                         "h-auto animate-shard-float-2")} />
             </div>
