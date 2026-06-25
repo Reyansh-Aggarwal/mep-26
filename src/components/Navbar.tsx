@@ -107,53 +107,14 @@ export const Navbar = () => {
             ref={navbarRef}
             className={cn("fixed top-0 left-0 w-full h-fit px-4 py-4 z-20 bg-black/80 backdrop-blur-sm -translate-y-full")}
         >
-            {/* Desktop Navigation Engine */}
-            <div id="desktopBar"
-                className={cn(
-                    "flex-row w-full h-fit",
-                    "hidden ",
-                    "border border-white/10 bg-white/[0.03]",
-                    "backdrop-blur-sm",
-                    "transition-all duration-300",
-                    "rounded-full text-offwhite"
-                )}
-            >
-                <button id="logo"
-                    onClick={() => scrollSection("heroSection")}
-                    className="px-8 py-2 w-fit text-white flex justify-center rounded-l-full active:bg-white/40 group"
-                >
-                    <img src={mepLogo} alt="MEP" className="h-8 w-18 group-active:invert" />
-                </button>
-                <div className="w-[1px] h-12 bg-white/10" />
-                <div className="flex flex-row w-full items-center justify-center">
-                    <button onClick={() => scrollSection("eventSection")}
-                        className="active:bg-white/40 active:text-black px-2 py-2 basis-1/2 h-full"
-                    >
-                        EVENTS
-                    </button>
-                    <button onClick={() => scrollSection("membersSection")}
-                        className="active:bg-white/40 active:text-black px-2 py-2 basis-1/2 h-full"
-                    >
-                        OUR TEAM
-                    </button>
-                </div>
 
-                <div className="w-[1px] h-12 bg-white/10" />
-                <button id="alumni"
-                    className="block px-8 py-2 text-white rounded-r-full active:bg-white/40 active:text-black"
-                >
-                    ALUMNI
-                </button>
-            </div>
-
-            {/* Mobile Navigation Engine */}
             <div id="mobileBar" className="flex justify-around font-bold">
                 <div className="flex flex-row w-full items-center justify-around z-30 ">
                     <div id="brochure"
                         className="relative w-fit rounded-full">
                         <div onClick={() => { navTo("brochure") }}
                             className={cn(
-                                "px-6 md:px-10 py-2.5 text-center",
+                                "px-6 md:px-10 py-2.5 text-center md:flex hidden",
                                 ` text-white/40  bg-blue-100/20 backdrop-blur-md`,
                                 ` border border-white/20 rounded-full`,
                                 "font-secondary font-bold tracking-wider uppercase",
@@ -183,7 +144,7 @@ export const Navbar = () => {
                         className="relative w-fit">
                         <div onClick={() => navTo("register")}
                             className={cn(
-                                "px-6 md:px-10 py-2.5 text-center",
+                                "px-6 md:px-10 py-2.5 text-center md:flex hidden",
                                 `text-white/40  bg-blue-100/20 backdrop-blur-md`,
                                 `border border-white/20 rounded-full`,
                                 "font-secondary font-bold tracking-wider uppercase",
@@ -196,17 +157,27 @@ export const Navbar = () => {
                     </div>
                 </div>
 
-                <div ref={menuRef}
-                    className={cn(
-                        "fixed top-0 left-0 h-dvh w-dvw bg-black z-20",
-                        "text-offwhite font-secondary font-bold text-6xl",
-                        "flex flex-col justify-around py-40 md:px-32"
-                    )}
-                >
-                    {/* Added the functional scrollSection handlers to mobile items */}
-                    <button onClick={() => scrollSection("eventSection")} className="w-full px-10 text-right hover:underline">MEP'26</button>
-                    <button onClick={() => scrollSection("membersSection")} className="w-full px-10 text-left hover:underline">OUR TEAM</button>
-                    <button onClick={() => scrollSection("heroSection")} className="w-full px-10 text-right hover:underline">ALUMNI</button>
+
+            </div>
+            <div ref={menuRef}
+                className={cn(
+                    "fixed top-0 left-0 h-dvh w-dvw bg-black z-20",
+                    "text-offwhite font-secondary font-bold text-6xl",
+                    "flex flex-col justify-around py-40 md:px-32"
+                )}
+            >
+                {/* Added the functional scrollSection handlers to mobile items */}
+                <div onClick={() => scrollSection("eventSection")}
+                    className="w-full px-10 text-right hover:underline">
+                    MEP'26
+                </div>
+                <div onClick={() => scrollSection("membersSection")}
+                    className="w-full px-10 text-left hover:underline">
+                    OUR TEAM
+                </div>
+                <div onClick={() => scrollSection("heroSection")}
+                    className="w-full px-10 text-right hover:underline">
+                    ALUMNI
                 </div>
             </div>
         </div>

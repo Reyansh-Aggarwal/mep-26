@@ -216,7 +216,7 @@ export const HeroSection = (() => {
                 )}
             >
                 <span id="MATRIX"
-                    className="md:text-[12rem] text-[9rem]">
+                    className="md:text-[12rem] text-[24dvw]">
                     {"MATRIX".split("").map((char, i) => (
                         <span key={i} className="inline-block matrix-letter">
                             {char}
@@ -225,10 +225,10 @@ export const HeroSection = (() => {
                 </span>
                 <div
                     ref={ecommRef}
-                    className="w-full h-full text-center"
+                    className="w-full h-full text-center flex flex-col justify-center"
                 >
                     <span id="ECOMM"
-                        className="text-[9rem] md:text-[12rem]">
+                        className="text-[25dvw] md:text-[12rem]">
                         {"ECOMM".split("").map((char, i) => (
                             <span key={i} className="inline-block ecomm-letter">
                                 {char}
@@ -237,9 +237,9 @@ export const HeroSection = (() => {
                     </span>
                     <div
                         ref={psynapseRef}
-                        className="w-full h-full text-center">
+                        className="w-full h-full text-center flex justify-center ">
                         <span id="PSYNAPSE"
-                            className="text-[6.2rem] md:text-[8.5rem]">
+                            className="text-[17.4dvw] md:text-[8.5rem]">
                             {"PSYNAPSE".split("").map((char, i) => (
                                 <span key={i} className="inline-block psynapse-letter">
                                     {char}
@@ -252,7 +252,7 @@ export const HeroSection = (() => {
             <div ref={shardsRef} className="w-full h-full z-20">
                 <img src={matrixShard}
                     className={cn(
-                        "absolute top-[10dvh] left-[-10dvw] w-[200px] ",
+                        "absolute top-[10dvh] left-[0] w-[200px] ",
                         "md:w-[225px] md:top-[20dvh] md:left-0",
                         "lg:top-[12dvh] lg:left-[16dvw]  lg:w-[275px]",
                         "h-auto animate-shard-float")} />

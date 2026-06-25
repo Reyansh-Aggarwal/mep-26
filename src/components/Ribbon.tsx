@@ -43,7 +43,7 @@ export const Ribbon = ({ content }: { content: string }) => {
                 )}
             >
                 {/* Duplicating text strings ensures it has enough length to overflow cleanly */}
-                {content} — {content} — {content} — {content} —
+                {content} — {content} — {content} — {content} — {content} — {content} —
             </div>
         </div>
     );
