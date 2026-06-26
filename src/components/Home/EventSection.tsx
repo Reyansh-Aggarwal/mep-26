@@ -19,7 +19,7 @@ const matrixEvents: Event[] = [
     {
         id: 1,
         name: "A/V Sync",
-        tagline: "May the frames be with you",
+        tagline: "May the Frames Be With You.",
         description: "An offline filmmaking competition for teams of five to produce a minimum three-minute video based on a randomly assigned aesthetic, incorporating a mandatory mid-event surprise element."
     },
     {
@@ -31,7 +31,7 @@ const matrixEvents: Event[] = [
     {
         id: 3,
         name: "Matrix Gauntlet",
-        tagline: "Reflex. Strategy. Glory.",
+        tagline: "paused my game to be here",
         description: "A hybrid gaming competition where teams of two demonstrate versatility and strategy across multiple genres, including Minecraft Bingo and Clash Royale, culminating in a surprise console game finale."
     },
     {
@@ -52,7 +52,7 @@ const ecommEvents: Event[] = [
         id: 2,
         name: "Pivot",
         tagline: "Market the Unexpected.",
-        description: "A two-round marketing challenge where teams of three build creative campaigns for contrasting target audiences, followed by an individual crisis-management round to tackle sudden PR or budget disasters."
+        description: "A two-round marketing challenge where teams of three build creative campaigns for contrasting target audiences, followed by an impromptu crisis-management round."
     },
     {
         id: 3,

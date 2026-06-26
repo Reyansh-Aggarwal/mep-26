@@ -56,7 +56,7 @@ const clubs = [
             { role: "President", name: "Mahi Agrawal" },
             { role: "Vice-President", name: "Anishka Patel" },
             { role: "General Secretary", name: "Rutvija Mohite" },
-            { role: "Joint Secretary", name: "Mariah Robins" },
+            { role: "Joint Secretary", name: "Mariah Susane Robins" },
         ],
         executives: [
             { name: "hello", role: "executive member" },
