@@ -52,7 +52,7 @@ export const MembersSection = () => {
                     <div key={idx} className="flex flex-col gap-8">
                         {/* Club Title */}
                         <div className="flex items-center justify-center md:justify-start gap-4">
-                            <h3 className={cn("font-primary text-6xl md:text-7xl uppercase", club.colorClass)}>
+                            <h3 className={cn("font-primary text-5xl md:text-7xl uppercase", club.colorClass)}>
                                 {club.name}
                             </h3>
                             <div className="h-[2px] flex-grow bg-white/10 hidden md:block rounded-full"></div>
@@ -86,14 +86,17 @@ export const MembersSection = () => {
             </div>
 
             {/* View More Button */}
-            <div className="mt-24 relative z-10">
-                <div className={cn(
-                    "bg-yellow px-8 py-4",
-                    "text-black font-bold",
-                    "shadow-[0_4px_0_#837600]",
-                    "transition-all duration-100 ease-in",
-                    "active:translate-y-[4px] active:shadow-[0_0_0_#837600]")}>
-                    VIEW MORE
+            <div className="mt-24 relative z-10 flex flex-row gap-4">
+                <div
+                    className={cn(
+                        "px-6 md:px-10 py-2.5 text-center",
+                        ` text-white/40  bg-blue-100/20 backdrop-blur-md`,
+                        ` border border-white/20 rounded-full`,
+                        "font-secondary font-bold tracking-wider uppercase",
+                        "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
+                        "active:mt-1 active:shadow-none active:bg-black active:text-white")
+                    }>
+                    MEET THE REST OF US
                 </div>
             </div>
         </div>

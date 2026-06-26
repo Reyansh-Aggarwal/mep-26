@@ -239,7 +239,7 @@ export const HeroSection = (() => {
                         ref={psynapseRef}
                         className="w-full h-full text-center flex justify-center ">
                         <span id="PSYNAPSE"
-                            className="text-[17.4dvw] md:text-[8.55rem]">
+                            className="text-[17.4dvw] md:text-[8.65rem]">
                             {"PSYNAPSE".split("").map((char, i) => (
                                 <span key={i} className="inline-block psynapse-letter">
                                     {char}
@@ -260,13 +260,13 @@ export const HeroSection = (() => {
                     className={cn(
                         "absolute top-[40dvh] -translate-y-[20%] right-[-40px] w-[175px] ",
                         "md:right-[-5dvw] md:w-[225px] md:top-[50dvh] ",
-                        "lg:top-1/3 lg:right-[10dvw] lg:w-[275px]",
+                        "lg:top-1/2 lg:right-[10dvw] lg:w-[275px]",
                         "h-auto animate-shard-float-1")} />
                 <img src={psynapseShard}
                     className={cn(
                         "absolute bottom-[25dvh] left-[0dvh] w-[175px] ",
                         "md:bottom-[0] md:left-0 md:w-[225px] ",
-                        "lg:bottom-[20dvh] lg:left-[10dvw] lg:w-[275px]",
+                        "lg:bottom-[0dvh] lg:left-[10dvw] lg:w-[275px]",
                         "h-auto animate-shard-float-2")} />
             </div>
         </div>

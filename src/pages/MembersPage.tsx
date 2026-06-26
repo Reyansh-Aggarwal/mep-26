@@ -1,70 +1,101 @@
-import { Link } from "react-router";
 import { cn } from "../utils";
+import { Navbar } from "../components/Navbar";
+import { Cursor } from "../components/Cursor";
 
 
 // 🔹 Mock Data Structure (Replace with your CMS/API data)
-const clubsData = [
+const clubs = [
     {
-        name: "Tech Club",
-        colorClass: "text-blue-500",
-        positions: [
-            { role: "President", name: "Alex Johnson" },
-            { role: "Vice President", name: "Maria Garcia" },
-            { role: "General Secretary", name: "David Kim" },
-            { role: "Joint Secretary", name: "Sarah Chen" },
+        name: "Matrix",
+        colorClass: "text-[var(--color-matrix)]",
+        members: [
+            { role: "President", name: "Reyansh Aggarwal" },
+            { role: "Vice-President", name: "Ishaan Garg" },
+            { role: "General Secretary", name: "Atharv Sharma" },
+            { role: "Joint Secretary", name: "Prayag Nagar" },
         ],
-        executives: Array.from({ length: 8 }, (_, i) => ({
-            role: "Executive Member",
-            name: `Executive Member ${i + 1}`,
-        })),
+        executives: [
+            { name: "hello", role: "executive" },
+            { name: "hello", role: "executive" },
+            { name: "hello", role: "executive" },
+            { name: "hello", role: "executive" },
+            { name: "hello", role: "executive" },
+            { name: "hello", role: "executive" },
+            { name: "hello", role: "executive" },
+            { name: "hello", role: "executive" },
+            { name: "hello", role: "executive" },
+            { name: "hello", role: "executive" },
+        ]
     },
     {
-        name: "Design Club",
-        colorClass: "text-pink-500",
-        positions: [
-            { role: "President", name: "James Wilson" },
-            { role: "Vice President", name: "Emma Davis" },
-            { role: "General Secretary", name: "Liam Brown" },
-            { role: "Joint Secretary", name: "Olivia Taylor" },
+        name: "Ecommbuzz",
+        colorClass: "text-[var(--color-ecomm)]",
+        members: [
+            { role: "President", name: "Krishiv Dua" },
+            { role: "Vice-President", name: "Sharanya Sarin" },
+            { role: "General Secretary", name: "Srishti Pandey" },
+            { role: "Joint Secretary", name: "Gaurav Kumar" },
         ],
-        executives: Array.from({ length: 8 }, (_, i) => ({
-            role: "Executive Member",
-            name: `Executive Member ${i + 1}`,
-        })),
+        executives: [
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+        ]
     },
-    // Add more clubs as needed
+    {
+        name: "Psynapse",
+        colorClass: "text-[var(--color-psynapse)]",
+        members: [
+            { role: "President", name: "Mahi Agrawal" },
+            { role: "Vice-President", name: "Anishka Patel" },
+            { role: "General Secretary", name: "Rutvija Mohite" },
+            { role: "Joint Secretary", name: "Mariah Robins" },
+        ],
+        executives: [
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+            { name: "hello", role: "executive member" },
+        ]
+    }
 ];
-
 export const MembersPage = () => {
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-offwhite relative overflow-hidden">
+        <div className="min-h-screen bg-[#0a0a0a] text-offwhite relative overflow-hidden md:cursor-none">
             {/* Ambient Backdrop Glows (Exact from Citation 3) */}
             <div className="absolute w-[500px] h-[500px] bg-[var(--color-matrix)]/5 rounded-full blur-[140px] pointer-events-none top-10 left-10" />
             <div className="absolute w-[400px] h-[400px] bg-[var(--color-ecomm)]/5 rounded-full blur-[120px] pointer-events-none top-1/2 right-10" />
             <div className="absolute w-[500px] h-[500px] bg-[var(--color-psynapse)]/5 rounded-full blur-[140px] pointer-events-none bottom-10 left-1/4" />
 
-            {/* Back to Home */}
-            <div className="absolute top-6 left-6 md:top-8 md:left-12 z-20">
-                <Link to="/" className="text-offwhite/60 hover:text-yellow transition-colors duration-300 text-sm uppercase tracking-widest flex items-center gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                    Home
-                </Link>
-            </div>
+            <Navbar />
+            <Cursor />
 
             {/* Header Section */}
-            <div className="text-center mt-24 mb-20 relative z-10 px-4 select-none">
+            <div className="text-center mt-24 mb-20 relative z-10 px-4 select-none animate-fade-in">
                 <h2 className="font-primary text-7xl md:text-9xl text-offwhite tracking-wider uppercase text-shadow-[0_0_8px_#ffffff50]">
-                    EXECUTIVE COMMITTEE
+                    MEP
                 </h2>
                 <p className="font-secondary text-yellow text-sm md:text-base tracking-[0.25em] uppercase mt-3">
-                    Leadership & Core Team
+                    the core team
                 </p>
             </div>
 
-            {/* Clubs Container */}
-            <div className="w-full max-w-7xl px-4 md:px-12 flex flex-col gap-32 relative z-10 pb-24">
-                {clubsData.map((club, idx) => (
+            <div className="w-full max-w-7xl px-4 md:px-12 flex flex-col gap-32 relative z-10 pb-24 animate-fade-in">
+                {clubs.map((club, idx) => (
                     <div key={idx} className="flex flex-col gap-10">
                         {/* Club Title */}
                         <div className="flex items-center justify-center md:justify-start gap-4">
@@ -76,17 +107,17 @@ export const MembersPage = () => {
 
                         {/* Core Positions Grid (4 Members) */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                            {club.positions.map((member, mIdx) => (
+                            {club.members.map((member, mIdx) => (
                                 <MemberCard key={mIdx} member={member} clubColorClass={club.colorClass} />
                             ))}
                         </div>
 
                         {/* Executive Members Grid (8 Members) */}
                         <div className="flex flex-col gap-6">
-                            <h4 className="font-secondary text-lg uppercase tracking-widest text-offwhite/60 border-b border-white/10 pb-2 w-fit">
+                            <h4 className="font-secondary text-lg uppercase tracking-widest text-offwhite/60 border-b border-white/10 pb-2 w-full text-center md:text-left">
                                 Executive Members
                             </h4>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-center justify-center">
                                 {club.executives.map((member, eIdx) => (
                                     <MemberCard key={eIdx} member={member} clubColorClass={club.colorClass} />
                                 ))}
@@ -99,11 +130,10 @@ export const MembersPage = () => {
     );
 }
 
-// 🔹 Reusable Member Card (Exact styling from Citations 1 & 2)
 function MemberCard({ member, clubColorClass }: { member: { name: string; role: string }; clubColorClass: string }) {
     return (
         <div className="flex flex-col items-center group ">
-            {/* Photo Placeholder */}
+            {/* Photo */}
             <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl bg-white/5 border border-white/10 overflow-hidden relative mb-4 transition-all duration-300 group-hover:border-yellow/50 group-hover:scale-105">
                 <div className="absolute inset-0 flex items-center justify-center text-white/20">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -112,7 +142,7 @@ function MemberCard({ member, clubColorClass }: { member: { name: string; role: 
                 </div>
             </div>
 
-            {/* Member Details */}
+            {/* Details */}
             <h4 className="font-secondary font-bold text-2xl text-offwhite uppercase group-hover:text-yellow transition-colors duration-300 text-center">
                 {member.name}
             </h4>

@@ -19,25 +19,25 @@ const matrixEvents: Event[] = [
         id: 1,
         name: "A/V Sync",
         tagline: "May the frames be with you",
-        description: ""
+        description: "An offline filmmaking competition for teams of five to produce a minimum three-minute video based on a randomly assigned aesthetic, incorporating a mandatory mid-event surprise element."
     },
     {
         id: 2,
         name: "Enigma",
         tagline: "The obvious is your greatest enemy.",
-        description: ""
+        description: "An offline multi-format puzzle hunt featuring cryptic riddles, cyphers, and physical on-ground clues where teams of three compete to solve the maximum number of tasks within the time limit."
     },
     {
         id: 3,
         name: "Matrix Gauntlet",
         tagline: "Reflex. Strategy. Glory.",
-        description: ""
+        description: "A hybrid gaming competition where teams of two demonstrate versatility and strategy across multiple genres, including Minecraft Bingo and Clash Royale, culminating in a surprise console game finale."
     },
     {
         id: 4,
         name: "The Silverbot Circuit",
         tagline: "Build. Drive. Conquer.",
-        description: ""
+        description: "A robotics competition challenging teams to design and build a fully autonomous line-following robot to navigate a complex track with obstacles and turns for the fastest time"
     }
 ];
 const ecommEvents: Event[] = [
@@ -45,25 +45,25 @@ const ecommEvents: Event[] = [
         id: 1,
         name: "Bidding Bankers",
         tagline: "With Great Capital comes Great Responsibility.",
-        description: ""
+        description: "An offline financial strategy event where teams of two compete in property bidding, trading, and investing rounds while managing market news, banker loans, and portfolio-maximizing objectives."
     },
     {
         id: 2,
         name: "Pivot",
         tagline: "Market the Unexpected.",
-        description: ""
+        description: "A two-round marketing challenge where teams of three build creative campaigns for contrasting target audiences, followed by an individual crisis-management round to tackle sudden PR or budget disasters."
     },
     {
         id: 3,
         name: "AdSnap",
         tagline: "Frame the Product. Capture the Market.",
-        description: ""
+        description: "An offline advertising event where teams create a stop-motion video and an accompanying promotional poster using a provided prop, utilizing DSLR/mirrorless cameras to capture the marketing vision."
     },
     {
         id: 4,
         name: "Pitch Perfect",
         tagline: "Think Big. Pitch Bold. Create Impact.",
-        description: ""
+        description: "An entrepreneurial challenge where teams present a three-minute innovative business pitch complete with a mandatory visual deck, followed by a mysterious and highly competitive surprise second round."
     }
 ];
 const psynapseEvents: Event[] = [
@@ -71,25 +71,25 @@ const psynapseEvents: Event[] = [
         id: 1,
         name: "Psycon",
         tagline: "Walk a Mile in a Psychologist's Mind.",
-        description: ""
+        description: "An individual, Comic-Con style monologue challenge where participants dress as famous psychologists and solve a live case study strictly from their assigned figure's theoretical perspective and background."
     },
     {
         id: 2,
         name: "Psyposium",
         tagline: "The Mind in Conflict.",
-        description: ""
+        description: "A psychology-themed debate event where three-member teams portray the internal conflict of Freud's personality theory—Id, Ego, and Superego—to argue complex, morally grey dilemmas and scenarios."
     },
     {
         id: 3,
         name: "Psynapse",
         tagline: "When Voices Become Change.",
-        description: ""
+        description: "A bilingual street play competition where teams of 7–10 members perform dramatic pieces addressing critical mental health issues, social stereotypes, and contemporary psychological challenges within seven minutes."
     },
     {
         id: 4,
         name: "Chroma Psychis",
         tagline: "If Words Could Paint the Color of the Soul.",
-        description: ""
+        description: "A conceptual art and presentation competition where teams of two create an original artwork depicting a specific phobia while strictly adhering to rigorous, randomized design criteria."
     }
 ];
 
@@ -230,8 +230,8 @@ export const EventSection = () => {
                 <div id="events"
                     className="flex flex-col gap-6 w-full max-w-6xl mx-auto">
 
-                    {/* Event Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+                    {/* Event Cards (Mobile) */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 ">
                         {events.map((event, index) => (
                             <div key={`${club}-${event.id}`}
                                 ref={(el) => { cardsRef.current[index] = el; }}
@@ -276,10 +276,14 @@ export const EventSection = () => {
                                         className="font-secondary text-sm md:text-base text-offwhite/70 tracking-widest uppercase">
                                         {event.tagline}
                                     </span>
+                                    <span
+                                        className="font-secondary text-sm md:text-base text-offwhite/70 tracking-widest hidden">
+                                        {event.description}
+                                    </span>
                                 </div>
 
                                 {/* Subtle arrow indicator */}
-                                <div className="relative z-10 flex justify-end mt-4">
+                                <div className="relative z-10 justify-end mt-4 flex">
                                     <span className="text-offwhite/20 group-hover:text-offwhite/60 transition-all duration-300 group-hover:translate-x-1 text-2xl font-secondary">
                                         →
                                     </span>
@@ -287,6 +291,7 @@ export const EventSection = () => {
                             </div>
                         ))}
                     </div>
+
 
                     {/* Quiz Section */}
                     <div className="mt-4">
@@ -317,7 +322,7 @@ export const EventSection = () => {
                                 {/* Right: Details */}
                                 <div className="flex flex-row justify-around items-center md:basis-1/2 p-6 md:p-8 border-t md:border-t-0 md:border-l border-white/10">
                                     <p className="font-secondary text-offwhite/80 leading-relaxed text-sm md:text-base text-center md:text-left">
-                                        Test your knowledge, think on your feet, and outsmart the competition in this high-stakes trivia challenge across various domains.
+                                        A comprehensive, multi-round trivia competition starting with a pen-and-paper preliminary round, leading to an intense final round covering diverse topics from pop culture to science and current affairs.
                                     </p>
                                 </div>
                             </div>

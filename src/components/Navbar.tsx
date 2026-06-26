@@ -3,18 +3,39 @@ import mepLogo from "../assets/logos/mep_logo.png";
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import Lenis from "lenis";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+
+// A reusable crack SVG overlay tailored to scale nicely across text bounding boxes
+const GlassCrack = () => (
+    <svg
+        className="absolute inset-0 w-full h-full pointer-events-none select-none z-10"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+    >
+        <path
+            d="M 50,50 L 52,48 L 40,5 L 45,10 L 42,0 
+               M 50,50 L 55,52 L 75,45 L 88,60 L 100,55 
+               M 50,50 L 45,46 L 25,42 L 12,55 L 0,50
+               M 50,50 L 54,55 L 68,78 L 80,92"
+            stroke="#000000"
+            strokeWidth="4"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        />
+    </svg>
+);
 
 export const Navbar = () => {
     const [menu, setMenu] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
     const logoRef = useRef<HTMLDivElement>(null);
     const navbarRef = useRef<HTMLDivElement>(null);
+    const transitionOverlayRef = useRef<HTMLDivElement>(null); // Ref for the black screen transition
     const navigate = useNavigate();
-    // 1. Maintain a single persistent reference slot for your Lenis instance
+    const currLocation = useLocation();
     const lenisRef = useRef<Lenis | null>(null);
 
-    // 2. Initialize Lenis exactly ONCE when the component mounts
     useEffect(() => {
         const lenisInstance = new Lenis({
             anchors: true,
@@ -24,8 +45,6 @@ export const Navbar = () => {
 
         lenisRef.current = lenisInstance;
 
-        // Optional but highly recommended: Keep Lenis animation frame active 
-        // if you aren't already running a global RAF loop elsewhere
         function raf(time: number) {
             lenisInstance.raf(time);
             requestAnimationFrame(raf);
@@ -38,24 +57,42 @@ export const Navbar = () => {
         };
     }, []);
 
-    const scrollSection = (sectionId: string) => {
-        setMenu(false);
+    // Custom navigation handler that runs the GSAP transition before changing routes
+    const handleTransitionNav = (dest: string, skipTransition = false) => {
+        setMenu(false); // Close menu instantly or after
 
-        if (lenisRef.current) {
-            if (sectionId === "heroSection") {
-                // Scroll directly to the top pixel coordinate of the viewport
-                lenisRef.current.scrollTo(0, { duration: 1 });
-            } else {
-                // Standard selector routing for layout elements below
-                lenisRef.current.scrollTo(`#${sectionId}`, { duration: 1 });
-            }
+        if (skipTransition) {
+            navigate(dest);
+            return;
         }
+
+        // Animate the hidden overlay to fill the screen
+        gsap.fromTo(transitionOverlayRef.current,
+            { scaleY: 0, transformOrigin: "bottom center" },
+            {
+                scaleY: 1,
+                duration: 0.5,
+                ease: "power3.inOut",
+                onComplete: () => {
+                    navigate(dest);
+                    // Fade it back down out of view once page changes
+                    gsap.to(transitionOverlayRef.current, {
+                        scaleY: 0,
+                        transformOrigin: "top center",
+                        duration: 0.5,
+                        ease: "power3.inOut",
+                        delay: 0.1
+                    });
+                }
+            }
+        );
     };
 
     function navTo(dest: string) {
-        console.log("navigted to", dest);
-        navigate("/" + dest);
+        console.log("navigated to", dest);
+        handleTransitionNav("/" + dest);
     }
+
     useEffect(() => {
         const handleHeroComplete = () => {
             if (navbarRef.current) {
@@ -71,11 +108,12 @@ export const Navbar = () => {
         return () => {
             window.removeEventListener("heroAnimationComplete", handleHeroComplete);
         };
-    }, []);
+    }, [currLocation.pathname === "/home"]);
+
     useEffect(() => {
         if (!menuRef.current) return;
 
-        let cx = window.innerWidth / 2; // Default fallbacks 
+        let cx = window.innerWidth / 2;
         let cy = 40;
 
         if (logoRef.current) {
@@ -99,87 +137,154 @@ export const Navbar = () => {
                 ease: "power4.inOut"
             });
         }
-
     }, [menu]);
 
     return (
-        <div id="navbar"
-            ref={navbarRef}
-            className={cn("fixed top-0 left-0 w-full h-fit px-4 py-4 z-20 bg-black/80 backdrop-blur-sm -translate-y-full")}
-        >
+        <>
+            {/* Fullscreen Transition Overlay Layer */}
+            <div
+                ref={transitionOverlayRef}
+                className="fixed inset-0 bg-black z-50 pointer-events-none scale-y-0"
+            />
 
-            <div id="mobileBar" className="flex justify-around font-bold">
-                <div className="flex flex-row w-full items-center justify-around z-30 ">
-                    <div id="brochure"
-                        className="relative w-fit rounded-full">
-                        <div onClick={() => { navTo("brochure") }}
-                            className={cn(
-                                "px-6 md:px-10 py-2.5 text-center md:flex hidden",
-                                ` text-white/40  bg-blue-100/20 backdrop-blur-md`,
-                                ` border border-white/20 rounded-full`,
-                                "font-secondary font-bold tracking-wider uppercase",
-                                "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
-                                "active:mt-1 active:shadow-none active:bg-blue-100/40 active:text-blue-100")
-                            }>
-                            VIEW BROCHURE
-                        </div>
-
-                    </div>
-                    <div id="logo"
-                        ref={logoRef}
-                        onClick={() => setMenu(!menu)}
-                        className={cn(
-                            "px-4 py-2 z-30 transition-all", // Boosted z-index so button stays clickable above overlay
-                            "text-white rounded-2xl outline outline-offwhite",
-                            menu ? "translate-y-[4px] shadow-none bg-black" : "shadow-[0_4px_0_#aaaacc] bg-offwhite"
-                        )}
-                    >
-                        <img src={mepLogo} alt="MEP" className={cn(
-                            "h-8",
-                            !menu ? "invert" : ""
-                        )} />
-                    </div>
-
-                    <div id="register"
-                        className="relative w-fit">
-                        <div onClick={() => navTo("register")}
-                            className={cn(
-                                "px-6 md:px-10 py-2.5 text-center md:flex hidden",
-                                `text-white/40  bg-blue-100/20 backdrop-blur-md`,
-                                `border border-white/20 rounded-full`,
-                                "font-secondary font-bold tracking-wider uppercase",
-                                "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
-                                "active:mt-1 active:shadow-none active:bg-blue-100/40 active:text-blue-100")
-                            }>
-                            REGISTER NOW
-                        </div>
-
-                    </div>
-                </div>
-
-
-            </div>
-            <div ref={menuRef}
-                className={cn(
-                    "fixed top-0 left-0 h-dvh w-dvw bg-black z-20",
-                    "text-offwhite font-secondary font-bold text-6xl",
-                    "flex flex-col justify-around py-40 md:px-32"
+            <div id="navbar"
+                ref={navbarRef}
+                className={cn("fixed top-0 left-0 w-full h-fit px-4 py-4 z-20 bg-black/80 backdrop-blur-sm",
+                    "select-none",
+                    currLocation.pathname === "/home" && " -translate-y-full"
                 )}
             >
-                {/* Added the functional scrollSection handlers to mobile items */}
-                <div onClick={() => scrollSection("eventSection")}
-                    className="w-full px-10 text-right hover:underline">
-                    MEP'26
+                <div id="mobileBar" className="flex justify-around font-bold">
+                    <div className="flex flex-row w-full items-center justify-around z-30 ">
+                        <div id="brochure" className="relative w-fit rounded-full">
+                            <div onClick={() => { navTo("brochure") }}
+                                className={cn(
+                                    "px-6 md:px-10 py-2.5 text-center md:flex hidden ",
+                                    "text-white/40 bg-blue-100/20 backdrop-blur-md",
+                                    "border border-white/20 rounded-full",
+                                    "font-secondary font-bold tracking-wider uppercase",
+                                    "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
+                                    "active:mt-1 active:shadow-none active:bg-black active:text-white"
+                                )}
+                            >
+                                VIEW BROCHURE
+                            </div>
+                        </div>
+
+                        <div id="logo"
+                            ref={logoRef}
+                            onClick={() => setMenu(!menu)}
+                            className={cn(
+                                "px-4 py-2 z-30 transition-all ",
+                                "text-white rounded-2xl outline outline-offwhite",
+                                menu ? "translate-y-[4px] shadow-none bg-black" : "shadow-[0_4px_0_#aaaacc] bg-offwhite"
+                            )}
+                        >
+                            <img src={mepLogo} alt="MEP" className={cn(
+                                "h-8",
+                                !menu ? "invert" : ""
+                            )} />
+                        </div>
+
+                        <div id="register" className="relative w-fit">
+                            <div onClick={() => navTo("register")}
+                                className={cn(
+                                    "px-6 md:px-10 py-2.5 text-center md:flex hidden ",
+                                    "text-white/40 bg-blue-100/20 backdrop-blur-md",
+                                    "border border-white/20 rounded-full",
+                                    "font-secondary font-bold tracking-wider uppercase",
+                                    "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
+                                    "active:mt-1 active:shadow-none active:bg-black active:text-white"
+                                )}
+                            >
+                                REGISTER NOW
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div onClick={() => scrollSection("membersSection")}
-                    className="w-full px-10 text-left hover:underline">
-                    OUR TEAM
-                </div>
-                <div onClick={() => scrollSection("heroSection")}
-                    className="w-full px-10 text-right hover:underline">
-                    ALUMNI
+
+                {/* Menu Overlay */}
+                <div ref={menuRef}
+                    className={cn(
+                        "fixed top-0 left-0 h-dvh w-dvw bg-black z-20",
+                        "text-offwhite font-secondary font-bold text-6xl",
+                        "flex flex-col justify-around pt-26 md:px-32"
+                    )}
+                >
+                    {/* Link 1: HOME (MEP'26) -> Bypasses transition */}
+                    <div
+                        onClick={() => handleTransitionNav("/home", true)}
+                        className={cn(
+                            "w-full px-10 text-right group ",
+                            currLocation.pathname === "/home" && "text-white/50"
+                        )}
+                    >
+                        <span className="inline-grid relative items-center justify-center">
+                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-80">MEP'26</span>
+                            {currLocation.pathname === "/home" && <GlassCrack />}
+                        </span>
+                    </div>
+
+                    {/* Link 2: OUR TEAM -> Has transition */}
+                    <div
+                        onClick={() => handleTransitionNav("/members")}
+                        className={cn(
+                            "w-full px-10 text-left group ",
+                            currLocation.pathname === "/members" && "text-white/50"
+                        )}
+                    >
+                        <span className="inline-grid relative items-center justify-center">
+                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-80 ">OUR TEAM</span>
+                            {currLocation.pathname === "/members" && <GlassCrack />}
+                        </span>
+                    </div>
+
+                    {/* Link 3: ALUMNI -> Has transition */}
+                    <div
+                        onClick={() => handleTransitionNav("/alumni")}
+                        className={cn(
+                            "w-full px-10 text-right group ",
+                            currLocation.pathname === "/alumni" && "text-white/50"
+                        )}
+                    >
+                        <span className="inline-grid relative items-center justify-center">
+                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-80">ALUMNI</span>
+                            {currLocation.pathname === "/alumni" && <GlassCrack />}
+                        </span>
+                    </div>
+
+                    <div className="flex flex-row justify-between w-full px-10 md:hidden text-xl">
+                        <div id="brochure" className="relative w-fit rounded-full">
+                            <div onClick={() => { navTo("brochure") }}
+                                className={cn(
+                                    "px-4 md:px-10 py-2.5 text-center w-fit ",
+                                    "text-white/40 bg-blue-100/20 backdrop-blur-md",
+                                    "border border-white/20 rounded-full",
+                                    "font-secondary font-bold tracking-wider uppercase",
+                                    "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
+                                    "active:translate-y-[4px] active:shadow-none active:bg-black active:text-white"
+                                )}
+                            >
+                                VIEW BROCHURE
+                            </div>
+                        </div>
+                        <div id="register" className="relative w-fit">
+                            <div onClick={() => navTo("register")}
+                                className={cn(
+                                    "px-4 md:px-10 py-2.5 text-center ",
+                                    "text-white/40 bg-blue-100/20 backdrop-blur-md",
+                                    "border border-white/20 rounded-full",
+                                    "font-secondary font-bold tracking-wider uppercase",
+                                    "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
+                                    "active:translate-y-[4px] active:shadow-none active:bg-black active:text-white"
+                                )}
+                            >
+                                REGISTER NOW
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };

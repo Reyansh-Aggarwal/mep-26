@@ -69,7 +69,7 @@ export const Home = () => {
 
     return (
         <ReactLenis root ref={lenisRef} options={{ autoRaf: false }}>
-            <div className="relative min-h-screen bg-black font-secondary w-full cursor-none">
+            <div className="relative min-h-screen bg-black font-secondary w-full cursor-auto md:cursor-none">
                 <div className="fixed inset-0 w-full h-full z-0 opacity-30 pointer-events-none">
                     <img
                         src={dotBg}

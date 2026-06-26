@@ -7,7 +7,7 @@ import { Cursor } from "../components/Cursor";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const Brochure = () => {
+export const Alumni = () => {
 
     const mainRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -32,7 +32,7 @@ export const Brochure = () => {
             >
 
                 <span className="text-white text-6xl md:text-8xl font-primary text-center w-full">
-                    BROCHURE
+                    Alumni
                 </span>
 
 

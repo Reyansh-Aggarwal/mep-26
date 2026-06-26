@@ -21,12 +21,11 @@ export const Cursor = () => {
         <div
             ref={cursorRef}
             className={cn(
-                "fixed pointer-events-none w-12 h-12 bg-white/10 rounded-full ",
+                "fixed pointer-events-none w-12 h-12 bg-white/10 rounded-full",
                 "border border-white/20 shadow-lg backdrop-blur-[4px]",
-                " z-[80] md:cursor-none opacity-0 md:opacity-100")}
+                " z-[80] opacity-0 md:opacity-100")}
             style={{ transform: "translate(-50%, -50%)" }}
-        >
+        />
 
-        </div>
     );
 };
