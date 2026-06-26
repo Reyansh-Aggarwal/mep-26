@@ -19,7 +19,6 @@ export const GallerySection = () => {
         gallery5, gallery6, gallery7, gallery8,
     ];
 
-    // These refs will now target wrappers dedicated solely to GSAP animations
     const forwardRowRef = useRef<HTMLDivElement>(null);
     const backwardRowRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -42,13 +41,13 @@ export const GallerySection = () => {
         // GSAP changes Y and opacity smoothly on the wrappers
         scrollTl.to(forwardRowRef.current, {
             x: -900,
-            opacity: 0.3,
+            opacity: 0.8,
             ease: "none"
         });
 
         scrollTl.to(backwardRowRef.current, {
             x: 900,
-            opacity: 0.3,
+            opacity: 0.8,
             ease: "none"
         }, "<");
 
@@ -65,7 +64,6 @@ export const GallerySection = () => {
                 <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
 
-                {/* FIX: This wrapper gets the ref and handles GSAP Y-translation */}
                 <div ref={forwardRowRef} className="w-full will-change-transform">
                     {/* The child handles the horizontal marquee CSS animation exclusively */}
                     <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
@@ -92,9 +90,7 @@ export const GallerySection = () => {
                 <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
                 <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
 
-                {/* FIX: This wrapper gets the ref and handles GSAP Y-translation */}
                 <div ref={backwardRowRef} className="w-full will-change-transform">
-                    {/* The child handles the horizontal reverse-marquee CSS animation exclusively */}
                     <div className="flex w-max animate-reverse-marquee hover:[animation-play-state:paused]">
                         <div className="flex gap-6 px-3">
                             {images.map((img, idx) => (

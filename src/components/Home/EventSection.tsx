@@ -320,7 +320,7 @@ export const EventSection = () => {
                                         {event.name}
                                     </p>
                                     <p className={cn(
-                                        "text-offwhite text-xl w-1/2",
+                                        "text-offwhite text-xl w-2/3",
                                         event.id % 2 === 0 ? "" : "ml-auto"
                                     )}>
                                         {event.description}

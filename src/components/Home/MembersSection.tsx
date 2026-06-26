@@ -24,7 +24,7 @@ const clubs = [
             { role: "Vice-President", name: "Ishaan Garg", image: MatrixVP },
             { role: "General Secretary", name: "Atharv Sharma", image: MatrixGen },
             { role: "Joint Secretary", name: "Prayag Nagar", image: MatrixJoint },
-            { role: "Media Head", name: "Atharv Shankar Saxena", image: MatrixMedia },
+            { role: "Media Head", name: "Atharv Saxena", image: MatrixMedia },
         ]
     },
     {
@@ -80,8 +80,8 @@ export const MembersSection = () => {
                         <div className="grid grid-cols-1 sm:flex flex-wrap justify-center gap-8 sm:gap-0">
                             {club.members.map((member, mIdx) => (
                                 <div key={mIdx} className={cn(
-                                    "flex flex-col items-center group sm:mb-12",
-                                    member.role === "President" ? "sm:basis-full lg:basis-1/2" : member.role === "Vice President" ? "sm:basis-full lg:basis-1/2" : "sm:basis-1/2 lg:basis-1/3")}>
+                                    "flex flex-col items-center group sm:mb-12 justify-center",
+                                    member.role === "President" ? "sm:basis-full lg:basis-1/2" : member.role === "Vice-President" ? "lg:basis-1/2" : "sm:basis-1/2 lg:basis-1/3")}>
 
                                     <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl bg-white/5 border border-white/10 overflow-hidden relative mb-4 transition-all duration-300 group-hover:border-yellow/50 group-hover:scale-105">
                                         <img src={member.image} />
