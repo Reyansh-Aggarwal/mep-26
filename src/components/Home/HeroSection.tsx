@@ -41,7 +41,7 @@ export const HeroSection = (() => {
                     start: "top top",
                     end: "bottom 20%",
                     scrub: 1,
-
+                    refreshPriority: 3,
                 });
                 ScrollTrigger.refresh();
             }

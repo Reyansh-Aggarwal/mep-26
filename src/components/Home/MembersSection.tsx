@@ -1,34 +1,52 @@
 import { cn } from "../../utils";
+import MatrixPrez from "../../assets/images/members/matrix/prez.jpeg"
+import MatrixVP from "../../assets/images/members/matrix/vp.jpeg"
+import MatrixGen from "../../assets/images/members/matrix/gen.jpeg"
+import MatrixJoint from "../../assets/images/members/matrix/joint.jpeg"
+import MatrixMedia from "../../assets/images/members/matrix/media.jpeg"
+import EcommPrez from "../../assets/images/members/ecomm/prez.jpeg"
+import EcommVP from "../../assets/images/members/ecomm/vp.png"
+import EcommGen from "../../assets/images/members/ecomm/gen.jpeg"
+import EcommJoint from "../../assets/images/members/ecomm/joint.jpeg"
+import EcommMedia from "../../assets/images/members/ecomm/media.jpeg"
+import PsyPrez from "../../assets/images/members/psynapse/prez.jpeg"
+import PsyVP from "../../assets/images/members/psynapse/vp.jpeg"
+import PsyGen from "../../assets/images/members/psynapse/gen.jpeg"
+import PsyJoint from "../../assets/images/members/psynapse/joint.jpeg"
+import PsyMedia from "../../assets/images/members/psynapse/media.jpeg"
 
 const clubs = [
     {
         name: "Matrix",
         colorClass: "text-[var(--color-matrix)]",
         members: [
-            { role: "President", name: "Reyansh Aggarwal" },
-            { role: "Vice-President", name: "Ishaan Garg" },
-            { role: "General Secretary", name: "Atharv Sharma" },
-            { role: "Joint Secretary", name: "Prayag Nagar" },
+            { role: "President", name: "Reyansh Aggarwal", image: MatrixPrez },
+            { role: "Vice-President", name: "Ishaan Garg", image: MatrixVP },
+            { role: "General Secretary", name: "Atharv Sharma", image: MatrixGen },
+            { role: "Joint Secretary", name: "Prayag Nagar", image: MatrixJoint },
+            { role: "Media Head", name: "Atharv Shankar Saxena", image: MatrixMedia },
         ]
     },
     {
         name: "Ecommbuzz",
         colorClass: "text-[var(--color-ecomm)]",
         members: [
-            { role: "President", name: "Krishiv Dua" },
-            { role: "Vice-President", name: "Sharanya Sarin" },
-            { role: "General Secretary", name: "Srishti Pandey" },
-            { role: "Joint Secretary", name: "Gaurav Kumar" },
+            { role: "President", name: "Krishiv Dua", image: EcommPrez },
+            { role: "Vice-President", name: "Sharanya Sarin", image: EcommVP },
+            { role: "General Secretary", name: "Srishti Pandey", image: EcommGen },
+            { role: "Joint Secretary", name: "Gaurav Kumar", image: EcommJoint },
+            { role: "Media Head", name: "Vanya Bajaj", image: EcommMedia },
         ]
     },
     {
         name: "Psynapse",
         colorClass: "text-[var(--color-psynapse)]",
         members: [
-            { role: "President", name: "Mahi Agrawal" },
-            { role: "Vice-President", name: "Anishka Patel" },
-            { role: "General Secretary", name: "Rutvija Mohite" },
-            { role: "Joint Secretary", name: "Mariah Susane Robins" },
+            { role: "President", name: "Mahi Agrawal", image: PsyPrez },
+            { role: "Vice-President", name: "Anishka Patel", image: PsyVP },
+            { role: "General Secretary", name: "Rutvija Mohite", image: PsyGen },
+            { role: "Joint Secretary", name: "Mariah Susane Robins", image: PsyJoint },
+            { role: "Media Head", name: "Kyna Sooden", image: PsyMedia },
         ]
     }
 ];
@@ -59,16 +77,14 @@ export const MembersSection = () => {
                         </div>
 
                         {/* Members Grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="grid grid-cols-1 sm:flex flex-wrap justify-center gap-8 sm:gap-0">
                             {club.members.map((member, mIdx) => (
-                                <div key={mIdx} className="flex flex-col items-center group ">
-                                    {/* Photo Placeholder */}
+                                <div key={mIdx} className={cn(
+                                    "flex flex-col items-center group sm:mb-12",
+                                    member.role === "President" ? "sm:basis-full lg:basis-1/2" : member.role === "Vice President" ? "sm:basis-full lg:basis-1/2" : "sm:basis-1/2 lg:basis-1/3")}>
+
                                     <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl bg-white/5 border border-white/10 overflow-hidden relative mb-4 transition-all duration-300 group-hover:border-yellow/50 group-hover:scale-105">
-                                        <div className="absolute inset-0 flex items-center justify-center text-white/20">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                            </svg>
-                                        </div>
+                                        <img src={member.image} />
                                     </div>
 
                                     {/* Member Details */}

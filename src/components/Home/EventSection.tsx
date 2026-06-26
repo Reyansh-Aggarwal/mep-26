@@ -26,13 +26,13 @@ const matrixEvents: Event[] = [
         id: 2,
         name: "Enigma",
         tagline: "The obvious is your greatest enemy.",
-        description: "An offline multi-format puzzle hunt featuring cryptic riddles, cyphers, and physical on-ground clues where teams of three compete to solve the maximum number of tasks within the time limit."
+        description: "An offline multi-format puzzle hunt featuring cryptic riddles, cyphers, and physical on-ground clues where teams compete to solve the maximum number of tasks within the time limit."
     },
     {
         id: 3,
         name: "Matrix Gauntlet",
         tagline: "paused my game to be here",
-        description: "A hybrid gaming competition where teams of two demonstrate versatility and strategy across multiple genres, including Minecraft Bingo and Clash Royale, culminating in a surprise console game finale."
+        description: "A hybrid gaming competition where teams of two demonstrate versatility, strategy, and quick reflexes across multiple genres, ranging from FPS shooters to highly competitive mobile games."
     },
     {
         id: 4,
@@ -46,7 +46,7 @@ const ecommEvents: Event[] = [
         id: 1,
         name: "Bidding Bankers",
         tagline: "With Great Capital comes Great Responsibility.",
-        description: "An offline financial strategy event where teams of two compete in property bidding, trading, and investing rounds while managing market news, banker loans, and portfolio-maximizing objectives."
+        description: "An offline mock stock event where teams of 2 compete in bidding, trading, and investing while managing market news, a banker system, networking all to maximise their portfolio."
     },
     {
         id: 2,
@@ -163,88 +163,63 @@ export const EventSection = () => {
         const validElements = eventsRef.current.filter((el): el is HTMLDivElement => el !== null);
         if (!containerRef.current || validElements.length === 0) return;
 
-        // Kill existing ScrollTriggers on this container before making a new one
-        ScrollTrigger.getAll().forEach(trigger => {
-            if (trigger.trigger === containerRef.current) {
-                trigger.kill();
-            }
-        });
-
-        // Clear previous styles
+        // Kill any leftover trigger by ID (revertOnUpdate handles it, but be explicit)
+        ScrollTrigger.getById("eventCards")?.kill(true);
         gsap.set(validElements, { clearProps: "all" });
 
         const tl = gsap.timeline({
             scrollTrigger: {
+                id: "eventCards",
                 trigger: containerRef.current,
                 start: "top top",
-                end: `+=${validElements.length * 100}%`, // Increased scroll distance for smoother transitions
+                end: `+=${validElements.length * 100}%`,
                 pin: true,
                 scrub: 1,
                 anticipatePin: 1,
                 invalidateOnRefresh: true,
+                refreshPriority: 2,
             }
         });
 
+        // Setup Initial State
         validElements.forEach((eventEl, index) => {
             if (index === 0) {
-                gsap.set(eventEl, { opacity: 1, scale: 1, zIndex: 10 });
+                gsap.set(eventEl, { opacity: 1, scale: 1, zIndex: 10, yPercent: 0 });
             } else {
                 gsap.set(eventEl, { opacity: 0, scale: 1, zIndex: 1, yPercent: 120 });
             }
         });
 
+        // Build Timeline Loop
         for (let i = 0; i < validElements.length - 1; i++) {
             const currentEl = validElements[i];
             const nextEl = validElements[i + 1];
 
             if (i > 0) {
                 const lastEl = validElements[i - 1];
-                tl.to(lastEl, {
-                    scale: 0.85,
-                    opacity: 0,
-                    yPercent: -200,
-                    zIndex: 1,
-                    duration: 1,
-                    ease: "power2.inOut"
-                })
-                    .to(currentEl, {
-                        scale: 0.85,
-                        opacity: 0.25,
-                        yPercent: -120,
-                        zIndex: 1,
-                        duration: 1,
-                        ease: "power2.inOut"
-                    }, "<").to(nextEl, {
-                        scale: 1,
-                        opacity: 1,
-                        yPercent: 0,
-                        zIndex: 10,
-                        duration: 1,
-                        ease: "power2.inOut"
-                    }, "<");
-
+                tl.to(lastEl, { scale: 0.85, opacity: 0, yPercent: -200, zIndex: 1, duration: 1, ease: "power2.inOut" })
+                    .to(currentEl, { scale: 0.85, opacity: 0.25, yPercent: -120, zIndex: 1, duration: 1, ease: "power2.inOut" }, "<")
+                    .to(nextEl, { scale: 1, opacity: 1, yPercent: 0, zIndex: 10, duration: 1, ease: "power2.inOut" }, "<");
             } else {
-                tl.to(currentEl, {
-                    scale: 0.85,
-                    opacity: 0.25,
-                    yPercent: -120,
-                    zIndex: 1,
-                    duration: 1,
-                    ease: "power2.inOut"
-                }).to(nextEl, {
-                    scale: 1,
-                    opacity: 1,
-                    yPercent: 0,
-                    zIndex: 10,
-                    duration: 1,
-                    ease: "power2.inOut"
-                }, "<");
+                tl.to(currentEl, { scale: 0.85, opacity: 0.25, yPercent: -120, zIndex: 1, duration: 1, ease: "power2.inOut" })
+                    .to(nextEl, { scale: 1, opacity: 1, yPercent: 0, zIndex: 10, duration: 1, ease: "power2.inOut" }, "<");
             }
         }
 
-        ScrollTrigger.refresh();
+        // Double rAF: wait for browser to commit the new pin-spacer layout
+        // before recalculating all downstream trigger positions.
+        let rafId1: number, rafId2: number;
+        rafId1 = requestAnimationFrame(() => {
+            rafId2 = requestAnimationFrame(() => {
+                ScrollTrigger.refresh();
+            });
+        });
 
-    }, { scope: containerRef, dependencies: [club] });
+        return () => {
+            cancelAnimationFrame(rafId1);
+            cancelAnimationFrame(rafId2);
+        };
+    }, { scope: containerRef, dependencies: [club], revertOnUpdate: true });
 
 
 

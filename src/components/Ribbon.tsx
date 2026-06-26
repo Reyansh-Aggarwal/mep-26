@@ -24,6 +24,7 @@ export const Ribbon = ({ content }: { content: string }) => {
                 start: "top bottom", // Starts animating as soon as the ribbon enters the bottom of the viewport
                 end: "bottom top",   // Ends animating when the ribbon completely leaves the top
                 scrub: 0.5,          // Links animation progress smoothly to scroll velocity
+                refreshPriority: 1,
             }
         });
     }, { scope: containerRef });
@@ -37,7 +38,7 @@ export const Ribbon = ({ content }: { content: string }) => {
                 ref={ribbonRef}
                 className={cn(
                     "border b px-4 py-4 text-transparent",
-                    "text-4xl md:text-6xl lg:text-8xl",
+                    "text-6xl md:text-6xl lg:text-8xl",
                     "whitespace-nowrap will-change-transform inline-block w-max font-bold",
                     "text-white/10 [-webkit-text-stroke:2px_#ffffff10]"
                 )}
