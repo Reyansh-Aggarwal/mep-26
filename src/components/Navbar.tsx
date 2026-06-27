@@ -26,6 +26,17 @@ const GlassCrack = () => (
     </svg>
 );
 
+let activeNavHandler: ((dest: string, skipTransition?: boolean) => void) | null = null;
+
+export function navTo(dest: string) {
+    console.log("navigated to", dest);
+    if (activeNavHandler) {
+        activeNavHandler(dest.startsWith("/") ? dest : "/" + dest);
+    } else {
+        console.warn("Navbar transition handler not initialized.");
+    }
+}
+
 export const Navbar = () => {
     const [menu, setMenu] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
@@ -88,10 +99,12 @@ export const Navbar = () => {
         );
     };
 
-    function navTo(dest: string) {
-        console.log("navigated to", dest);
-        handleTransitionNav("/" + dest);
-    }
+    useEffect(() => {
+        activeNavHandler = handleTransitionNav;
+        return () => {
+            activeNavHandler = null;
+        };
+    }, [handleTransitionNav]);
 
     useEffect(() => {
         const handleHeroComplete = () => {
@@ -157,7 +170,7 @@ export const Navbar = () => {
                 <div id="mobileBar" className="flex justify-around font-bold">
                     <div className="flex flex-row w-full items-center justify-around z-30 ">
                         <div id="brochure" className="relative w-fit rounded-full">
-                            <div onClick={() => { navTo("brochure") }}
+                            <div onClick={() => { handleTransitionNav("/brochure") }}
                                 className={cn(
                                     "px-6 md:px-10 py-2.5 text-center md:flex hidden ",
                                     "text-white/40 bg-blue-100/20 backdrop-blur-md",
@@ -187,7 +200,7 @@ export const Navbar = () => {
                         </div>
 
                         <div id="register" className="relative w-fit">
-                            <div onClick={() => navTo("register")}
+                            <div onClick={() => handleTransitionNav("/register")}
                                 className={cn(
                                     "px-6 md:px-10 py-2.5 text-center md:flex hidden ",
                                     "text-white/40 bg-blue-100/20 backdrop-blur-md",
@@ -255,7 +268,7 @@ export const Navbar = () => {
 
                     <div className="flex flex-row justify-between w-full px-10 md:hidden text-xl">
                         <div id="brochure" className="relative w-fit rounded-full">
-                            <div onClick={() => { navTo("brochure") }}
+                            <div onClick={() => { handleTransitionNav("/brochure") }}
                                 className={cn(
                                     "px-4 md:px-10 py-2.5 text-center w-fit ",
                                     "text-white/40 bg-blue-100/20 backdrop-blur-md",
@@ -269,7 +282,7 @@ export const Navbar = () => {
                             </div>
                         </div>
                         <div id="register" className="relative w-fit">
-                            <div onClick={() => navTo("register")}
+                            <div onClick={() => handleTransitionNav("/register")}
                                 className={cn(
                                     "px-4 md:px-10 py-2.5 text-center ",
                                     "text-white/40 bg-blue-100/20 backdrop-blur-md",

@@ -88,7 +88,6 @@ export const Home = () => {
                     <GallerySection />
                     <Ribbon content={"MEET OUR TEAM"} />
                     <MembersSection />
-                    <Ribbon content={"MEET OUR TEAM"} />
                     <Footer />
                 </div>
             </div>

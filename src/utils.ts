@@ -6,7 +6,6 @@ export const cn = (...inputs: any[]) => {
     return twMerge(clsx(inputs));
 }
 
-
 export const useInView = (options?: IntersectionObserverInit) => {
     const ref = useRef<HTMLDivElement | null>(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -25,3 +24,17 @@ export const useInView = (options?: IntersectionObserverInit) => {
 
     return { ref, isVisible };
 };
+
+export interface Club {
+    name: string;
+    colorClass: string;
+    accentVar: string;
+    members: Member[];
+    executives: Member[];
+}
+
+export interface Member {
+    role: string;
+    name: string;
+    image: any
+}
