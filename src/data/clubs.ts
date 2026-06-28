@@ -20,7 +20,7 @@ import EcommExecDivyaansh from "../assets/images/members/ecomm/execs/divyaansh.j
 import EcommExecUddeshya from "../assets/images/members/ecomm/execs/uddeshya.jpeg"
 import EcommExecIvanya from "../assets/images/members/ecomm/execs/ivanya.jpeg"
 import EcommExecShreyansh from "../assets/images/members/ecomm/execs/shreyansh.jpeg"
-
+import EcommExecSaira from "../assets/images/members/ecomm/execs/saira.jpeg"
 export const clubData = [
     {
         name: "Matrix",
@@ -62,7 +62,7 @@ export const clubData = [
             { name: "Shauryavir Singh Jamwal", role: "executive", image: EcommExecJamwal },
             { name: "Divyaansh Gautam", role: "executive", image: EcommExecDivyaansh },
             { name: "Uddeshya Singh Negi", role: "executive", image: EcommExecUddeshya },
-            { name: "Saira Kumar", role: "executive", image: undefined },
+            { name: "Saira Kumar", role: "executive", image: EcommExecSaira },
             { name: "Shreyansh Khandelwal", role: "executive", image: EcommExecShreyansh },
         ]
     },
