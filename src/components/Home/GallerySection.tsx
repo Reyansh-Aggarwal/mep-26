@@ -54,10 +54,7 @@ export const GallerySection = () => {
     }, { scope: containerRef });
 
     return (
-        <div ref={containerRef} className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden py-24">
-            {/* Ambient backdrop glow layers */}
-            <div className="absolute w-[500px] h-[500px] bg-[var(--color-matrix)]/5 rounded-full blur-[140px] pointer-events-none top-1/4 left-1/4" />
-            <div className="absolute w-[400px] h-[400px] bg-[var(--color-psynapse)]/5 rounded-full blur-[120px] pointer-events-none bottom-1/4 right-1/4" />
+        <div ref={containerRef} className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden py-24 bg-black">
 
             {/* FIRST STRIP */}
             <div className="w-full overflow-hidden relative z-10 py-4 select-none">

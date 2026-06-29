@@ -228,7 +228,7 @@ export const EventSection = () => {
             id="eventSection"
             ref={ref}
             className={cn(
-                "min-h-dvh w-full relative",
+                "min-h-dvh w-full relative bg-black",
                 "text-center items-center justify-start",
                 "flex flex-col py-24 gap-12 select-none",
             )}
@@ -268,7 +268,7 @@ export const EventSection = () => {
 
             {/* Club Selector Buttons */}
             <div id="buttons"
-                className={cn("flex flex-row w-full justify-center items-center gap-4 relative z-10")}>
+                className={cn("flex flex-row w-full justify-center items-center gap-4 relative z-10",)}>
                 {(["matrix", "ecomm", "psynapse"] as const).map((c) => (
                     <div key={c} id="button"
                         onClick={() => {

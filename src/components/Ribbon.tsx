@@ -32,7 +32,7 @@ export const Ribbon = ({ content }: { content: string }) => {
     return (
         <div
             ref={containerRef}
-            className="w-full h-fit relative overflow-hidden py-10"
+            className="w-full h-fit relative overflow-hidden pb-10 bg-black"
         >
             <div
                 ref={ribbonRef}
