@@ -27,7 +27,6 @@ export const Preloader = () => {
     const images = Array.from(document.images);
     totalCount = images.length;
 
-    //fonts loaded
     document.fonts.ready.then(() => {
       if (totalCount === 0) updateProgress();
     });
@@ -106,15 +105,6 @@ export const Preloader = () => {
             filter: "brightness(0) invert(1)",
             clipPath: `inset(${100 - progress}% 0px 0px 0px)`
           }}
-        />
-      </div>
-      <div className="text-6xl font-primary tracking-widest font-bold mb-4">
-        {progress}%
-      </div>
-      <div className="w-64 h-1 bg-white/20 rounded-full overflow-hidden">
-        <div
-          className="h-full bg-white transition-all duration-300 ease-out"
-          style={{ width: `${progress}%` }}
         />
       </div>
     </div>
