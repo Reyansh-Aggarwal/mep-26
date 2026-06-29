@@ -31,6 +31,7 @@ export const HeroSection = (() => {
         }, "<")
 
         const tl = gsap.timeline({
+            paused: true,
             defaults: { ease: "power3.out" },
             onComplete: () => {
                 window.dispatchEvent(new CustomEvent("heroAnimationComplete"));
@@ -194,7 +195,19 @@ export const HeroSection = (() => {
                 "-=0.8"
             );
 
+        const startAnimation = () => {
+            tl.play();
+        };
 
+        if ((window as any).preloaderComplete) {
+            startAnimation();
+        } else {
+            window.addEventListener("preloaderComplete", startAnimation);
+        }
+
+        return () => {
+            window.removeEventListener("preloaderComplete", startAnimation);
+        };
     }, []);
 
     return (
