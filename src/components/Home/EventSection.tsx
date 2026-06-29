@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { cn, useInView } from "../../utils";
 import matrixLogo from "../../assets/logos/matrix_logo.png";
-import matrixLogoVid from "../../assets/matrix_logo.mp4";
 import ecommLogo from "../../assets/logos/ecomm_logo.png";
 import psynapseLogo from "../../assets/logos/psynapse_logo.png";
 import gsap from "gsap";
