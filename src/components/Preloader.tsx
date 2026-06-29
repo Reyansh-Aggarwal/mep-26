@@ -24,27 +24,24 @@ export const Preloader = () => {
       updateProgress();
     };
 
-    // Get all images currently in the DOM
     const images = Array.from(document.images);
     totalCount = images.length;
 
-    // Track fonts
-    let fontsLoaded = false;
+    //fonts loaded
     document.fonts.ready.then(() => {
-      fontsLoaded = true;
-      if (totalCount === 0) updateProgress(); // if no images, this will trigger completion
+      if (totalCount === 0) updateProgress();
     });
 
     if (totalCount === 0) {
       // If there are no images, just wait for fonts and maybe a small timeout
-      setTimeout(() => setProgress(100), 500);
+      setTimeout(() => setProgress(100), 300);
     } else {
       images.forEach((img) => {
         if (img.complete) {
           handleImageLoad();
         } else {
           img.addEventListener("load", handleImageLoad);
-          img.addEventListener("error", handleImageLoad); // count errors as loaded so it doesn't hang
+          img.addEventListener("error", handleImageLoad);
         }
       });
     }
