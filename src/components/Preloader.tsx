@@ -12,11 +12,13 @@ export const Preloader = () => {
     let totalCount = 0;
 
     const updateProgress = () => {
-      if (totalCount === 0) {
-        setProgress(100);
-      } else {
-        setProgress(Math.floor((loadedCount / totalCount) * 100));
-      }
+      setTimeout(() => {
+        if (totalCount === 0) {
+          setProgress(100);
+        } else {
+          setProgress(Math.floor((loadedCount / totalCount) * 100));
+        }
+      }, 200);
     };
 
     const handleImageLoad = () => {
@@ -100,7 +102,7 @@ export const Preloader = () => {
         <img
           src="/mep_logo.png"
           alt="MEP Logo Fill"
-          className="absolute inset-0 w-full h-full object-contain transition-all duration-300 ease-out"
+          className="absolute inset-0 w-full h-full object-contain transition-all duration-200 ease-out"
           style={{
             filter: "brightness(0) invert(1)",
             clipPath: `inset(${100 - progress}% 0px 0px 0px)`
