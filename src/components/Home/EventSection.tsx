@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { cn, useInView } from "../../utils";
 import matrixLogo from "../../assets/logos/matrix_logo.png";
+import matrixLogoVid from "../../assets/matrix_logo.mp4";
 import ecommLogo from "../../assets/logos/ecomm_logo.png";
 import psynapseLogo from "../../assets/logos/psynapse_logo.png";
 import gsap from "gsap";
@@ -250,6 +251,8 @@ export const EventSection = () => {
                     "h-64 md:h-96 flex flex-row justify-center gap-12 items-center relative"
                 )}>
                 <img src={matrixLogo}
+
+
                     className={cn(
                         "transition-all duration-300 ease-out absolute opacity-30 h-16",
                         club == "matrix" ? "h-32 lg:h-48 opacity-100" : club == "ecomm" ? "-translate-x-[23dvw] -translate-z-8" : "-translate-x-[46dvw] opacity-0"
