@@ -154,7 +154,6 @@ export const Navbar = () => {
 
     return (
         <>
-            {/* Fullscreen Transition Overlay Layer */}
             <div
                 ref={transitionOverlayRef}
                 className="fixed inset-0 bg-black z-50 pointer-events-none scale-y-0"
@@ -216,19 +215,17 @@ export const Navbar = () => {
                     </div>
                 </div>
 
-                {/* Menu Overlay */}
                 <div ref={menuRef}
                     className={cn(
                         "fixed top-0 left-0 h-dvh w-dvw bg-black z-20",
                         "text-offwhite font-secondary font-bold text-6xl",
-                        "flex flex-col justify-around pt-26 md:px-32"
+                        "flex flex-col justify-around pt-26 md:px-32 text-center"
                     )}
                 >
-                    {/* Link 1: HOME (MEP'26) -> Bypasses transition */}
                     <div
                         onClick={() => handleTransitionNav("/home", true)}
                         className={cn(
-                            "w-full px-10 text-right group ",
+                            "w-full px-10 md:text-right group ",
                             currLocation.pathname === "/home" && "text-white/50"
                         )}
                     >
@@ -238,11 +235,10 @@ export const Navbar = () => {
                         </span>
                     </div>
 
-                    {/* Link 2: OUR TEAM -> Has transition */}
                     <div
                         onClick={() => handleTransitionNav("/members")}
                         className={cn(
-                            "w-full px-10 text-left group ",
+                            "w-full px-10 md:text-left group ",
                             currLocation.pathname === "/members" && "text-white/50"
                         )}
                     >
@@ -252,11 +248,10 @@ export const Navbar = () => {
                         </span>
                     </div>
 
-                    {/* Link 3: ALUMNI -> Has transition */}
                     <div
                         onClick={() => handleTransitionNav("/alumni")}
                         className={cn(
-                            "w-full px-10 text-right group ",
+                            "w-full px-10 md:text-right group ",
                             currLocation.pathname === "/alumni" && "text-white/50"
                         )}
                     >

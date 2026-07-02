@@ -1,8 +1,16 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { cn, useInView } from "../../utils.tsx";
 import matrixLogo from "../../assets/logos/matrix_logo.png";
 import ecommLogo from "../../assets/logos/ecomm_logo.png";
 import psynapseLogo from "../../assets/logos/psynapse_logo.png";
+// Glass shards (one per event = 12 total).
+// TODO: replace placeholder shards with the real per-event shard art.
+import matrixShard1 from "../../assets/images/matrix-shard1.png";
+import matrixShard2 from "../../assets/images/matrix-shard2.png";
+import matrixShard3 from "../../assets/images/matrix-shard3.png";
+import matrixShard4 from "../../assets/images/matrix-shard4.png";
+import ecommShardLanding from "../../assets/images/ecomm-shard-landing.png";
+import psynapseShardLanding from "../../assets/images/psynapse-shard-landing.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -98,53 +106,54 @@ const clubConfig = {
     matrix: {
         color: "var(--color-matrix)",
         textClass: "text-matrix",
-        bgClass: "bg-matrix/30",
-        hoverClass: "hover:bg-matrix",
-        shadowClass: "shadow-[0_4px_0_#1e2b4d]",
+        // Deep desaturated stage tint + low-alpha ambient blob color (gsap-tweenable rgb/rgba).
+        stageTint: "rgb(21, 28, 46)",
+        blobColor: "rgba(81, 126, 255, 0.08)",
         glowShadow: "0 0 12px #0000ff60",
-        borderHover: "hover:border-matrix/50",
         numColor: "text-matrix/10",
-        gradientFrom: "from-matrix/10",
-        royalBgClass: "bg-royal-blue"
     },
     ecomm: {
         color: "var(--color-ecomm)",
         textClass: "text-ecomm",
-        bgClass: "bg-ecomm/30",
-        hoverClass: "hover:bg-ecomm",
-        shadowClass: "shadow-[0_4px_0_#0a3c18]",
+        stageTint: "rgb(11, 37, 21)",
+        blobColor: "rgba(0, 197, 42, 0.08)",
         glowShadow: "0 0 12px #00ff0060",
-        borderHover: "hover:border-ecomm/50",
         numColor: "text-ecomm/10",
-        gradientFrom: "from-ecomm/10",
-        royalBgClass: "bg-royal-green"
     },
     psynapse: {
         color: "var(--color-psynapse)",
         textClass: "text-psynapse",
-        bgClass: "bg-psynapse/30",
-        hoverClass: "hover:bg-psynapse",
-        shadowClass: "shadow-[0_4px_0_#4a0b30]",
+        stageTint: "rgb(42, 13, 33)",
+        blobColor: "rgba(255, 0, 140, 0.08)",
         glowShadow: "0 0 12px #ff000060",
-        borderHover: "hover:border-psynapse/50",
         numColor: "text-psynapse/10",
-        gradientFrom: "from-psynapse/10",
-        royalBgClass: "bg-royal-pink"
     },
 } as const;
 
+const matrixShards = [matrixShard1, matrixShard2, matrixShard3, matrixShard4];
+// TODO: replace placeholder shards — ecomm/psynapse only have a single landing shard so far.
+const ecommShards = [ecommShardLanding, matrixShard2, ecommShardLanding, matrixShard4];
+const psynapseShards = [psynapseShardLanding, matrixShard1, psynapseShardLanding, matrixShard3];
+
+const acts = [
+    { key: "matrix", config: clubConfig.matrix, logo: matrixLogo, events: matrixEvents, shards: matrixShards },
+    { key: "ecomm", config: clubConfig.ecomm, logo: ecommLogo, events: ecommEvents, shards: ecommShards },
+    { key: "psynapse", config: clubConfig.psynapse, logo: psynapseLogo, events: psynapseEvents, shards: psynapseShards },
+] as const;
+
+// Flatten into a single ordered list of event "beats" across all three acts.
+const flatEvents = acts.flatMap((act, ai) =>
+    act.events.map((event, ei) => ({ event, config: act.config, ai, ei, shard: act.shards[ei] }))
+);
+
+const floatClasses = ["animate-shard-float", "animate-shard-float-1", "animate-shard-float-2", "animate-shard-float-3"];
+
 export const EventSection = () => {
-    const [club, setClub] = useState<"matrix" | "ecomm" | "psynapse">("matrix");
-    const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
     const { ref, isVisible } = useInView({ threshold: 0.01 });
-    const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
     const containerRef = useRef<HTMLDivElement>(null);
     const eventsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-    const events = club == "matrix" ? matrixEvents :
-        club == "ecomm" ? ecommEvents :
-            psynapseEvents;
-    const config = clubConfig[club];
+    const logoRefs = useRef<(HTMLImageElement | null)[]>([]);
+    const blobRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     useEffect(() => {
         if (isVisible) {
@@ -159,20 +168,35 @@ export const EventSection = () => {
             });
         }
     }, [isVisible]);
-    useGSAP(() => {
-        const validElements = eventsRef.current.filter((el): el is HTMLDivElement => el !== null);
-        if (!containerRef.current || validElements.length === 0) return;
 
-        // Kill any leftover trigger by ID (revertOnUpdate handles it, but be explicit)
-        ScrollTrigger.getById("eventCards")?.kill(true);
-        gsap.set(validElements, { clearProps: "all" });
+    useGSAP(() => {
+        const events = eventsRef.current.filter((el): el is HTMLDivElement => el !== null);
+        const logos = logoRefs.current.filter((el): el is HTMLImageElement => el !== null);
+        const blobs = blobRefs.current.filter((el): el is HTMLDivElement => el !== null);
+        if (!containerRef.current || events.length === 0 || logos.length === 0) return;
+
+        ScrollTrigger.getById("eventStage")?.kill(true);
+        gsap.set(events, { clearProps: "all" });
+
+        // --- Initial state ---------------------------------------------------
+        events.forEach((el, i) => {
+            gsap.set(el, i === 0
+                ? { opacity: 1, scale: 1, yPercent: 0, zIndex: 10 }
+                : { opacity: 0, scale: 1, yPercent: 120, zIndex: 1 });
+        });
+        logos.forEach((el, ai) => {
+            gsap.set(el, ai === 0
+                ? { opacity: 1, scale: 1 }
+                : { opacity: 0, scale: 0.6 });
+        });
+        gsap.set(blobs, { backgroundColor: acts[0].config.blobColor });
 
         const tl = gsap.timeline({
             scrollTrigger: {
-                id: "eventCards",
+                id: "eventStage",
                 trigger: containerRef.current,
                 start: "top top",
-                end: `+=${validElements.length * 100}%`,
+                end: `+=${flatEvents.length * 90}%`,
                 pin: true,
                 scrub: 1,
                 anticipatePin: 1,
@@ -181,33 +205,26 @@ export const EventSection = () => {
             }
         });
 
-        // Setup Initial State
-        validElements.forEach((eventEl, index) => {
-            if (index === 0) {
-                gsap.set(eventEl, { opacity: 1, scale: 1, zIndex: 10, yPercent: 0 });
-            } else {
-                gsap.set(eventEl, { opacity: 0, scale: 1, zIndex: 1, yPercent: 120 });
-            }
-        });
+        // --- Beats: conveyor through every event, act-synced logo/bg swaps ----
+        for (let i = 0; i < events.length - 1; i++) {
+            const cur = events[i];
+            const next = events[i + 1];
+            const curAct = flatEvents[i].ai;
+            const nextAct = flatEvents[i + 1].ai;
 
-        // Build Timeline Loop
-        for (let i = 0; i < validElements.length - 1; i++) {
-            const currentEl = validElements[i];
-            const nextEl = validElements[i + 1];
+            tl.to(cur, { yPercent: -120, opacity: 0, scale: 0.85, zIndex: 1, duration: 1, ease: "power2.inOut" })
+                .to(next, { yPercent: 0, opacity: 1, scale: 1, zIndex: 10, duration: 1, ease: "power2.inOut" }, "<");
 
-            if (i > 0) {
-                const lastEl = validElements[i - 1];
-                tl.to(lastEl, { scale: 0.85, opacity: 0, yPercent: -200, zIndex: 1, duration: 1, ease: "power2.inOut" })
-                    .to(currentEl, { scale: 0.85, opacity: 0.25, yPercent: -120, zIndex: 1, duration: 1, ease: "power2.inOut" }, "<")
-                    .to(nextEl, { scale: 1, opacity: 1, yPercent: 0, zIndex: 10, duration: 1, ease: "power2.inOut" }, "<");
-            } else {
-                tl.to(currentEl, { scale: 0.85, opacity: 0.25, yPercent: -120, zIndex: 1, duration: 1, ease: "power2.inOut" })
-                    .to(nextEl, { scale: 1, opacity: 1, yPercent: 0, zIndex: 10, duration: 1, ease: "power2.inOut" }, "<");
+            if (nextAct !== curAct) {
+                // Act transition: morph logos, tint stage, recolor ambient blobs.
+                tl.to(logos[curAct], { opacity: 0, scale: 0.6, duration: 1, ease: "power2.inOut" }, "<")
+                    .to(logos[nextAct], { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, "<")
+                    .to(blobs, { backgroundColor: acts[nextAct].config.blobColor, duration: 1, ease: "power2.inOut" }, "<");
             }
         }
 
-        // Double rAF: wait for browser to commit the new pin-spacer layout
-        // before recalculating all downstream trigger positions.
+        // Double rAF: wait for the browser to commit the new pin-spacer layout
+        // before recalculating downstream trigger positions.
         let rafId1: number, rafId2: number;
         rafId1 = requestAnimationFrame(() => {
             rafId2 = requestAnimationFrame(() => {
@@ -219,225 +236,142 @@ export const EventSection = () => {
             cancelAnimationFrame(rafId1);
             cancelAnimationFrame(rafId2);
         };
-    }, { scope: containerRef, dependencies: [club], revertOnUpdate: true });
-
-
+    }, { scope: containerRef, dependencies: [] });
 
     return (
         <div
             id="eventSection"
             ref={ref}
             className={cn(
-                "min-h-dvh w-full relative bg-black",
-                "text-center items-center justify-start",
-                "flex flex-col py-24 gap-12 select-none",
+                "w-full relative bg-black text-center select-none",
             )}
         >
             <div
-                className="absolute w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none top-1/4 left-0 transition-colors duration-700"
-                style={{ backgroundColor: `color-mix(in srgb, ${config.color} 8%, transparent)` }}
-            />
-            <div
-                className="absolute w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none bottom-1/4 right-0 transition-colors duration-700"
-                style={{ backgroundColor: `color-mix(in srgb, ${config.color} 6%, transparent)` }}
-            />
+                ref={containerRef}
+                className="hidden md:flex h-screen w-full relative overflow-hidden flex-col items-center justify-center"
+            >
+                <div
+                    ref={(el) => { blobRefs.current[0] = el; }}
+                    className="absolute w-[500px] h-[500px] rounded-full blur-[140px] pointer-events-none top-1/4 left-0"
+                />
+                <div
+                    ref={(el) => { blobRefs.current[1] = el; }}
+                    className="absolute w-[400px] h-[400px] rounded-full blur-[120px] pointer-events-none bottom-1/4 right-0"
+                />
 
-            {/* Logo Carousel Header */}
-            <div id="header"
-                className={cn(
-                    "font-primary text-9xl lg:text-[11rem] text-offwhite",
-                    "transform-3d w-full",
-                    "h-64 md:h-96 flex flex-row justify-center gap-12 items-center relative"
-                )}>
-                <img src={matrixLogo}
+                {/* Logo header — one per club, cross-faded per act */}
+                <div id="header" className="absolute top-[10%] w-full h-40 flex items-center justify-center pointer-events-none">
+                    {acts.map((act, ai) => (
+                        <img
+                            key={act.key}
+                            ref={(el) => { logoRefs.current[ai] = el; }}
+                            src={act.logo}
+                            alt={act.key}
+                            className="absolute h-28 lg:h-40 w-auto"
+                        />
+                    ))}
+                </div>
 
-
-                    className={cn(
-                        "transition-all duration-300 ease-out absolute opacity-30 h-16",
-                        club == "matrix" ? "h-32 lg:h-48 opacity-100" : club == "ecomm" ? "-translate-x-[23dvw] -translate-z-8" : "-translate-x-[46dvw] opacity-0"
-                    )} />
-                <img src={ecommLogo}
-                    className={cn(
-                        "transition-all duration-300 ease-out absolute opacity-30 h-16",
-                        club == "matrix" ? "translate-x-[23dvw] -translate-z-8" : club == "psynapse" ? "-translate-x-[23dvw] -translate-z-8 " : "h-32 lg:h-48 opacity-100"
-                    )} />
-                <img src={psynapseLogo}
-                    className={cn(
-                        "transition-all duration-300 ease-out absolute opacity-30 h-16",
-                        club == "matrix" ? "translate-x-[46dvw] -translate-z-8 opacity-0" : club == "ecomm" ? "translate-x-[23dvw] -translate-z-8 " : "h-32 lg:h-48 opacity-100"
-                    )} />
+                {/* Event beats */}
+                <div className="relative w-full max-w-6xl h-[420px] px-12 lg:px-16">
+                    {flatEvents.map((fe, i) => {
+                        const isLeft = i % 2 === 0;
+                        return (
+                            <div
+                                key={`${fe.ai}-${fe.event.id}`}
+                                ref={(el) => { eventsRef.current[i] = el; }}
+                                className={cn(
+                                    "absolute inset-0 flex items-center gap-8 lg:gap-16 will-change-transform px-8 lg:px-0",
+                                    isLeft ? "flex-row" : "flex-row-reverse"
+                                )}
+                            >
+                                <div className={cn(
+                                    "flex flex-col gap-4 w-1/2",
+                                    isLeft ? "text-left items-start" : "text-right items-end"
+                                )}>
+                                    <p
+                                        className={cn("font-primary text-5xl lg:text-6xl", fe.config.textClass)}
+                                        style={{ textShadow: fe.config.glowShadow }}
+                                    >
+                                        {fe.event.name}
+                                    </p>
+                                    <p className="font-secondary text-sm lg:text-base text-offwhite/70 tracking-widest uppercase">
+                                        {fe.event.tagline}
+                                    </p>
+                                    <p className="font-secondary text-offwhite/80 leading-relaxed text-lg">
+                                        {fe.event.description}
+                                    </p>
+                                </div>
+                                <div className="w-1/2 flex justify-center items-center">
+                                    <img
+                                        src={fe.shard}
+                                        alt=""
+                                        className={cn(
+                                            "w-[240px] lg:w-[300px] h-auto glass-shard-glow",
+                                            floatClasses[i % floatClasses.length]
+                                        )}
+                                    />
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
 
-            {/* Club Selector Buttons */}
-            <div id="buttons"
-                className={cn("flex flex-row w-full justify-center items-center gap-4 relative z-10",)}>
-                {(["matrix", "ecomm", "psynapse"] as const).map((c) => (
-                    <div key={c} id="button"
-                        onClick={() => {
-                            // Reset tracking refs array cleanly on switch
-                            eventsRef.current = [];
-                            setClub(c);
-                        }}
+            <div className="md:hidden flex flex-col gap-20 py-24 px-5">
+                {acts.map((act) => (
+                    <MobileAct key={act.key} act={act} />
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const MobileAct = ({ act }: { act: (typeof acts)[number] }) => {
+    const { ref, isVisible } = useInView({ threshold: 0.15 });
+    return (
+        <div ref={ref} className="flex flex-col gap-8 items-center">
+            <img
+                src={act.logo}
+                alt={act.key}
+                className={cn(
+                    "h-20 w-auto transition-all duration-700",
+                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                )}
+            />
+            <div className="flex flex-col gap-6 w-full">
+                {act.events.map((event, ei) => (
+                    <div
+                        key={event.id}
                         className={cn(
-                            "px-6 md:px-10 py-2.5 text-center",
-                            ` text-white/40 bg-blue-100/20 backdrop-blur-md`,
-                            ` border border-white/20 rounded-full`,
-                            "font-secondary font-bold tracking-wider uppercase transition-all",
-                            `hover:${config.bgClass}`,
-                            club === c
-                                ? `translate-y-[4px] shadow-none bg-${c} text-offwhite`
-                                : `shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]`,
+                            "relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm p-6 flex flex-col gap-2 transition-all duration-700",
+                            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                        )}
+                        style={{ transitionDelay: isVisible ? `${ei * 100}ms` : "0ms" }}
+                    >
+                        <span className={cn(
+                            "absolute -top-4 -right-2 font-primary text-[7rem] leading-none select-none pointer-events-none tracking-tighter",
+                            act.config.numColor
                         )}>
-                        {c}
+                            {String(event.id).padStart(2, "0")}
+                        </span>
+                        <div className="relative z-10 flex flex-col gap-2">
+                            <span
+                                className={cn("font-primary text-4xl", act.config.textClass)}
+                                style={{ textShadow: act.config.glowShadow }}
+                            >
+                                {event.name}
+                            </span>
+                            <span className="font-secondary text-sm text-offwhite/70 tracking-widest uppercase">
+                                {event.tagline}
+                            </span>
+                            <p className="font-secondary text-offwhite/80 leading-relaxed text-base mt-2">
+                                {event.description}
+                            </p>
+                        </div>
                     </div>
                 ))}
             </div>
-
-            {/* Events Grid */}
-            <div id="content" className="w-full px-4 md:px-12 lg:px-20 relative z-10">
-                {/* Events (Desktop View) */}
-                <div
-                    ref={containerRef}
-                    className="w-full h-screen hidden md:flex items-center justify-center relative"
-                >
-                    <div className="flex flex-col relative justify-center items-center w-full max-w-5xl px-4 min-h-[400px]">
-                        {events.map((event, index) => (
-                            <div
-                                key={`${club}-${event.id}`}
-                                ref={(el) => { eventsRef.current[index] = el; }}
-                                className={cn(
-                                    "flex flex-col gap-4 w-full absolute will-change-transform",
-                                    event.id % 2 === 0 ? "text-left items-start" : "text-right items-end"
-                                )}
-                            >
-                                <hr className="text-yellow opacity-20 w-full hidden" />
-                                <div className={cn(
-                                    "flex flex-col gap-4 w-full",
-                                    event.id % 2 === 0 ? "items-start" : "items-end"
-                                )}>
-                                    <p className={cn(
-                                        "font-primary text-4xl md:text-5xl lg:text-4xl w-full",
-                                        config.textClass
-                                    )}>
-                                        {event.name}
-                                    </p>
-                                    <p className={cn(
-                                        "text-offwhite text-xl w-2/3",
-                                        event.id % 2 === 0 ? "" : "ml-auto"
-                                    )}>
-                                        {event.description}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Events (Mobile View) */}
-                <div id="events" className="flex flex-col gap-6 w-full max-w-6xl mx-auto md:hidden">
-                    <div className="grid grid-cols-1 gap-5 md:gap-6">
-                        {events.map((event, index) => (
-                            <div key={`${club}-${event.id}`}
-                                ref={(el) => { cardsRef.current[index] = el; }}
-                                className={cn(
-                                    "group relative overflow-hidden rounded-2xl",
-                                    "border border-white/10 bg-white/[0.03]",
-                                    "backdrop-blur-sm",
-                                    "transition-all duration-300",
-                                    "hover:border-white/20 hover:bg-white/[0.06]",
-                                    "hover:scale-[1.02]",
-                                    "p-6 md:p-8",
-                                    "flex flex-col justify-between",
-                                    "min-h-[180px] md:min-h-[220px]",
-                                )}
-                                onClick={() => setSelectedEvent(event)}>
-
-                                <span className={cn(
-                                    "absolute -top-4 -right-2 font-primary text-[8rem] md:text-[10rem] leading-none select-none pointer-events-none transition-colors duration-500",
-                                    config.numColor
-                                )}>
-                                    {String(event.id).padStart(2, "0")}
-                                </span>
-
-                                <div
-                                    className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                                    style={{ background: `linear-gradient(90deg, transparent, ${config.color}, transparent)` }}
-                                />
-
-                                <div className="relative z-10 flex flex-col gap-2">
-                                    <span
-                                        className={cn(
-                                            "font-primary text-4xl md:text-5xl lg:text-4xl w-full transition-all duration-300",
-                                            config.textClass
-                                        )}
-                                        style={{ textShadow: config.glowShadow }}>
-                                        {event.name}
-                                    </span>
-                                    <span className="font-secondary text-sm md:text-base text-offwhite/70 tracking-widest uppercase">
-                                        {event.tagline}
-                                    </span>
-                                </div>
-
-                                <div className="relative z-10 justify-end mt-4 flex">
-                                    <span className="text-offwhite/20 group-hover:text-offwhite/60 transition-all duration-300 group-hover:translate-x-1 text-2xl font-secondary">
-                                        →
-                                    </span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-            {/* Modal Overlay */}
-
-            {selectedEvent && (
-                <div
-                    className="fixed inset-0 z-[50] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-fade-in"
-                    onClick={() => setSelectedEvent(null)}
-                >
-                    <div
-                        className="relative w-full max-w-2xl bg-white/[0.03] border border-white/20 rounded-3xl p-8 md:p-12 overflow-y-auto max-h-[85vh] shadow-[0_0_40px_rgba(0,0,0,0.5)] backdrop-blur-xl"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        {/* Close button */}
-                        <div
-                            className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors text-2xl outline-none"
-                            onClick={() => setSelectedEvent(null)}
-                        >
-                            ✕
-                        </div>
-                        <div className="flex flex-col gap-4 mt-4">
-                            <span
-                                className={cn(
-                                    "font-primary text-5xl md:text-7xl tracking-wide",
-                                    config.textClass
-                                )}
-                                style={{ textShadow: config.glowShadow }}
-                            >
-                                {selectedEvent.name}
-                            </span>
-
-                            <span className="font-secondary text-lg md:text-xl text-yellow tracking-widest uppercase">
-
-                                {selectedEvent.tagline}
-
-                            </span>
-
-                            <div className="h-[1px] w-full bg-white/10 my-4" />
-
-                            <p className="font-secondary text-offwhite/80 leading-relaxed text-lg md:text-xl">
-
-                                {selectedEvent.description || "Description coming soon."}
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            )}
         </div>
     );
 };

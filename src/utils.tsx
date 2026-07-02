@@ -39,7 +39,7 @@ export interface Member {
     image: any
 }
 
-export const ExternalRedirect = ({ url }) => {
+export const ExternalRedirect = ({ url }: { url: string }) => {
 
     useEffect(() => {
         window.history.replaceState(null, '', '/home');
