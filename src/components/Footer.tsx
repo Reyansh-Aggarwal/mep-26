@@ -25,7 +25,7 @@ export const Footer = () => {
                 {/* Left: Branding */}
                 <div className="flex flex-col gap-4 basis-1/2">
                     <span className="font-primary text-6xl md:text-7xl lg:text-8xl text-offwhite uppercase tracking-wider text-shadow-[0_0_8px_#ffffff50]">
-                        MATRIX'26
+                        MEP'26
                     </span>
 
                 </div>
@@ -62,8 +62,8 @@ export const Footer = () => {
                             <a href="mailto:thematrixclan2026@gmail.com" className="hover:text-yellow transition-colors duration-300 cursor-pointer">
                                 thematrixclan2026@gmail.com
                             </a>
-                            <a href="https://instagram.com/mepfest2026" className="hover:text-yellow transition-colors duration-300 cursor-pointer">
-                                @mepfest2026
+                            <a href="https://instagram.com/thematrixclan.msm" className="hover:text-yellow transition-colors duration-300 cursor-pointer">
+                                @thematrixclan.msm
                             </a>
                             <a href="tel:+919086222000" className="hover:text-yellow transition-colors duration-300 cursor-pointer">
                                 +919086222000
