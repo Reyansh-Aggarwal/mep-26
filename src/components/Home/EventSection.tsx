@@ -9,8 +9,14 @@ import matrixShard1 from "../../assets/images/matrix-shard1.png";
 import matrixShard2 from "../../assets/images/matrix-shard2.png";
 import matrixShard3 from "../../assets/images/matrix-shard3.png";
 import matrixShard4 from "../../assets/images/matrix-shard4.png";
-import ecommShardLanding from "../../assets/images/ecomm-shard-landing.png";
-import psynapseShardLanding from "../../assets/images/psynapse-shard-landing.png";
+import ecommShard1 from "../../assets/images/ecomm-shard1.png";
+import ecommShard2 from "../../assets/images/ecomm-shard2.png";
+import ecommShard3 from "../../assets/images/ecomm-shard3.png";
+import ecommShard4 from "../../assets/images/ecomm-shard4.png";
+import psynapseShard1 from "../../assets/images/psynapse-shard1.png";
+import psynapseShard2 from "../../assets/images/psynapse-shard2.png";
+import psynapseShard3 from "../../assets/images/psynapse-shard3.png";
+import psynapseShard4 from "../../assets/images/psynapse-shard4.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -106,7 +112,6 @@ const clubConfig = {
     matrix: {
         color: "var(--color-matrix)",
         textClass: "text-matrix",
-        // Deep desaturated stage tint + low-alpha ambient blob color (gsap-tweenable rgb/rgba).
         stageTint: "rgb(21, 28, 46)",
         blobColor: "rgba(81, 126, 255, 0.08)",
         glowShadow: "0 0 12px #0000ff60",
@@ -131,9 +136,8 @@ const clubConfig = {
 } as const;
 
 const matrixShards = [matrixShard1, matrixShard2, matrixShard3, matrixShard4];
-// TODO: replace placeholder shards — ecomm/psynapse only have a single landing shard so far.
-const ecommShards = [ecommShardLanding, matrixShard2, ecommShardLanding, matrixShard4];
-const psynapseShards = [psynapseShardLanding, matrixShard1, psynapseShardLanding, matrixShard3];
+const ecommShards = [ecommShard1, ecommShard2, ecommShard3, ecommShard4];
+const psynapseShards = [psynapseShard1, psynapseShard2, psynapseShard3, psynapseShard4];
 
 const acts = [
     { key: "matrix", config: clubConfig.matrix, logo: matrixLogo, events: matrixEvents, shards: matrixShards },
@@ -295,7 +299,7 @@ export const EventSection = () => {
                                     >
                                         {fe.event.name}
                                     </p>
-                                    <p className="font-secondary text-sm lg:text-base text-offwhite/70 tracking-widest uppercase">
+                                    <p className="font-secondary text-sm lg:text-base text-offwhite/40 tracking-widest uppercase">
                                         {fe.event.tagline}
                                     </p>
                                     <p className="font-secondary text-offwhite/80 leading-relaxed text-lg">
