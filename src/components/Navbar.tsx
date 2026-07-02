@@ -1,4 +1,4 @@
-import { cn } from "../utils";
+import { cn } from "../utils.tsx";
 import mepLogo from "../assets/logos/mep_logo.png";
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";

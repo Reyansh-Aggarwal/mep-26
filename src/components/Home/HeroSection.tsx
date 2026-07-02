@@ -1,4 +1,4 @@
-import { cn } from "../../utils";
+import { cn } from "../../utils.tsx";
 import { useRef } from "react";
 import gsap from "gsap";
 import matrixShard from "../../assets/images/matrix-shard-landing.png";

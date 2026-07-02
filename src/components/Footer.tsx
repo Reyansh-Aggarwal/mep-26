@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router"
-import { cn } from "../utils"
+import { cn } from "../utils.tsx"
 
 export const Footer = () => {
     const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import gsap from "gsap";
-import { cn } from "../utils";
+import { cn } from "../utils.tsx";
 
 export const Preloader = () => {
   const [progress, setProgress] = useState(0);

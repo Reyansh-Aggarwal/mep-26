@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useEffect, useRef } from "react";
-import { cn, type Member } from "../../utils";
+import { cn, type Member } from "../../utils.tsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +20,7 @@ function Avatar({ image, name, size = "md", accent }: { image: string, name: str
                 size === "sm" ? "w-20 h-20" : size === "md" ? "w-36 h-36 md:w-44 md:h-44" : "w-44 h-44 md:w-56 md:h-56")}
         >
             {image ? (
-                <img src={image} alt={name} className="w-full h-full object-cover" />
+                <img src={image} alt={name} loading="lazy" className="w-full h-full object-cover" />
             ) : (
                 <div
                     className="w-full h-full flex items-center justify-center text-2xl font-bold tracking-wider"

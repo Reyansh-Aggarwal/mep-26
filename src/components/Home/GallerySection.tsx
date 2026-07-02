@@ -67,14 +67,14 @@ export const GallerySection = () => {
                         <div className="flex gap-6 px-3">
                             {images.map((img, idx) => (
                                 <div key={`1-${idx}`} className="relative group overflow-hidden rounded-2xl border border-white/10 w-[280px] md:w-[380px] h-[200px] md:h-[260px] transition-all duration-300 hover:border-yellow/50">
-                                    <img src={img} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt={`Gallery Image ${idx + 1}`} />
+                                    <img src={img} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt={`Gallery Image ${idx + 1}`} />
                                 </div>
                             ))}
                         </div>
                         <div className="flex gap-6 px-3">
                             {images.map((img, idx) => (
                                 <div key={`2-${idx}`} className="relative group overflow-hidden rounded-2xl border border-white/10 w-[280px] md:w-[380px] h-[200px] md:h-[260px] transition-all duration-300 hover:border-yellow/50">
-                                    <img src={img} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt={`Gallery Image ${idx + 1}`} />
+                                    <img src={img} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt={`Gallery Image ${idx + 1}`} />
                                 </div>
                             ))}
                         </div>
@@ -92,14 +92,14 @@ export const GallerySection = () => {
                         <div className="flex gap-6 px-3">
                             {images.map((img, idx) => (
                                 <div key={`rev-1-${idx}`} className="relative group overflow-hidden rounded-2xl border border-white/10 w-[280px] md:w-[380px] h-[200px] md:h-[260px] transition-all duration-300 hover:border-yellow/50">
-                                    <img src={img} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt={`Gallery Image ${idx + 1}`} />
+                                    <img src={img} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt={`Gallery Image ${idx + 1}`} />
                                 </div>
                             ))}
                         </div>
                         <div className="flex gap-6 px-3">
                             {images.map((img, idx) => (
                                 <div key={`rev-2-${idx}`} className="relative group overflow-hidden rounded-2xl border border-white/10 w-[280px] md:w-[380px] h-[200px] md:h-[260px] transition-all duration-300 hover:border-yellow/50">
-                                    <img src={img} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt={`Gallery Image ${idx + 1}`} />
+                                    <img src={img} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt={`Gallery Image ${idx + 1}`} />
                                 </div>
                             ))}
                         </div>

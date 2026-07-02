@@ -1,4 +1,4 @@
-import { cn } from "../../utils";
+import { cn } from "../../utils.tsx";
 import { clubData as clubs } from "../../data/clubs";
 import { navTo } from "../Navbar";
 import { ClubSection } from "../Team/ClubSection";

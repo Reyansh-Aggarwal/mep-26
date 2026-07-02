@@ -38,3 +38,18 @@ export interface Member {
     name: string;
     image: any
 }
+
+export const ExternalRedirect = ({ url }) => {
+
+    useEffect(() => {
+        window.history.replaceState(null, '', '/home');
+
+        window.location.href = url;
+    }, [url]);
+
+    return (
+        <div>
+            redirecting
+        </div>
+    );
+}

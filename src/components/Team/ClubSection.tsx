@@ -1,9 +1,9 @@
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { cn } from "../../utils";
+import { cn } from "../../utils.tsx";
 import { CoreMemberCard, ExecMemberCard } from "./MemberCards";
-import type { Club } from "../../utils";
+import type { Club } from "../../utils.tsx";
 gsap.registerPlugin(ScrollTrigger);
 
 export function ClubSection({ club, isLast, showExec = true }: { club: Club, isLast: boolean, showExec?: boolean }) {

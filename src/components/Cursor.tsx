@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { cn } from "../utils";
+import { cn } from "../utils.tsx";
 
 export const Cursor = () => {
     const cursorRef = useRef<HTMLDivElement>(null);

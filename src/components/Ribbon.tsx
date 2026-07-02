@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { cn } from "../utils";
+import { cn } from "../utils.tsx";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
