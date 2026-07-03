@@ -272,14 +272,14 @@ export const HeroSection = (() => {
                 <img src={ecommShard}
                     className={cn(
                         "absolute top-[40dvh] -translate-y-[20%] right-[-40px] w-[175px] ",
-                        "md:right-[-5dvw] md:w-[225px] md:top-[50dvh] ",
+                        "md:right-0 md:w-[225px] md:top-[50dvh] ",
                         "lg:top-1/2 lg:right-[10dvw] lg:w-[275px]",
                         "h-auto animate-shard-float-1")} />
                 <img src={psynapseShard}
                     className={cn(
                         "absolute bottom-[25dvh] left-[0dvh] w-[175px] ",
-                        "md:bottom-[0] md:left-0 md:w-[225px] ",
-                        "lg:bottom-[0dvh] lg:left-[10dvw] lg:w-[275px]",
+                        "md:bottom-[12dvh] md:left-0 md:w-[225px] ",
+                        "lg:bottom-[12dvh] lg:left-[10dvw] lg:w-[275px]",
                         "h-auto animate-shard-float-2")} />
             </div>
         </div>

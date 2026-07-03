@@ -3,8 +3,6 @@ import { cn, useInView } from "../../utils.tsx";
 import matrixLogo from "../../assets/logos/matrix_logo.png";
 import ecommLogo from "../../assets/logos/ecomm_logo.png";
 import psynapseLogo from "../../assets/logos/psynapse_logo.png";
-// Glass shards (one per event = 12 total).
-// TODO: replace placeholder shards with the real per-event shard art.
 import matrixShard1 from "../../assets/images/matrix-shard1.png";
 import matrixShard2 from "../../assets/images/matrix-shard2.png";
 import matrixShard3 from "../../assets/images/matrix-shard3.png";
@@ -50,9 +48,9 @@ const matrixEvents: Event[] = [
     },
     {
         id: 4,
-        name: "The Silverbot Circuit",
-        tagline: "Build. Drive. Conquer.",
-        description: "A robotics competition challenging teams to design and build a fully autonomous line-following robot to navigate a complex track with obstacles and turns for the fastest time"
+        name: "Goaltech",
+        tagline: "Engineer your own goal",
+        description: "A 1v1 Robo Soccer competition for classes 9–12. Teams of two design and pilot wired or Bluetooth-controlled robots to dribble and score goals in a thrilling 5-minute match."
     }
 ];
 const ecommEvents: Event[] = [
