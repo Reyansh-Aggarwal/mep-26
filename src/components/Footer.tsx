@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router"
 import { cn } from "../utils.tsx"
+import { socialData } from "../data/clubs.ts";
 
 export const Footer = () => {
     const navigate = useNavigate();
+    const clubs = ["matrix", "ecomm", "psynapse"];
 
     const navTo = (path: string) => {
         navigate("/" + path);
@@ -20,7 +22,7 @@ export const Footer = () => {
             {/* Top Divider */}
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
-            <div className="w-full max-w-7xl px-8 flex flex-col md:flex-row gap-12 md:gap-8 justify-between relative z-10">
+            <div className="w-full max-w-7xl px-8 flex flex-col md:flex-col gap-12 md:gap-8 justify-between relative z-10">
 
                 {/* Left: Branding */}
                 <div className="flex flex-col gap-4 basis-1/2">
@@ -31,7 +33,7 @@ export const Footer = () => {
                 </div>
 
                 {/* Right: Links Sections */}
-                <div className="flex flex-col md:flex-row gap-8 md:gap-16 basis-1/2 md:justify-around">
+                <div className="flex flex-col md:flex-col gap-8 md:gap-16 basis-1/2 md:justify-around">
                     {/* Navigation */}
                     <div className="flex flex-col gap-4">
                         <span className="font-secondary text-yellow text-sm md:text-base tracking-[0.25em] uppercase mb-2">
@@ -50,6 +52,10 @@ export const Footer = () => {
                                 <span className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 mr-2 text-yellow">→</span>
                                 Register
                             </span>
+                            <span onClick={() => navTo("members")} className="hover:text-yellow transition-colors duration-300 cursor-pointer flex items-center group">
+                                <span className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300 mr-2 text-yellow">→</span>
+                                Our Team
+                            </span>
                         </div>
                     </div>
 
@@ -58,16 +64,28 @@ export const Footer = () => {
                         <span className="font-secondary text-yellow text-sm md:text-base tracking-[0.25em] uppercase mb-2">
                             Need help?
                         </span>
-                        <div className="flex flex-col gap-3 font-secondary text-offwhite/80 tracking-widest text-sm">
-                            <a href="mailto:thematrixclan2026@gmail.com" className="hover:text-yellow transition-colors duration-300 cursor-pointer">
-                                thematrixclan2026@gmail.com
-                            </a>
-                            <a href="https://instagram.com/thematrixclan.msm" className="hover:text-yellow transition-colors duration-300 cursor-pointer">
-                                @thematrixclan.msm
-                            </a>
-                            <a href="tel:+919086222000" className="hover:text-yellow transition-colors duration-300 cursor-pointer">
-                                +919086222000
-                            </a>
+                        <div className="flex flex-row gap-3 font-secondary text-offwhite/80 tracking-widest text-sm">
+                            {clubs.map((club) => (
+                                <div key={club}
+                                    className="flex flex-row gap-2 justify-center align-center items-center">
+                                    <img src={socialData[club].logo}
+                                        className="w-auto h-24" />
+                                    <div
+                                        className="flex flex-col gap-1 justify-center">
+
+                                        <a href={`https://instagram.com/${socialData[club].insta}`} className="hover:text-yellow transition-colors duration-300 cursor-pointer">
+                                            @{socialData[club].insta}
+                                        </a>
+                                        <a href={`mailto:${socialData[club].email}`} className="hover:text-yellow transition-colors duration-300 cursor-pointer">
+                                            {socialData[club].email}
+                                        </a>
+                                        <a href={`tel:${socialData[club].phone}`} className="hover:text-yellow transition-colors duration-300 cursor-pointer">
+                                            {socialData[club].phone}
+                                        </a>
+                                    </div>
+                                    <div className="h-full w-[1px] bg-white" />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

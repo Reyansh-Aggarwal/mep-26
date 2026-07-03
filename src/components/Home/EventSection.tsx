@@ -1,20 +1,9 @@
 import { useRef, useEffect, type CSSProperties } from "react";
 import { cn, useInView } from "../../utils.tsx";
-import matrixLogo from "../../assets/logos/matrix_logo.png";
-import ecommLogo from "../../assets/logos/ecomm_logo.png";
-import psynapseLogo from "../../assets/logos/psynapse_logo.png";
-import matrixShard1 from "../../assets/images/matrix-shard1.png";
-import matrixShard2 from "../../assets/images/matrix-shard2.png";
-import matrixShard3 from "../../assets/images/matrix-shard3.png";
-import matrixShard4 from "../../assets/images/matrix-shard4.png";
-import ecommShard1 from "../../assets/images/ecomm-shard1.png";
-import ecommShard2 from "../../assets/images/ecomm-shard2.png";
-import ecommShard3 from "../../assets/images/ecomm-shard3.png";
-import ecommShard4 from "../../assets/images/ecomm-shard4.png";
-import psynapseShard1 from "../../assets/images/psynapse-shard1.png";
-import psynapseShard2 from "../../assets/images/psynapse-shard2.png";
-import psynapseShard3 from "../../assets/images/psynapse-shard3.png";
-import psynapseShard4 from "../../assets/images/psynapse-shard4.png";
+import { matrixLogo, ecommLogo, psynapseLogo } from "../../data/clubs.ts";
+import matrixShard from "../../assets/images/matrix-shard.png";
+import ecommShard from "../../assets/images/ecomm-shard.png";
+import psynapseShard from "../../assets/images/psynapse-shard.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -134,9 +123,9 @@ const clubConfig = {
     },
 } as const;
 
-const matrixShards = [matrixShard1, matrixShard2, matrixShard3, matrixShard4];
-const ecommShards = [ecommShard1, ecommShard2, ecommShard3, ecommShard4];
-const psynapseShards = [psynapseShard1, psynapseShard2, psynapseShard3, psynapseShard4];
+const matrixShards = [matrixShard];
+const ecommShards = [ecommShard];
+const psynapseShards = [psynapseShard];
 
 const acts = [
     { key: "matrix", config: clubConfig.matrix, logo: matrixLogo, events: matrixEvents, shards: matrixShards },
@@ -301,7 +290,7 @@ export const EventSection = () => {
                 />
 
                 {/* Logo header — one per club, cross-faded per act */}
-                <div id="header" className="absolute top-[10%] w-full h-40 flex items-center justify-center pointer-events-none">
+                <div id="header" className="absolute top-[10%] w-full h-40 flex items-center justify-center pointer-events-none z-30">
                     {acts.map((act, ai) => (
                         <img
                             key={act.key}

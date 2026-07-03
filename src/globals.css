@@ -32,7 +32,6 @@ body {
 }
 
 @theme {
-  /* For Tailwind v4.0+ */
   --font-secondary: 'Clash Grotesk', sans;
   --font-primary: 'Tomorrow', sans-serif;
   --color-black: #0D0F12;

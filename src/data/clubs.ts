@@ -21,6 +21,12 @@ import EcommExecUddeshya from "../assets/images/members/ecomm/execs/uddeshya.jpe
 import EcommExecIvanya from "../assets/images/members/ecomm/execs/ivanya.jpeg"
 import EcommExecShreyansh from "../assets/images/members/ecomm/execs/shreyansh.jpeg"
 import EcommExecSaira from "../assets/images/members/ecomm/execs/saira.jpeg"
+import matrixLogo from "../assets/logos/matrix_logo.png";
+import ecommLogo from "../assets/logos/ecomm_logo.png";
+import psynapseLogo from "../assets/logos/psynapse_logo.png";
+
+export { matrixLogo, ecommLogo, psynapseLogo };
+
 export const clubData = [
     {
         name: "Matrix",
@@ -88,3 +94,24 @@ export const clubData = [
         ]
     }
 ];
+
+export const socialData = {
+    matrix: {
+        logo: matrixLogo,
+        insta: "thematrixclan.msm",
+        phone: "+919086222000",
+        email: "thematrixclan2026@gmail.com"
+    },
+    ecomm: {
+        logo: ecommLogo,
+        insta: "theecommbuzz",
+        phone: "+919311286331",
+        email: "ecommbuzz2026@gmail.com"
+    },
+    psynapse: {
+        logo: psynapseLogo,
+        insta: "psynapse.msm",
+        phone: "+919311352507",
+        email: "psynapse.msm2026@gmail.com"
+    }
+}

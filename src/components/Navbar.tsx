@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import Lenis from "lenis";
 import { useLocation, useNavigate } from "react-router";
+import { Button } from "./Button.tsx";
 
 // A reusable crack SVG overlay tailored to scale nicely across text bounding boxes
 const GlassCrack = () => (
@@ -17,7 +18,7 @@ const GlassCrack = () => (
                M 50,50 L 55,52 L 75,45 L 88,60 L 100,55 
                M 50,50 L 45,46 L 25,42 L 12,55 L 0,50
                M 50,50 L 54,55 L 68,78 L 80,92"
-            stroke="#000000"
+            stroke="#0D0F12"
             strokeWidth="4"
             fill="none"
             strokeLinecap="round"
@@ -168,20 +169,7 @@ export const Navbar = () => {
             >
                 <div id="mobileBar" className="flex justify-around font-bold">
                     <div className="flex flex-row w-full items-center justify-around z-30 ">
-                        <div id="brochure" className="relative w-fit rounded-full">
-                            <div onClick={() => { handleTransitionNav("/brochure") }}
-                                className={cn(
-                                    "px-6 md:px-10 py-2.5 text-center md:flex hidden ",
-                                    "text-white/40 bg-blue-100/20 backdrop-blur-md",
-                                    "border border-white/20 rounded-full",
-                                    "font-secondary font-bold tracking-wider uppercase",
-                                    "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
-                                    "active:mt-1 active:shadow-none active:bg-black active:text-white"
-                                )}
-                            >
-                                VIEW BROCHURE
-                            </div>
-                        </div>
+                        <Button onclick={() => { handleTransitionNav("/brochure") }} text="VIEW BROCHURE" />
 
                         <div id="logo"
                             ref={logoRef}
@@ -198,20 +186,7 @@ export const Navbar = () => {
                             )} />
                         </div>
 
-                        <div id="register" className="relative w-fit">
-                            <div onClick={() => handleTransitionNav("/register")}
-                                className={cn(
-                                    "px-6 md:px-10 py-2.5 text-center md:flex hidden ",
-                                    "text-white/40 bg-blue-100/20 backdrop-blur-md",
-                                    "border border-white/20 rounded-full",
-                                    "font-secondary font-bold tracking-wider uppercase",
-                                    "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
-                                    "active:mt-1 active:shadow-none active:bg-black active:text-white"
-                                )}
-                            >
-                                REGISTER NOW
-                            </div>
-                        </div>
+                        <Button onclick={() => { handleTransitionNav("/register") }} text="REGISTER NOW" />
                     </div>
                 </div>
 
@@ -262,34 +237,8 @@ export const Navbar = () => {
                     </div>
 
                     <div className="flex flex-row justify-between w-full px-10 md:hidden text-lg">
-                        <div id="brochure" className="relative w-fit rounded-full">
-                            <div onClick={() => { handleTransitionNav("/brochure") }}
-                                className={cn(
-                                    "px-4 md:px-10 py-2.5 text-center w-fit ",
-                                    "text-white/40 bg-blue-100/20 backdrop-blur-md",
-                                    "border border-white/20 rounded-full",
-                                    "font-secondary font-bold tracking-wider uppercase",
-                                    "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
-                                    "active:translate-y-[4px] active:shadow-none active:bg-black active:text-white"
-                                )}
-                            >
-                                VIEW BROCHURE
-                            </div>
-                        </div>
-                        <div id="register" className="relative w-fit">
-                            <div onClick={() => handleTransitionNav("/register")}
-                                className={cn(
-                                    "px-4 md:px-10 py-2.5 text-center ",
-                                    "text-white/40 bg-blue-100/20 backdrop-blur-md",
-                                    "border border-white/20 rounded-full",
-                                    "font-secondary font-bold tracking-wider uppercase",
-                                    "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
-                                    "active:translate-y-[4px] active:shadow-none active:bg-black active:text-white"
-                                )}
-                            >
-                                REGISTER NOW
-                            </div>
-                        </div>
+                        <Button onclick={() => { handleTransitionNav("/brochure") }} text="VIEW BROCHURE" />
+                        <Button onclick={() => { handleTransitionNav("/register") }} text="REGISTER NOW" />
                     </div>
                 </div>
             </div>

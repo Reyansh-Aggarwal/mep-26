@@ -1,7 +1,7 @@
-import { cn } from "../../utils.tsx";
 import { clubData as clubs } from "../../data/clubs";
 import { navTo } from "../Navbar";
 import { ClubSection } from "../Team/ClubSection";
+import { Button } from "../Button.tsx";
 
 export const MembersSection = () => {
 
@@ -17,19 +17,7 @@ export const MembersSection = () => {
             </div>
 
             {/* View More Button */}
-            <div className="mt-24 relative z-10 flex flex-row gap-4">
-                <div onClick={() => navTo("members")}
-                    className={cn(
-                        "px-6 md:px-10 py-2.5 text-center",
-                        ` text-white/40  bg-blue-100/20 backdrop-blur-md`,
-                        ` border border-white/20 rounded-full`,
-                        "font-secondary font-bold tracking-wider uppercase",
-                        "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
-                        "active:mt-1 active:shadow-none active:bg-black active:text-white")
-                    }>
-                    MEET THE REST OF US
-                </div>
-            </div>
+            <Button onclick={() => { navTo("/members") }} text="MEET THE REST" />
         </div>
     );
 };
