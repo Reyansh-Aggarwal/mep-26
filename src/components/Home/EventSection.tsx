@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, type CSSProperties } from "react";
 import { cn, useInView } from "../../utils.tsx";
 import matrixLogo from "../../assets/logos/matrix_logo.png";
 import ecommLogo from "../../assets/logos/ecomm_logo.png";
@@ -14,8 +14,9 @@ import psynapseShardLanding from "../../assets/images/psynapse-shard-landing.png
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 interface Event {
     id: number,
@@ -146,7 +147,26 @@ const flatEvents = acts.flatMap((act, ai) =>
     act.events.map((event, ei) => ({ event, config: act.config, ai, ei, shard: act.shards[ei] }))
 );
 
-const floatClasses = ["animate-shard-float", "animate-shard-float-1", "animate-shard-float-2", "animate-shard-float-3"];
+// Club-tinted glow for the traveler — only the active club's img is visible,
+// so the tint transition rides the opacity cross-fade at each act boundary.
+const shardGlowStyle: Record<(typeof acts)[number]["key"], CSSProperties> = {
+    matrix: { filter: "drop-shadow(0 0 14px rgba(81,126,255,.55)) drop-shadow(0 0 30px rgba(81,126,255,.3))" },
+    ecomm: { filter: "drop-shadow(0 0 14px rgba(0,197,42,.55)) drop-shadow(0 0 30px rgba(0,197,42,.3))" },
+    psynapse: { filter: "drop-shadow(0 0 14px rgba(255,0,140,.55)) drop-shadow(0 0 30px rgba(255,0,140,.3))" },
+};
+
+// Traveler slot per beat: shard hugs the half opposite the text (isLeft = text left).
+// 75%/25% = center of the empty half (the half opposite the text, which spans 50%-100% or 0%-50%).
+const slotLeft = (i: number) => (i % 2 === 0 ? "75%" : "25%");
+const slotTop = (i: number) => (i % 2 === 0 ? "42%" : "58%");
+// 2D spin, decoupled from the left/right turns: a triangular ramp keyed by waypoint
+// index only, so it never reacts to a direction change. Peaks at the middle waypoint,
+// unwinds back to 0 by the last one.
+const SPIN_PER_BEAT = 20;
+const spinAt = (i: number, lastIndex: number) => {
+    const half = lastIndex / 2;
+    return SPIN_PER_BEAT * (half - Math.abs(i - half));
+};
 
 export const EventSection = () => {
     const { ref, isVisible } = useInView({ threshold: 0.01 });
@@ -154,6 +174,8 @@ export const EventSection = () => {
     const eventsRef = useRef<(HTMLDivElement | null)[]>([]);
     const logoRefs = useRef<(HTMLImageElement | null)[]>([]);
     const blobRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const travelerRef = useRef<HTMLDivElement>(null);
+    const travelerImgRefs = useRef<(HTMLImageElement | null)[]>([]);
 
     useEffect(() => {
         if (isVisible) {
@@ -191,6 +213,12 @@ export const EventSection = () => {
         });
         gsap.set(blobs, { backgroundColor: acts[0].config.blobColor });
 
+        // Traveler shard: start on beat 0's slot, showing only the matrix shard.
+        gsap.set(travelerRef.current, { left: slotLeft(0), top: slotTop(0), xPercent: -50, yPercent: -50, rotation: 0 });
+        const travelerImgs = travelerImgRefs.current.filter((el): el is HTMLImageElement => el !== null);
+        gsap.set(travelerImgs, { opacity: 0 });
+        gsap.set(travelerImgs[0], { opacity: 1 });
+
         const tl = gsap.timeline({
             scrollTrigger: {
                 id: "eventStage",
@@ -215,11 +243,22 @@ export const EventSection = () => {
             tl.to(cur, { yPercent: -120, opacity: 0, scale: 0.85, zIndex: 1, duration: 1, ease: "power2.inOut" })
                 .to(next, { yPercent: 0, opacity: 1, scale: 1, zIndex: 10, duration: 1, ease: "power2.inOut" }, "<");
 
+            // Straight slot-to-slot diagonal — left/top lerp linearly, no bow.
+            // Light ease rounds the turn at each slot instead of cornering hard.
+            tl.to(travelerRef.current, {
+                left: slotLeft(i + 1),
+                top: slotTop(i + 1),
+                rotation: spinAt(i + 1, events.length - 1),
+                duration: 1, ease: "power1.inOut",
+            }, "<");
+
             if (nextAct !== curAct) {
-                // Act transition: morph logos, tint stage, recolor ambient blobs.
+                // Act transition: morph logos, tint stage, recolor ambient blobs, swap traveler shard.
                 tl.to(logos[curAct], { opacity: 0, scale: 0.6, duration: 1, ease: "power2.inOut" }, "<")
                     .to(logos[nextAct], { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, "<")
-                    .to(blobs, { backgroundColor: acts[nextAct].config.blobColor, duration: 1, ease: "power2.inOut" }, "<");
+                    .to(blobs, { backgroundColor: acts[nextAct].config.blobColor, duration: 1, ease: "power2.inOut" }, "<")
+                    .to(travelerImgRefs.current[curAct], { opacity: 0, duration: 1, ease: "power2.inOut" }, "<")
+                    .to(travelerImgRefs.current[nextAct], { opacity: 1, duration: 1, ease: "power2.inOut" }, "<");
             }
         }
 
@@ -274,6 +313,23 @@ export const EventSection = () => {
 
                 {/* Event beats */}
                 <div className="relative w-full max-w-6xl h-[420px] px-12 lg:px-16">
+                    {/* Traveling glass shard — one per club, rides the stage as you scroll */}
+                    <div
+                        ref={travelerRef}
+                        className="absolute z-20 pointer-events-none w-[240px] lg:w-[300px] aspect-square"
+                    >
+                        {acts.map((act, ai) => (
+                            <img
+                                key={act.key}
+                                ref={(el) => { travelerImgRefs.current[ai] = el; }}
+                                src={act.shards[0]}
+                                alt=""
+                                style={shardGlowStyle[act.key]}
+                                className="absolute inset-0 w-full h-auto animate-shard-float"
+                            />
+                        ))}
+                    </div>
+
                     {flatEvents.map((fe, i) => {
                         const isLeft = i % 2 === 0;
                         return (
@@ -302,16 +358,8 @@ export const EventSection = () => {
                                         {fe.event.description}
                                     </p>
                                 </div>
-                                <div className="w-1/2 flex justify-center items-center">
-                                    <img
-                                        src={fe.shard}
-                                        alt=""
-                                        className={cn(
-                                            "w-[240px] lg:w-[300px] h-auto glass-shard-glow",
-                                            floatClasses[i % floatClasses.length]
-                                        )}
-                                    />
-                                </div>
+                                {/* Empty half — the traveling shard occupies this slot */}
+                                <div className="w-1/2" aria-hidden />
                             </div>
                         );
                     })}
