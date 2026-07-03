@@ -14,16 +14,19 @@ export const Ribbon = ({ content }: { content: string }) => {
     useGSAP(() => {
         if (!ribbonRef.current || !containerRef.current) return;
 
+        gsap.set(ribbonRef.current, {
+            color: "#ffffff10",
+        })
+
         gsap.to(ribbonRef.current, {
-            // Animate horizontally. Adjust the value based on how fast/far you want it to move.
-            // Using a negative value moves it right-to-left, positive moves it left-to-right.
+            color: "white",
             x: "-30%",
             ease: "none",
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: "top bottom", // Starts animating as soon as the ribbon enters the bottom of the viewport
-                end: "bottom top",   // Ends animating when the ribbon completely leaves the top
-                scrub: 0.5,          // Links animation progress smoothly to scroll velocity
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.5,
                 refreshPriority: 1,
             }
         });

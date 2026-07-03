@@ -261,7 +261,7 @@ export const Navbar = () => {
                         </span>
                     </div>
 
-                    <div className="flex flex-row justify-between w-full px-10 md:hidden text-xl">
+                    <div className="flex flex-row justify-between w-full px-10 md:hidden text-lg">
                         <div id="brochure" className="relative w-fit rounded-full">
                             <div onClick={() => { handleTransitionNav("/brochure") }}
                                 className={cn(
