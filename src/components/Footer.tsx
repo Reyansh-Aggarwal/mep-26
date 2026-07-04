@@ -17,8 +17,6 @@ export const Footer = () => {
                 "flex flex-col items-center justify-center pt-24 pb-12 z-10"
             )}>
 
-
-
             {/* Top Divider */}
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
