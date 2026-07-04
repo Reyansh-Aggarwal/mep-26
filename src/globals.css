@@ -90,7 +90,7 @@ body {
   }
 
   50% {
-    transform: translateY(-8px) rotate(5deg);
+    transform: translateY(-20px) rotate(5deg);
   }
 }
 

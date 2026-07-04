@@ -153,7 +153,7 @@ const slotTop = (i: number) => (i % 2 === 0 ? "42%" : "58%");
 // 2D spin, decoupled from the left/right turns: a triangular ramp keyed by waypoint
 // index only, so it never reacts to a direction change. Peaks at the middle waypoint,
 // unwinds back to 0 by the last one.
-const SPIN_PER_BEAT = 20;
+const SPIN_PER_BEAT = 30;
 const spinAt = (i: number, lastIndex: number) => {
     const half = lastIndex / 2;
     return SPIN_PER_BEAT * (half - Math.abs(i - half));
