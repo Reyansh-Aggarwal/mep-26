@@ -4,7 +4,7 @@ import { socialData } from "../data/clubs.ts";
 
 export const Footer = () => {
     const navigate = useNavigate();
-    const clubs = ["matrix", "ecomm", "psynapse"];
+    const clubs = ["matrix", "ecomm", "psynapse"] as const;
 
     const navTo = (path: string) => {
         navigate("/" + path);
