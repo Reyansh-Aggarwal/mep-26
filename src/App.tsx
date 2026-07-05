@@ -25,7 +25,7 @@ export default function App() {
           <Route path="brochure" element={<Brochure />} />
           <Route path="members" element={<MembersPage />} />
           <Route path="alumni" element={<Alumni />} />
-          <Route path="register" element={<ExternalRedirect url="https://forms.gle/v7qFynQGVTdzMSYJ8" />} />
+          <Route path="register" element={<ExternalRedirect url="https://prettyform.addxt.com/a/form/vf/1FAIpQLScY9AS4102YUC6AMyXR7HiuaxUSHpXgSTHP8Pi-gQb42RBOFw" />} />
         </Routes>
       </Suspense>
     </>

@@ -21,6 +21,15 @@ import EcommExecUddeshya from "../assets/images/members/ecomm/execs/uddeshya.jpe
 import EcommExecIvanya from "../assets/images/members/ecomm/execs/ivanya.jpeg"
 import EcommExecShreyansh from "../assets/images/members/ecomm/execs/shreyansh.jpeg"
 import EcommExecSaira from "../assets/images/members/ecomm/execs/saira.jpeg"
+import PsyExecYashika from "../assets/images/members/psynapse/execs/yashika.jpeg"
+import PsyExecVrinda from "../assets/images/members/psynapse/execs/vrinda.jpeg"
+import PsyExecAkshita from "../assets/images/members/psynapse/execs/akshita.jpeg"
+import PsyExecDiya from "../assets/images/members/psynapse/execs/diya.jpeg"
+import PsyExecAyanna from "../assets/images/members/psynapse/execs/ayanna.jpeg"
+import PsyExecEshita from "../assets/images/members/psynapse/execs/eshita.jpeg"
+import PsyExecAnika from "../assets/images/members/psynapse/execs/anika.jpeg"
+import PsyExecKhanak from "../assets/images/members/psynapse/execs/khanak.jpeg"
+
 import matrixLogo from "../assets/logos/matrix_logo.png";
 import ecommLogo from "../assets/logos/ecomm_logo.png";
 import psynapseLogo from "../assets/logos/psynapse_logo.png";
@@ -84,13 +93,14 @@ export const clubData = [
             { role: "Media Head", name: "Kyna Sooden", image: PsyMedia },
         ],
         executives: [
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
+            { name: "Vrinda Gulati", role: "executive", image: PsyExecVrinda },
+            { name: "Akshita Sharma", role: "executive", image: PsyExecAkshita },
+            { name: "Diya Pillai", role: "executive", image: PsyExecDiya },
+            { name: "Ayanna Gupta", role: "executive", image: PsyExecAyanna },
+            { name: "Yashika", role: "executive", image: PsyExecYashika },
+            { name: "Eshita", role: "executive", image: PsyExecEshita },
+            { name: "Anika Vishwakarma", role: "executive", image: PsyExecAnika },
+            { name: "Khanak Choudhary", role: "executive", image: PsyExecKhanak }
         ]
     }
 ];

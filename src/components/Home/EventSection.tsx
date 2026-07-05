@@ -64,9 +64,9 @@ const ecommEvents: Event[] = [
     },
     {
         id: 4,
-        name: "Pitch Perfect",
-        tagline: "Think Big. Pitch Bold. Create Impact.",
-        description: "An entrepreneurial challenge where teams present a three-minute innovative business pitch complete with a mandatory visual deck, followed by a mysterious and highly competitive surprise second round."
+        name: "Money Talks",
+        tagline: "Roundtable: Economics Beyond Numbers.",
+        description: "Master the art of high-stakes economic strategy. Analyze complex global industry challenges on the spot, deliver powerful impromptu solutions, and outwit rival stakeholders in an intense, fast-paced roundtable discussion."
     }
 ];
 const psynapseEvents: Event[] = [
