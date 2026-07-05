@@ -4,7 +4,7 @@ import { socialData } from "../data/clubs.ts";
 
 export const Footer = () => {
     const navigate = useNavigate();
-    const clubs = ["matrix", "ecomm", "psynapse"];
+    const clubs = ["matrix", "ecomm", "psynapse"] as const;
 
     const navTo = (path: string) => {
         navigate("/" + path);
@@ -16,8 +16,6 @@ export const Footer = () => {
                 "relative w-full bg-black overflow-hidden",
                 "flex flex-col items-center justify-center pt-24 pb-12 z-10"
             )}>
-
-
 
             {/* Top Divider */}
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent" />
