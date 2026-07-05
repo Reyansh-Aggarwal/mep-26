@@ -115,13 +115,13 @@ export const socialData = {
     ecomm: {
         logo: ecommLogo,
         insta: "theecommbuzz",
-        phone: "+919311286331",
+        phone: "+919311352507",
         email: "ecommbuzz2026@gmail.com"
     },
     psynapse: {
         logo: psynapseLogo,
         insta: "psynapse.msm",
-        phone: "+919311352507",
+        phone: "+919311286331",
         email: "psynapse.msm2026@gmail.com"
     }
 }

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router"
+import { Fragment } from "react"
 import { cn } from "../utils.tsx"
 import { socialData } from "../data/clubs.ts";
 
@@ -58,31 +59,35 @@ export const Footer = () => {
                     </div>
 
                     {/* Contact */}
-                    <div className="flex flex-col gap-4">
+                    <div className="w-full flex flex-col gap-4">
                         <span className="font-secondary text-yellow text-sm md:text-base tracking-[0.25em] uppercase mb-2">
                             Need help?
                         </span>
-                        <div className="flex flex-row gap-3 font-secondary text-offwhite/80 tracking-widest text-sm">
-                            {clubs.map((club) => (
-                                <div key={club}
-                                    className="flex flex-row gap-2 justify-center align-center items-center">
-                                    <img src={socialData[club].logo}
-                                        className="w-auto h-24" />
+                        <div className="w-full flex flex-col lg:flex-row gap-6 lg:gap-8 justify-between lg:items-center font-secondary text-offwhite/80 tracking-widest text-sm">
+                            {clubs.map((club, index) => (
+                                <Fragment key={club}>
                                     <div
-                                        className="flex flex-col gap-1 justify-center">
+                                        className="flex flex-row gap-2 lg:justify-center items-center">
+                                        <img src={socialData[club].logo}
+                                            className="w-auto h-24" />
+                                        <div
+                                            className="flex flex-col gap-3 justify-center">
 
-                                        <a href={`https://instagram.com/${socialData[club].insta}`} className="hover:text-yellow transition-colors duration-300 cursor-pointer">
-                                            @{socialData[club].insta}
-                                        </a>
-                                        <a href={`mailto:${socialData[club].email}`} className="hover:text-yellow transition-colors duration-300 cursor-pointer">
-                                            {socialData[club].email}
-                                        </a>
-                                        <a href={`tel:${socialData[club].phone}`} className="hover:text-yellow transition-colors duration-300 cursor-pointer">
-                                            {socialData[club].phone}
-                                        </a>
+                                            <a href={`https://instagram.com/${socialData[club].insta}`} className="hover:text-yellow transition-colors duration-300 cursor-pointer">
+                                                @{socialData[club].insta}
+                                            </a>
+                                            <a href={`mailto:${socialData[club].email}`} className="hover:text-yellow transition-colors duration-300 cursor-pointer">
+                                                {socialData[club].email}
+                                            </a>
+                                            <a href={`tel:${socialData[club].phone}`} className="hover:text-yellow transition-colors duration-300 cursor-pointer">
+                                                {socialData[club].phone}
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div className="h-full w-[1px] bg-white" />
-                                </div>
+                                    {index < clubs.length - 1 && (
+                                        <div className="h-[1px] w-full bg-white/10 lg:h-24 lg:w-[1px]" />
+                                    )}
+                                </Fragment>
                             ))}
                         </div>
                     </div>
@@ -91,7 +96,7 @@ export const Footer = () => {
 
             {/* Bottom Copyright */}
             <div className="w-full max-w-7xl px-8 mt-24 flex flex-col md:flex-row items-center justify-between font-secondary text-xs text-offwhite/30 uppercase tracking-widest relative z-10 border-t border-white/5 pt-8">
-                <span>2026 Matrix Clan.</span>
+                <span>2026 Matrix Clan</span>
             </div>
         </div>
     )
