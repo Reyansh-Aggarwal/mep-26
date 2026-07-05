@@ -178,7 +178,7 @@ export function ClubSection({ club, isLast, showExec = true }: { club: Club, isL
                 <div className={cn(
                     "transition-all duration-500 ease-in-out pb-6",
                     isExpanded
-                        ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 md:gap-8"
+                        ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 md:gap-20"
                         : "grid grid-cols-4 sm:grid-cols-8 gap-4 md:gap-6"
                 )}>
                     {club.executives.map((m, i) => (
