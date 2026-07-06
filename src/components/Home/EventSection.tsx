@@ -247,11 +247,15 @@ export const EventSection = () => {
 
             if (nextAct !== curAct) {
                 // Act transition: morph logos, tint stage, recolor ambient blobs, swap traveler shard.
+                // The outgoing shard fades out in the first half; the incoming shard fades in during
+                // the second half — so the next club's shard feels "pre-existing" when it takes control.
                 tl.to(logos[curAct], { opacity: 0, scale: 0.6, duration: 1, ease: "power2.inOut" }, "<")
                     .to(logos[nextAct], { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, "<")
                     .to(blobs, { backgroundColor: acts[nextAct].config.blobColor, duration: 1, ease: "power2.inOut" }, "<")
-                    .to(travelerImgRefs.current[curAct], { opacity: 0, duration: 1, ease: "power2.inOut" }, "<")
-                    .to(travelerImgRefs.current[nextAct], { opacity: 1, duration: 1, ease: "power2.inOut" }, "<");
+                    // Outgoing shard fades out in first half of the beat
+                    .to(travelerImgRefs.current[curAct], { opacity: 0, duration: 0.5, ease: "power2.in" }, "<")
+                    // Incoming shard fades in during second half, so it "arrives" already in place
+                    .to(travelerImgRefs.current[nextAct], { opacity: 1, duration: 0.5, ease: "power2.out" }, "<+=0.5");
             }
         }
 
