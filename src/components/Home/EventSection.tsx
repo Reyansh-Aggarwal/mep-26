@@ -8,6 +8,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
+import { Button } from "../Button.tsx";
+import { navTo } from "../Navbar.tsx";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -333,7 +335,7 @@ export const EventSection = () => {
                                 )}
                             >
                                 <div className={cn(
-                                    "flex flex-col gap-4 w-1/2",
+                                    "flex flex-col gap-4 w-2/3",
                                     isLeft ? "text-left items-start" : "text-right items-end"
                                 )}>
                                     <p
@@ -348,6 +350,7 @@ export const EventSection = () => {
                                     <p className="font-secondary text-offwhite/80 leading-relaxed text-lg">
                                         {fe.event.description}
                                     </p>
+                                    <Button text={"View Rules"} onclick={() => navTo("/brochure")} />
                                 </div>
                                 {/* Empty half — the traveling shard occupies this slot */}
                                 <div className="w-1/2" aria-hidden />
