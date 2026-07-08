@@ -107,7 +107,7 @@ export const Home = () => {
                     <Ribbon content={"EVENTS"} />
                     <EventSection />
                     <Ribbon content={"EVENTS"} />
-                    <div className="sticky top-0 z-0">
+                    <div className="relative z-10 md:sticky md:top-0 md:z-0">
                         <GallerySection />
                     </div>
                     <div className="relative z-10 bg-black">

@@ -422,12 +422,15 @@ const MobileAct = ({ act }: { act: (typeof acts)[number] }) => {
                             >
                                 {event.name}
                             </span>
-                            <span className="font-secondary text-sm text-offwhite/70 tracking-widest uppercase">
+                            <span className="font-secondary text-sm text-offwhite/60 tracking-widest uppercase">
                                 {event.tagline}
                             </span>
                             <p className="font-secondary text-offwhite/80 leading-relaxed text-base mt-2">
                                 {event.description}
                             </p>
+                            <div className="flex justify-center">
+                                <Button text="View Rules" onclick={() => navTo("/brochure", event.page)} />
+                            </div>
                         </div>
                     </div>
                 ))}

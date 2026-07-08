@@ -49,14 +49,7 @@ export const clubData = [
             { role: "Media Head", name: "Atharv Saxena", image: MatrixMedia },
         ],
         executives: [
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
-            { name: "hello", role: "executive", image: undefined },
+
         ]
     },
     {
