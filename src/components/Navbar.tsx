@@ -175,7 +175,7 @@ export const Navbar = () => {
             >
                 <div id="mobileBar" className="flex justify-around font-bold">
                     <div className="flex flex-row w-full items-center justify-around z-30 ">
-                        <Button onclick={() => { handleTransitionNav("/brochure") }} text="VIEW BROCHURE" />
+                        <Button onclick={() => { handleTransitionNav("/brochure") }} text="VIEW BROCHURE" visibility="md" />
 
                         <div id="logo"
                             ref={logoRef}
@@ -192,7 +192,7 @@ export const Navbar = () => {
                             )} />
                         </div>
 
-                        <Button onclick={() => { handleTransitionNav("/register") }} text="REGISTER NOW" />
+                        <Button onclick={() => { handleTransitionNav("/register") }} text="REGISTER NOW" visibility="md" />
                     </div>
                 </div>
 
@@ -242,9 +242,22 @@ export const Navbar = () => {
                         </span>
                     </div>
 
-                    <div className="flex flex-row justify-between w-full px-10 md:hidden text-lg">
-                        <Button onclick={() => { handleTransitionNav("/brochure") }} text="VIEW BROCHURE" />
-                        <Button onclick={() => { handleTransitionNav("/register") }} text="REGISTER NOW" />
+                    <div
+                        onClick={() => handleTransitionNav("/results")}
+                        className={cn(
+                            "w-full px-10 md:text-left group ",
+                            currLocation.pathname === "/results" && "text-white/50"
+                        )}
+                    >
+                        <span className="inline-grid relative items-center justify-center">
+                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-80">RESULTS</span>
+                            {currLocation.pathname === "/results" && <GlassCrack />}
+                        </span>
+                    </div>
+
+                    <div className="flex flex-row justify-between w-full px-10 md:hidden text-lg h-fit items-center">
+                        <Button onclick={() => { handleTransitionNav("/brochure") }} text="VIEW BROCHURE" visibility="sm" />
+                        <Button onclick={() => { handleTransitionNav("/register") }} text="REGISTER NOW" visibility="sm" />
                     </div>
                 </div>
             </div>
