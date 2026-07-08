@@ -77,18 +77,6 @@ export function ClubSection({ club, isLast, showExec = true }: { club: Club, isL
             ref={sectionRef}
             className="relative w-full max-w-7xl mx-auto px-4 md:px-12 pt-24 pb-8 select-none"
         >
-            {/* Ghost watermark name */}
-            <div
-                className={cn(
-                    "absolute -top-6 left-4 md:left-12 font-primary uppercase ",
-                    "select-none leading-none text-white/2",
-                    "[-webkit-text-stroke:2px_#ffffff06]")}
-                style={{
-                    fontSize: "clamp(80px, 18vw, 220px)",
-                }}
-            >
-                {club.name}
-            </div>
 
             {/* Club heading + rule */}
             <div className="flex items-center gap-6 mb-14 relative z-10">
