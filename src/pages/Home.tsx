@@ -85,10 +85,15 @@ export const Home = () => {
                     <Ribbon content={"EVENTS"} />
                     <EventSection />
                     <Ribbon content={"EVENTS"} />
-                    <GallerySection />
-                    <Ribbon content={"MEET OUR TEAM"} />
-                    <MembersSection />
-                    <Footer />
+                    {/* Gallery pins while the Members section slides up to cover it */}
+                    <div className="sticky top-0 z-0">
+                        <GallerySection />
+                    </div>
+                    <div className="relative z-10 bg-black">
+                        <Ribbon content={"MEET OUR TEAM"} />
+                        <MembersSection />
+                        <Footer />
+                    </div>
                 </div>
             </div>
         </ReactLenis>
