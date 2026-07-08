@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -15,6 +16,26 @@ export const Brochure = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [containerHeight, setContainerHeight] = useState(0);
     const [numPages, setNumPages] = useState(0);
+    const location = useLocation();
+
+    useEffect(() => {
+        if (numPages > 0) {
+            const params = new URLSearchParams(location.search);
+            const pageParam = params.get("page");
+            if (pageParam) {
+                const targetPage = parseInt(pageParam, 10);
+                if (!isNaN(targetPage) && targetPage > 0 && targetPage <= numPages) {
+                    setTimeout(() => {
+                        const pageEl = document.getElementById(`brochure-page-${targetPage}`);
+                        if (pageEl && containerRef.current) {
+                            // Using scrollIntoView
+                            pageEl.scrollIntoView({ behavior: "smooth" });
+                        }
+                    }, 100);
+                }
+            }
+        }
+    }, [numPages, location.search]);
 
     useEffect(() => {
         const container = containerRef.current;
@@ -87,11 +108,12 @@ export const Brochure = () => {
                     }
                 >
                     {Array.from({ length: numPages }, (_, index) => (
-                        <Page
-                            key={index}
-                            pageNumber={index + 1}
-                            height={pageHeight}
-                        />
+                        <div key={index} id={`brochure-page-${index + 1}`} className="w-full flex justify-center">
+                            <Page
+                                pageNumber={index + 1}
+                                height={pageHeight}
+                            />
+                        </div>
                     ))}
                 </Document>
             </div>

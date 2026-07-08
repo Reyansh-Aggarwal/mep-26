@@ -29,10 +29,14 @@ const GlassCrack = () => (
 
 let activeNavHandler: ((dest: string, skipTransition?: boolean) => void) | null = null;
 
-export function navTo(dest: string) {
-    console.log("navigated to", dest);
+export function navTo(dest: string, page?: number) {
+    let finalDest = dest.startsWith("/") ? dest : "/" + dest;
+    if (page !== undefined) {
+        finalDest += `?page=${page}`;
+    }
+    console.log("navigated to", finalDest);
     if (activeNavHandler) {
-        activeNavHandler(dest.startsWith("/") ? dest : "/" + dest);
+        activeNavHandler(finalDest);
     } else {
         console.warn("Navbar transition handler not initialized.");
     }
@@ -118,9 +122,11 @@ export const Navbar = () => {
             }
         };
         window.addEventListener("heroAnimationComplete", handleHeroComplete);
+        window.addEventListener("heroRevealNav", handleHeroComplete);
 
         return () => {
             window.removeEventListener("heroAnimationComplete", handleHeroComplete);
+            window.removeEventListener("heroRevealNav", handleHeroComplete);
         };
     }, [currLocation.pathname === "/home"]);
 

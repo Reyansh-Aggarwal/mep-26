@@ -19,14 +19,17 @@ export default function App() {
     <>
       <Preloader />
       <Suspense fallback={null}>
-        <Routes>
-          <Route index element={<Navigate to="/home" replace />} />
-          <Route path="home" element={<Home />} />
-          <Route path="brochure" element={<Brochure />} />
-          <Route path="members" element={<MembersPage />} />
-          <Route path="alumni" element={<Alumni />} />
-          <Route path="register" element={<ExternalRedirect url="https://prettyform.addxt.com/a/form/vf/1FAIpQLScY9AS4102YUC6AMyXR7HiuaxUSHpXgSTHP8Pi-gQb42RBOFw" />} />
-        </Routes>
+        {/* Keyed wrapper → each route mounts fresh and fades in */}
+        <div key={pathname} className="animate-fade-in">
+          <Routes>
+            <Route index element={<Navigate to="/home" replace />} />
+            <Route path="home" element={<Home />} />
+            <Route path="brochure" element={<Brochure />} />
+            <Route path="members" element={<MembersPage />} />
+            <Route path="alumni" element={<Alumni />} />
+            <Route path="register" element={<ExternalRedirect url="https://prettyform.addxt.com/a/form/vf/1FAIpQLScY9AS4102YUC6AMyXR7HiuaxUSHpXgSTHP8Pi-gQb42RBOFw" />} />
+          </Routes>
+        </div>
       </Suspense>
     </>
   )

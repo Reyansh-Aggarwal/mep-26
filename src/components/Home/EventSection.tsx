@@ -17,32 +17,37 @@ interface Event {
     id: number,
     name: string,
     tagline: string,
-    description: string
+    description: string,
+    page: number
 }
 const matrixEvents: Event[] = [
     {
         id: 1,
         name: "A/V Sync",
         tagline: "May the Frames Be With You.",
-        description: "An offline filmmaking competition for teams of five to produce a minimum three-minute video based on a randomly assigned aesthetic, incorporating a mandatory mid-event surprise element."
+        description: "An offline filmmaking competition for teams of five to produce a minimum three-minute video based on a randomly assigned aesthetic, incorporating a mandatory mid-event surprise element.",
+        page: 7
     },
     {
         id: 2,
         name: "Enigma",
         tagline: "The obvious is your greatest enemy.",
-        description: "An offline multi-format puzzle hunt featuring cryptic riddles, cyphers, and physical on-ground clues where teams compete to solve the maximum number of tasks within the time limit."
+        description: "An offline multi-format puzzle hunt featuring cryptic riddles, cyphers, and physical on-ground clues where teams compete to solve the maximum number of tasks within the time limit.",
+        page: 11
     },
     {
         id: 3,
         name: "Matrix Gauntlet",
         tagline: "paused my game to be here",
-        description: "A hybrid gaming competition where teams of two demonstrate versatility, strategy, and quick reflexes across multiple genres, ranging from FPS shooters to highly competitive mobile games."
+        description: "A hybrid gaming competition where teams of two demonstrate versatility, strategy, and quick reflexes across multiple genres, ranging from FPS shooters to highly competitive mobile games.",
+        page: 9
     },
     {
         id: 4,
         name: "Goaltech",
         tagline: "Engineer your own goal",
-        description: "A 1v1 Robo Soccer competition for classes 9–12. Teams of two design and pilot wired or Bluetooth-controlled robots to dribble and score goals in a thrilling 5-minute match."
+        description: "A 1v1 Robo Soccer competition for classes 9–12. Teams of two design and pilot wired or Bluetooth-controlled robots to dribble and score goals in a thrilling 5-minute match.",
+        page: 13
     }
 ];
 const ecommEvents: Event[] = [
@@ -50,25 +55,30 @@ const ecommEvents: Event[] = [
         id: 1,
         name: "Bidding Bankers",
         tagline: "With Great Capital comes Great Responsibility.",
-        description: "An offline mock stock event where teams of 2 compete in bidding, trading, and investing while managing market news, a banker system, networking all to maximise their portfolio."
+        description: "An offline mock stock event where teams of 2 compete in bidding, trading, and investing while managing market news, a banker system, networking all to maximise their portfolio.",
+        page: 15
     },
     {
         id: 2,
         name: "Pivot",
         tagline: "Market the Unexpected.",
-        description: "A two-round marketing challenge where teams of three build creative campaigns for contrasting target audiences, followed by an impromptu crisis-management round."
+        description: "A two-round marketing challenge where teams of three build creative campaigns for contrasting target audiences, followed by an impromptu crisis-management round.",
+        page: 17
+
     },
     {
         id: 3,
         name: "AdSnap",
         tagline: "Frame the Product. Capture the Market.",
-        description: "An offline advertising event where teams create a stop-motion video and an accompanying promotional poster using a provided prop, utilizing DSLR/mirrorless cameras to capture the marketing vision."
+        description: "An offline advertising event where teams create a stop-motion video and an accompanying promotional poster using a provided prop, utilizing DSLR/mirrorless cameras to capture the marketing vision.",
+        page: 19
     },
     {
         id: 4,
         name: "Money Talks",
         tagline: "Roundtable: Economics Beyond Numbers.",
-        description: "Master the art of high-stakes economic strategy. Analyze complex global industry challenges on the spot, deliver powerful impromptu solutions, and outwit rival stakeholders in an intense, fast-paced roundtable discussion."
+        description: "Master the art of high-stakes economic strategy. Analyze complex global industry challenges on the spot, deliver powerful impromptu solutions, and outwit rival stakeholders in an intense, fast-paced roundtable discussion.",
+        page: 21
     }
 ];
 const psynapseEvents: Event[] = [
@@ -76,25 +86,29 @@ const psynapseEvents: Event[] = [
         id: 1,
         name: "Psycon",
         tagline: "Walk a Mile in a Psychologist's Mind.",
-        description: "An individual, Comic-Con style monologue challenge where participants dress as famous psychologists and solve a live case study strictly from their assigned figure's theoretical perspective and background."
+        description: "An individual, Comic-Con style monologue challenge where participants dress as famous psychologists and solve a live case study strictly from their assigned figure's theoretical perspective and background.",
+        page: 25
     },
     {
         id: 2,
         name: "Psyposium",
         tagline: "The Mind in Conflict.",
-        description: "A psychology-themed debate event where three-member teams portray the internal conflict of Freud's personality theory—Id, Ego, and Superego—to argue complex, morally grey dilemmas and scenarios."
+        description: "A psychology-themed debate event where three-member teams portray the internal conflict of Freud's personality theory—Id, Ego, and Superego—to argue complex, morally grey dilemmas and scenarios.",
+        page: 29
     },
     {
         id: 3,
         name: "Psynapse",
         tagline: "When Voices Become Change.",
-        description: "A bilingual street play competition where teams of 7–10 members perform dramatic pieces addressing critical mental health issues, social stereotypes, and contemporary psychological challenges within seven minutes."
+        description: "A bilingual street play competition where teams of 7–10 members perform dramatic pieces addressing critical mental health issues, social stereotypes, and contemporary psychological challenges within seven minutes.",
+        page: 23
     },
     {
         id: 4,
         name: "Chroma Psychis",
         tagline: "If Words Could Paint the Color of the Soul.",
-        description: "A conceptual art and presentation competition where teams of two create an original artwork depicting a specific phobia while strictly adhering to rigorous, randomized design criteria."
+        description: "A conceptual art and presentation competition where teams of two create an original artwork depicting a specific phobia while strictly adhering to rigorous, randomized design criteria.",
+        page: 27
     }
 ];
 
@@ -354,7 +368,7 @@ export const EventSection = () => {
                                     <p className="font-secondary text-offwhite/80 leading-relaxed text-lg">
                                         {fe.event.description}
                                     </p>
-                                    <Button text={"View Rules"} onclick={() => navTo("/brochure")} />
+                                    <Button text={"View Rules"} onclick={() => navTo("/brochure", fe.event.page)} />
                                 </div>
                                 {/* Empty half — the traveling shard occupies this slot */}
                                 <div className="w-1/2" aria-hidden />

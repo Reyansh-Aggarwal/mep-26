@@ -145,9 +145,78 @@ export interface AlumniYear {
 }
 
 export const alumniData: AlumniYear[] = [
-    // ── 2025 (Batch of 2024-2025) ──────────────────────────────
+    // ── 2025 (Batch of 2025-2026) ──────────────────────────────
     {
         year: 2025,
+        clubs: [
+            {
+                name: "Matrix",
+                colorClass: "text-[var(--color-matrix)]",
+                accentVar: "var(--color-matrix)",
+                coreMembers: [
+                    { name: "Akshit Raj", role: "President" },
+                    { name: "Leon Saljo", role: "Vice-President" },
+                    { name: "Rishav Chahar", role: "General Secretary" },
+                    { name: "Dominic D'lima", role: "Joint Secretary" },
+                ],
+                executives: [
+                    { name: "Akshat Tiwari", role: "Executive" },
+                    { name: "Arnav Vishwakarma", role: "Executive" },
+                    { name: "Awismit Rana", role: "Executive" },
+                    { name: "Lucien Gorlier", role: "Executive" },
+                    { name: "Nixon Paul Khokhar", role: "Executive" },
+                    { name: "Rakshitesh Sinha", role: "Executive" },
+                    { name: "Samuel Joseph", role: "Executive" },
+                ],
+            },
+            {
+                name: "Ecommbuzz",
+                colorClass: "text-[var(--color-ecomm)]",
+                accentVar: "var(--color-ecomm)",
+                coreMembers: [
+                    { name: "Ansh Bajaj", role: "President" },
+                    { name: "Kanusha Bopanna", role: "Vice-President" },
+                    { name: "Neil Abraham", role: "General Secretary" },
+                    { name: "Bhavya Rajput", role: "Joint Secretary" },
+                ],
+                executives: [
+                    { name: "Radhika Bagga", role: "Executive" },
+                    { name: "Nealex Joseph", role: "Executive" },
+                    { name: "Arnav Tanwar", role: "Executive" },
+                    { name: "Krisha Kataria", role: "Executive" },
+                    { name: "Prisha Gupta", role: "Executive" },
+                    { name: "Nanki Billing", role: "Executive" },
+                    { name: "Mahindra Anand", role: "Executive" },
+                    { name: "Kushagra Gupta", role: "Executive" },
+                    { name: "Nikita", role: "Executive" },
+                    { name: "Jia Uppal", role: "Executive" },
+                    { name: "Shyla Nautiyal", role: "Executive" },
+                    { name: "Hardik Goel", role: "Executive" },
+                    { name: "Kapish Gahlot", role: "Executive" },
+
+                ],
+            },
+            {
+                name: "Psynapse",
+                colorClass: "text-[var(--color-psynapse)]",
+                accentVar: "var(--color-psynapse)",
+                coreMembers: [
+                    { name: "Renu Pawar", role: "President" },
+                    { name: "Doyel Bishnoi", role: "Vice-President" },
+                    { name: "Mannat", role: "General Secretary" },
+                    { name: "Alina Wilson", role: "Joint Secretary" },
+                ],
+                executives: [
+                    { name: "Mahi Agrawal", role: "Executive" },
+                    { name: "Abin Thomas", role: "Executive" },
+                    { name: "Ayanna Gupta", role: "Executive" }
+                ],
+            }
+        ],
+    },
+    // ── 2024 (Batch of 2024-2025) ──────────────────────────────
+    {
+        year: 2024,
         clubs: [
             {
                 name: "Matrix",
@@ -201,12 +270,28 @@ export const alumniData: AlumniYear[] = [
                     { name: "Kanusha Bopanna", role: "Executive" },
                 ],
             },
+            {
+                name: "Psynapse",
+                colorClass: "text-[var(--color-psynapse)]",
+                accentVar: "var(--color-psynapse)",
+                coreMembers: [
+                    { name: "Daksh", role: "President" },
+                    { name: "Dhriti Yadav", role: "Vice-President" },
+                    { name: "Roger Sebastian", role: "General Secretary" },
+                    { name: "Chinghoih Guite", role: "Joint Secretary" },
+                ],
+                executives: [
+                    { name: "Indira Shinde", role: "Executive" },
+                    { name: "Aarshiya Negi", role: "Executive" },
+                    { name: "Harshita Joshi", role: "Executive" }
+                ],
+            },
         ],
     },
 
-    // ── 2024 (Batch of 2023-2024) ──────────────────────────────
+    // ── 2023 (Batch of 2023-2024) ──────────────────────────────
     {
-        year: 2024,
+        year: 2023,
         clubs: [
             {
                 name: "Matrix",
@@ -263,9 +348,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2023 (Batch of 2022-2023) ──────────────────────────────
+    // ── 2022 (Batch of 2022-2023) ──────────────────────────────
     {
-        year: 2023,
+        year: 2022,
         clubs: [
             {
                 name: "Matrix",
@@ -311,9 +396,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2022 (Batch of 2021-2022) ──────────────────────────────
+    // ── 2021 (Batch of 2021-2022) ──────────────────────────────
     {
-        year: 2022,
+        year: 2021,
         clubs: [
             {
                 name: "Matrix",
@@ -370,9 +455,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2021 (Batch of 2020-2021) ──────────────────────────────
+    // ── 2020 (Batch of 2020-2021) ──────────────────────────────
     {
-        year: 2021,
+        year: 2020,
         clubs: [
             {
                 name: "Matrix",
@@ -428,9 +513,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2020 (Batch of 2019-2020) ──────────────────────────────
+    // ── 2019 (Batch of 2019-2020) ──────────────────────────────
     {
-        year: 2020,
+        year: 2019,
         clubs: [
             {
                 name: "Matrix",
@@ -484,9 +569,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2019 (Batch of 2018-2019) ──────────────────────────────
+    // ── 2018 (Batch of 2018-2019) ──────────────────────────────
     {
-        year: 2019,
+        year: 2018,
         clubs: [
             {
                 name: "Matrix",
@@ -539,9 +624,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2018 (Batch of 2017-2018) ──────────────────────────────
+    // ── 2017 (Batch of 2017-2018) ──────────────────────────────
     {
-        year: 2018,
+        year: 2017,
         clubs: [
             {
                 name: "Matrix",
@@ -597,9 +682,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2017 (Batch of 2016-2017) ──────────────────────────────
+    // ── 2016 (Batch of 2016-2017) ──────────────────────────────
     {
-        year: 2017,
+        year: 2016,
         clubs: [
             {
                 name: "Matrix",
@@ -654,9 +739,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2016 (Batch of 2015-2016) ──────────────────────────────
+    // ── 2015 (Batch of 2015-2016) ──────────────────────────────
     {
-        year: 2016,
+        year: 2015,
         clubs: [
             {
                 name: "Matrix",
@@ -711,9 +796,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2015 (Batch of 2014-2015) ──────────────────────────────
+    // ── 2014 (Batch of 2014-2015) ──────────────────────────────
     {
-        year: 2015,
+        year: 2014,
         clubs: [
             {
                 name: "Matrix",
@@ -743,9 +828,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2014 (Batch of 2013-2014) ──────────────────────────────
+    // ── 2013 (Batch of 2013-2014) ──────────────────────────────
     {
-        year: 2014,
+        year: 2013,
         clubs: [
             {
                 name: "Matrix",
@@ -796,9 +881,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2013 (Batch of 2012-2013) ──────────────────────────────
+    // ── 2012 (Batch of 2012-2013) ──────────────────────────────
     {
-        year: 2013,
+        year: 2012,
         clubs: [
             {
                 name: "Matrix",
@@ -846,9 +931,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2012 (Batch of 2011-2012) ──────────────────────────────
+    // ── 2011 (Batch of 2011-2012) ──────────────────────────────
     {
-        year: 2012,
+        year: 2011,
         clubs: [
             {
                 name: "Matrix",
@@ -895,9 +980,9 @@ export const alumniData: AlumniYear[] = [
         ],
     },
 
-    // ── 2011 (Batch of 2010-2011) ──────────────────────────────
+    // ── 2010 (Batch of 2010-2011) ──────────────────────────────
     {
-        year: 2011,
+        year: 2010,
         clubs: [
             {
                 name: "Matrix",

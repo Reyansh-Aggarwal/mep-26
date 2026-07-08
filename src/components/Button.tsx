@@ -15,6 +15,8 @@ export const Button = ({ text, onclick }: ButtonProps) => {
                     "border border-white/20 rounded-full",
                     "font-secondary font-bold tracking-wider uppercase",
                     "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
+                    "transition-all duration-200 cursor-none",
+                    "hover:text-white hover:border-yellow/40 hover:shadow-[0_4px_0_#726d84]",
                     "active:translate-y-1 active:shadow-none active:bg-black active:text-white"
                 )}
             >

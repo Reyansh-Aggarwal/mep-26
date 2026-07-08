@@ -17,6 +17,30 @@ export const HeroSection = (() => {
 
 
     useGSAP(() => {
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const matrixLettersRM = gsap.utils.toArray(".matrix-letter");
+        const ecommLettersRM = gsap.utils.toArray(".ecomm-letter");
+        const psynapseLettersRM = gsap.utils.toArray(".psynapse-letter");
+
+        // Reduced motion: skip the orchestrated intro, present the final state instantly.
+        if (prefersReducedMotion) {
+            gsap.set([matrixRef.current, ecommRef.current, psynapseRef.current], {
+                yPercent: 0,
+                opacity: 1,
+                backgroundColor: "rgba(0,0,0,0)",
+            });
+            gsap.set([matrixLettersRM, ecommLettersRM, psynapseLettersRM], {
+                rotation: 0,
+                color: "#fffdf5",
+                textShadow: "0px 0px 8px rgba(255, 255, 255, 0.56)",
+            });
+            gsap.set(matrixRef.current, { scale: 0.8, y: "15dvh" });
+            gsap.set(shardsRef.current, { visibility: "visible", opacity: 1, yPercent: 0 });
+            window.dispatchEvent(new CustomEvent("heroAnimationComplete"));
+            return;
+        }
+
         //SCROLL TIMELINE
         const scrollTl = gsap.timeline({ paused: true });
         scrollTl.to([shardsRef.current], {
@@ -155,11 +179,11 @@ export const HeroSection = (() => {
                 },
                 "<"
             )
-            .to([], { duration: 0.1 })
+            .to({}, { duration: 0.1 })
             .to(
                 [matrixRef.current, ecommRef.current, psynapseRef.current],
                 {
-                    backgroundColor: "",
+                    backgroundColor: "rgba(0,0,0,0)",
                     duration: 0.5,
                 }
             )
