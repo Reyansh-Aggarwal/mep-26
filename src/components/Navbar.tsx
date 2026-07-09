@@ -173,8 +173,9 @@ export const Navbar = () => {
                     currLocation.pathname === "/home" && " -translate-y-full"
                 )}
             >
-                <div id="mobileBar" className="flex-1 justify-center font-bold w-full items-center">
-                    {/* CHANGED: Added place-items-center to align all grid cells to their true center */}
+                {/* CHANGED: Added relative and z-30 here to ensure the mobile bar explicitly stacks above the fixed menu */}
+                <div id="mobileBar" className="relative flex-1 justify-center font-bold w-full items-center z-30">
+                    {/* CHANGED: Kept z-30 here, grid layout stays clean */}
                     <div className="grid grid-cols-3 w-full items-center place-items-center z-30">
 
                         {/* Left Grid Cell */}
@@ -185,13 +186,13 @@ export const Navbar = () => {
                             ref={logoRef}
                             onClick={() => setMenu(!menu)}
                             className={cn(
-                                "px-4 py-2 z-30 transition-all w-fit cursor-pointer", // Added cursor-pointer for UX
+                                "px-4 py-2 z-30 transition-all w-fit cursor-focus",
                                 "text-white rounded-2xl outline outline-offwhite",
                                 menu ? "translate-y-[4px] shadow-none bg-black" : "shadow-[0_4px_0_#aaaacc] bg-offwhite"
                             )}
                         >
                             <img src={mepLogo} alt="MEP" className={cn(
-                                "h-8 mx-auto", // Added mx-auto just to ensure the inner image balances
+                                "h-8 mx-auto",
                                 !menu ? "invert" : ""
                             )} />
                         </div>
@@ -201,11 +202,12 @@ export const Navbar = () => {
                     </div>
                 </div>
 
+                {/* Menu remains untouched at z-20, meaning mobileBar sits safely above it */}
                 <div ref={menuRef}
                     className={cn(
                         "fixed top-0 left-0 h-dvh w-dvw bg-black z-20",
                         "text-offwhite font-secondary font-bold text-6xl",
-                        "flex flex-col justify-around pt-26 md:px-32 text-center"
+                        "flex flex-col justify-around pt-16 md:px-32 text-center md:px-[20dvw]"
                     )}
                 >
                     <div
@@ -246,7 +248,9 @@ export const Navbar = () => {
                             {currLocation.pathname === "/alumni" && <GlassCrack />}
                         </span>
                     </div>
-
+                    <div className="cursor-focus p-4 bg-gray-800 rounded-lg">
+                        Hover me to see the cursor shrink!
+                    </div>
                     <div
                         onClick={() => handleTransitionNav("/results")}
                         className={cn(

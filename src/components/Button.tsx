@@ -8,10 +8,10 @@ interface ButtonProps {
 
 export const Button = ({ text, onclick, visibility }: ButtonProps) => {
     return (
-        <div id="brochure" className={cn("relative w-fit rounded-full")}>
+        <div id="brochure" className={cn("relative w-fit rounded-full group")}>
             <div onClick={() => { onclick() }}
                 className={cn(
-                    "px-6 md:px-10 py-2.5 text-center flex",
+                    "px-6 md:px-10 py-2.5 text-center flex cursor-focus",
                     "text-white/40 bg-blue-100/20 backdrop-blur-md",
                     "border border-white/20 rounded-full",
                     "font-secondary font-bold tracking-wider uppercase",
