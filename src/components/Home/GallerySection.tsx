@@ -124,10 +124,10 @@ export const GallerySection = () => {
                         <figure
                             key={idx}
                             className={cn(
-                                "gallery-frame group relative overflow-hidden border border-white/10",
-                                "transition-colors duration-500 hover:border-yellow/40",
-                                "w-full h-[56vw] md:h-[62vh] md:shrink-0",
-                                idx % 2 === 1 ? "md:mt-20" : "md:mb-20",
+                                "gallery-frame group relative overflow-hidden",
+                                "transition-colors duration-500 group-hover:border-yellow/40",
+                                "h-[56vw] md:h-[62vh] md:shrink-0 w-full",
+                                idx % 2 === 1 ? "md:mt-20 ml-[47dvw] md:ml-0" : "md:mb-20",
                                 idx === 8 ? "md:w-max" : "md:w-[44vh]"
                             )}
                         >
@@ -136,8 +136,9 @@ export const GallerySection = () => {
                                 loading="lazy"
                                 alt={`MEP moment ${idx + 1}`}
                                 className={cn(
-                                    "h-full object-cover transition-transform duration-500",
-                                    idx === 8 ? "md:w-auto w-full" : "w-full")}
+                                    "h-full object-cover transition-transform duration-500 w-full",
+                                    "border border-white/10",
+                                    idx === 8 ? "md:w-auto w-full" : "md:w-full w-1/2")}
                             />
                             <span className="absolute bottom-3 left-4 font-primary text-sm text-offwhite/70 tracking-widest">
                                 {String(idx + 1).padStart(2, "0")}

@@ -112,6 +112,16 @@ const psynapseEvents: Event[] = [
     }
 ];
 
+const quizEvent: Event[] = [
+    {
+        id: 1,
+        name: "Quizzardry",
+        tagline: "the thinker",
+        description: "An exhilarating inter-school quiz for classes 9-12 testing knowledge across general topics. Teams of three battle through pen-and-paper preliminaries to reach high-stakes, action-packed buzzer finals.",
+        page: 31
+    }
+];
+
 const clubConfig = {
     matrix: {
         color: "var(--color-matrix)",
@@ -137,6 +147,14 @@ const clubConfig = {
         glowShadow: "0 0 12px #ff000060",
         numColor: "text-psynapse/10",
     },
+    quiz: {
+        color: "var(--color-quiz)",
+        textClass: "text-quiz",
+        stageTint: "rgb(21, 28, 46)",
+        blobColor: "rgba(81, 126, 255, 0.08)",
+        glowShadow: "0 0 12px #0000ff60",
+        numColor: "text-matrix/10",
+    }
 } as const;
 
 const matrixShards = [matrixShard];
@@ -147,6 +165,7 @@ const acts = [
     { key: "matrix", config: clubConfig.matrix, logo: matrixLogo, events: matrixEvents, shards: matrixShards },
     { key: "ecomm", config: clubConfig.ecomm, logo: ecommLogo, events: ecommEvents, shards: ecommShards },
     { key: "psynapse", config: clubConfig.psynapse, logo: psynapseLogo, events: psynapseEvents, shards: psynapseShards },
+    { key: "quiz", config: clubConfig.quiz, logo: undefined, events: quizEvent, shards: psynapseShards },
 ] as const;
 
 // Flatten into a single ordered list of event "beats" across all three acts.
@@ -160,6 +179,7 @@ const shardGlowStyle: Record<(typeof acts)[number]["key"], CSSProperties> = {
     matrix: { filter: "drop-shadow(0 0 14px rgba(81,126,255,.55)) drop-shadow(0 0 30px rgba(81,126,255,.3))" },
     ecomm: { filter: "drop-shadow(0 0 14px rgba(0,197,42,.55)) drop-shadow(0 0 30px rgba(0,197,42,.3))" },
     psynapse: { filter: "drop-shadow(0 0 14px rgba(255,0,140,.55)) drop-shadow(0 0 30px rgba(255,0,140,.3))" },
+    quiz: { filter: "drop-shadow(0 0 14px rgba(81,126,255,.55)) drop-shadow(0 0 30px rgba(81,126,255,.3))" },
 };
 
 // Traveler slot per beat: shard hugs the half opposite the text (isLeft = text left).
@@ -260,21 +280,15 @@ export const EventSection = () => {
             }, "<");
 
             if (nextAct !== curAct) {
-                // Act transition: morph logos, tint stage, recolor ambient blobs, swap traveler shard.
-                // The outgoing shard fades out in the first half; the incoming shard fades in during
-                // the second half — so the next club's shard feels "pre-existing" when it takes control.
                 tl.to(logos[curAct], { opacity: 0, scale: 0.6, duration: 1, ease: "power2.inOut" }, "<")
                     .to(logos[nextAct], { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, "<")
                     .to(blobs, { backgroundColor: acts[nextAct].config.blobColor, duration: 1, ease: "power2.inOut" }, "<")
-                    // Outgoing shard fades out in first half of the beat
                     .to(travelerImgRefs.current[curAct], { opacity: 0, duration: 0.5, ease: "power2.in" }, "<")
                     // Incoming shard fades in during second half, so it "arrives" already in place
                     .to(travelerImgRefs.current[nextAct], { opacity: 1, duration: 0.5, ease: "power2.out" }, "<+=0.5");
             }
         }
 
-        // Double rAF: wait for the browser to commit the new pin-spacer layout
-        // before recalculating downstream trigger positions.
         let rafId1: number, rafId2: number;
         rafId1 = requestAnimationFrame(() => {
             rafId2 = requestAnimationFrame(() => {
@@ -317,7 +331,9 @@ export const EventSection = () => {
                             ref={(el) => { logoRefs.current[ai] = el; }}
                             src={act.logo}
                             alt={act.key}
-                            className="absolute h-28 lg:h-40 w-auto"
+                            className={cn(
+                                "absolute h-28 lg:h-40 w-auto",
+                                !act.logo && "hidden")}
                         />
                     ))}
                 </div>
@@ -396,7 +412,8 @@ const MobileAct = ({ act }: { act: (typeof acts)[number] }) => {
                 alt={act.key}
                 className={cn(
                     "h-20 w-auto transition-all duration-700",
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+                    !act.logo && "hidden"
                 )}
             />
             <div className="flex flex-col gap-6 w-full">
