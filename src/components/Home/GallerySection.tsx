@@ -7,6 +7,7 @@ import gallery5 from "../../assets/images/gallery/gallery-5.jpg";
 import gallery6 from "../../assets/images/gallery/gallery-6.jpg";
 import gallery7 from "../../assets/images/gallery/gallery-7.jpg";
 import gallery8 from "../../assets/images/gallery/gallery-8.jpg";
+import gallery9 from "../../assets/images/gallery/gallery-9.jpg";
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,6 +19,7 @@ export const GallerySection = () => {
     const images = [
         gallery1, gallery2, gallery3, gallery4,
         gallery5, gallery6, gallery7, gallery8,
+        gallery9
     ];
 
     const outerRef = useRef<HTMLDivElement>(null);
@@ -34,9 +36,7 @@ export const GallerySection = () => {
         const mm = gsap.matchMedia();
 
         // Desktop/tablet: sticky wrapper holds the viewport while vertical scroll
-        // through the (tall) outer section drives a horizontal pan of the track.
-        // Sticky is used instead of ScrollTrigger pin — it plays nicely with Lenis
-        // and the other pinned sections on the page.
+
         mm.add("(min-width: 768px)", () => {
             const getShift = () => Math.max(0, track.scrollWidth - sticky.clientWidth);
 
@@ -108,7 +108,7 @@ export const GallerySection = () => {
                 <div className="hidden md:block absolute bottom-8 left-12 right-32 h-px bg-white/10 z-30">
                     <div
                         ref={progressRef}
-                        className="h-full w-full origin-left bg-gradient-to-r from-white/80 to-white/10 scale-x-0"
+                        className="h-full w-full origin-left bg-gradient-to-r from-yellow to-yellow/20 scale-x-0"
                     />
                 </div>
 
@@ -126,15 +126,18 @@ export const GallerySection = () => {
                             className={cn(
                                 "gallery-frame group relative overflow-hidden border border-white/10",
                                 "transition-colors duration-500 hover:border-yellow/40",
-                                "w-full h-[56vw] md:h-[62vh] md:w-[44vh] md:shrink-0",
-                                idx % 2 === 1 ? "md:mt-20" : "md:mb-20"
+                                "w-full h-[56vw] md:h-[62vh] md:shrink-0",
+                                idx % 2 === 1 ? "md:mt-20" : "md:mb-20",
+                                idx === 8 ? "w-max" : "md:w-[44vh]"
                             )}
                         >
                             <img
                                 src={img}
                                 loading="lazy"
                                 alt={`MEP moment ${idx + 1}`}
-                                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                className={cn(
+                                    "h-full object-cover transition-transform duration-500",
+                                    idx === 8 ? "w-auto" : "w-full")}
                             />
                             <span className="absolute bottom-3 left-4 font-primary text-sm text-offwhite/70 tracking-widest">
                                 {String(idx + 1).padStart(2, "0")}
