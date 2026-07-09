@@ -13,6 +13,7 @@ import PsyVP from "../assets/images/members/psynapse/vp.jpeg"
 import PsyGen from "../assets/images/members/psynapse/gen.jpeg"
 import PsyJoint from "../assets/images/members/psynapse/joint.jpeg"
 import PsyMedia from "../assets/images/members/psynapse/media.jpeg"
+import MatrixExecSaksham from "../assets/images/members/matrix/execs/saksham.jpg"
 import EcommExecJamwal from "../assets/images/members/ecomm/execs/jamwal.jpeg"
 import EcommExecSaachi from "../assets/images/members/ecomm/execs/saachi.jpeg"
 import EcommExecAvreen from "../assets/images/members/ecomm/execs/avreen.jpeg"
@@ -49,7 +50,9 @@ export const clubData = [
             { role: "Media Head", name: "Atharv Saxena", image: MatrixMedia },
         ],
         executives: [
-
+            { role: "Executive", name: "Saksham Sharma", image: MatrixExecSaksham },
+            { role: "Executive", name: "Enoch Jom Puthenpura" },
+            { role: "Executive", name: "Priydarshini" }
         ]
     },
     {

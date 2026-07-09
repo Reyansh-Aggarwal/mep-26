@@ -173,25 +173,30 @@ export const Navbar = () => {
                     currLocation.pathname === "/home" && " -translate-y-full"
                 )}
             >
-                <div id="mobileBar" className="flex justify-around font-bold">
-                    <div className="flex flex-row w-full items-center justify-around z-30 ">
+                <div id="mobileBar" className="flex-1 justify-center font-bold w-full items-center">
+                    {/* CHANGED: Added place-items-center to align all grid cells to their true center */}
+                    <div className="grid grid-cols-3 w-full items-center place-items-center z-30">
+
+                        {/* Left Grid Cell */}
                         <Button onclick={() => { handleTransitionNav("/brochure") }} text="VIEW BROCHURE" visibility="md" />
 
+                        {/* Center Grid Cell */}
                         <div id="logo"
                             ref={logoRef}
                             onClick={() => setMenu(!menu)}
                             className={cn(
-                                "px-4 py-2 z-30 transition-all ",
+                                "px-4 py-2 z-30 transition-all w-fit cursor-pointer", // Added cursor-pointer for UX
                                 "text-white rounded-2xl outline outline-offwhite",
                                 menu ? "translate-y-[4px] shadow-none bg-black" : "shadow-[0_4px_0_#aaaacc] bg-offwhite"
                             )}
                         >
                             <img src={mepLogo} alt="MEP" className={cn(
-                                "h-8",
+                                "h-8 mx-auto", // Added mx-auto just to ensure the inner image balances
                                 !menu ? "invert" : ""
                             )} />
                         </div>
 
+                        {/* Right Grid Cell */}
                         <Button onclick={() => { handleTransitionNav("/register") }} text="REGISTER NOW" visibility="md" />
                     </div>
                 </div>

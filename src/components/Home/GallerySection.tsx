@@ -128,7 +128,7 @@ export const GallerySection = () => {
                                 "transition-colors duration-500 hover:border-yellow/40",
                                 "w-full h-[56vw] md:h-[62vh] md:shrink-0",
                                 idx % 2 === 1 ? "md:mt-20" : "md:mb-20",
-                                idx === 8 ? "w-max" : "md:w-[44vh]"
+                                idx === 8 ? "md:w-max" : "md:w-[44vh]"
                             )}
                         >
                             <img
@@ -137,7 +137,7 @@ export const GallerySection = () => {
                                 alt={`MEP moment ${idx + 1}`}
                                 className={cn(
                                     "h-full object-cover transition-transform duration-500",
-                                    idx === 8 ? "w-auto" : "w-full")}
+                                    idx === 8 ? "md:w-auto w-full" : "w-full")}
                             />
                             <span className="absolute bottom-3 left-4 font-primary text-sm text-offwhite/70 tracking-widest">
                                 {String(idx + 1).padStart(2, "0")}

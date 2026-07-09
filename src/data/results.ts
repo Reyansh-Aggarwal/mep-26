@@ -13,6 +13,7 @@ export type Award = {
 
 export type ResultEvent = {
     name: string;
+    colorClass: string;
     awards: Award[];
 };
 
@@ -27,6 +28,7 @@ export const resultsData: YearResult[] = [
         events: [
             {
                 name: "Xero Day",
+                colorClass: "text-[var(--color-matrix)]",
                 awards: [
                     { title: "Best Coder", recipient: "Army Public School, D.K", rank: 1 },
                     { title: "2nd Best Coder", recipient: "St. Xavier's", rank: 2 },
@@ -34,6 +36,7 @@ export const resultsData: YearResult[] = [
             },
             {
                 name: "Tactus Gramen",
+                colorClass: "text-[var(--color-matrix)]",
                 awards: [
                     { title: "Best Gamer", recipient: "St. Columba's School", rank: 1 },
                     { title: "2nd Best Gamer", recipient: "St. Xavier's Sr. Secondary School", rank: 2 },
@@ -41,6 +44,7 @@ export const resultsData: YearResult[] = [
             },
             {
                 name: "A/V Sync",
+                colorClass: "text-[var(--color-matrix)]",
                 awards: [
                     { title: "Best Movie", recipient: "Army Public School, D.K", rank: 1 },
                     { title: "2nd Best Movie", recipient: "Loreto Convent", rank: 2 },
@@ -50,6 +54,7 @@ export const resultsData: YearResult[] = [
             },
             {
                 name: "Techtures",
+                colorClass: "text-[var(--color-matrix)]",
                 awards: [
                     { title: "1st", recipient: "Delhi Public School, RKP", rank: 1 },
                     { title: "2nd", recipient: "Air Force Golden Jubilee Institute", rank: 2 },
@@ -57,6 +62,7 @@ export const resultsData: YearResult[] = [
             },
             {
                 name: "Project R",
+                colorClass: "text-[var(--color-matrix)]",
                 awards: [
                     { title: "1st", recipient: "Air Force Bal Bharti", rank: 1 },
                     { title: "2nd", recipient: "Delhi Public School, RKP", rank: 2 },
@@ -64,6 +70,7 @@ export const resultsData: YearResult[] = [
             },
             {
                 name: "Mindcraft",
+                colorClass: "text-[var(--color-matrix)]",
                 awards: [
                     { title: "1st", recipient: "Air Force Bal Bharti", rank: 1 },
                     { title: "2nd", recipient: "Air Force Golden Jubilee", rank: 2 },
@@ -71,18 +78,21 @@ export const resultsData: YearResult[] = [
             },
             {
                 name: "Soundwave",
+                colorClass: "text-[var(--color-matrix)]",
                 awards: [
                     { title: "1st", recipient: "Delhi Public School, RKP", rank: 1 },
                 ],
             },
             {
                 name: "Brand Ad",
+                colorClass: "text-[var(--color-ecomm)]",
                 awards: [
                     { title: "Best Advertisement", recipient: "Mater Dei School", rank: 1 },
                 ],
             },
             {
                 name: "Symposium",
+                colorClass: "text-[var(--color-ecomm)]",
                 awards: [
                     { title: "Best Team", recipient: "Tagore International School", rank: 1 },
                     { title: "Best Speaker", recipient: "Mater Dei School", rank: 0 },
@@ -92,6 +102,7 @@ export const resultsData: YearResult[] = [
             },
             {
                 name: "Bidding Bankers",
+                colorClass: "text-[var(--color-ecomm)]",
                 awards: [
                     { title: "Best Bid", recipient: "Tagore International School, Vasant Vihar", rank: 1 },
                     { title: "Best Venture Capitalist", recipient: "Air Force Bal Bharti School", rank: 0 },
@@ -99,6 +110,7 @@ export const resultsData: YearResult[] = [
             },
             {
                 name: "Pitch Perfect",
+                colorClass: "text-[var(--color-ecomm)]",
                 awards: [
                     { title: "Best Pitch", recipient: "Air Force Bal Bharti School", rank: 1 },
                     { title: "2nd Best Pitch", recipient: "Convent of Jesus and Mary", rank: 2 },
@@ -106,6 +118,7 @@ export const resultsData: YearResult[] = [
             },
             {
                 name: "Diorama",
+                colorClass: "text-[var(--color-ecomm)]",
                 awards: [
                     { title: "Best Poster", recipient: "Delhi Public School, RKP", rank: 1 },
                     { title: "Best Photography", recipient: "Convent of Jesus and Mary", rank: 0 },
@@ -113,6 +126,7 @@ export const resultsData: YearResult[] = [
             },
             {
                 name: "Quizzardry",
+                colorClass: "text-[var(--color-quiz)]",
                 awards: [
                     { title: "1st position", recipient: "Delhi Public School, RKP", rank: 1 },
                     { title: "2nd position", recipient: "Loreto Convent", rank: 2 },
@@ -120,6 +134,7 @@ export const resultsData: YearResult[] = [
             },
             {
                 name: "Psynapse (Stage Play)",
+                colorClass: "text-[var(--color-psynapse)]",
                 awards: [
                     { title: "1st position", recipient: "Loreto Convent", rank: 1 },
                     { title: "2nd position", recipient: "Mater Dei", rank: 2 },

@@ -34,7 +34,8 @@ function AwardRow({ award }: { award: Award }) {
             />
             <div className="flex flex-1 flex-col gap-0.5 md:flex-row md:items-baseline md:justify-between md:gap-6">
                 <p
-                    className="font-secondary text-[0.7rem] uppercase tracking-[0.28em] shrink-0"
+                    className={cn(
+                        "font-secondary text-[0.7rem] uppercase tracking-[0.28em] shrink-0")}
                     style={{ color: medal.ring }}
                 >
                     {award.title}
@@ -95,16 +96,16 @@ function EventBlock({ event, index }: { event: ResultEvent; index: number }) {
 
     return (
         <div ref={ref} className="relative pl-14 md:pl-20 pb-14">
-            {/* node on the spine */}
             <div className="event-node absolute left-0 top-1 flex h-11 w-11 md:h-12 md:w-12 -translate-x-1/2 items-center justify-center rounded-full border border-white/10 bg-[#0d0d0d]">
                 <span className="font-primary text-sm md:text-base text-yellow tracking-wide">
                     {String(index + 1).padStart(2, "0")}
                 </span>
             </div>
 
-            {/* event title */}
             <div className="event-head mb-3 opacity-0">
-                <h3 className="font-primary text-2xl md:text-4xl uppercase tracking-wide text-offwhite">
+                <h3 className={cn(
+                    "font-primary text-2xl md:text-4xl uppercase tracking-wide",
+                    event.colorClass)}>
                     {event.name}
                 </h3>
                 <div className="mt-3 h-px w-full bg-gradient-to-r from-white/12 to-transparent" />

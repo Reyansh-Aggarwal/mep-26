@@ -404,7 +404,7 @@ const MobileAct = ({ act }: { act: (typeof acts)[number] }) => {
                     <div
                         key={event.id}
                         className={cn(
-                            "relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-sm p-6 flex flex-col gap-2 transition-all duration-700",
+                            "relative overflow-hidden rounded-2xl border border-white/5 bg-white/1 backdrop-blur-sm p-6 flex flex-col gap-2 transition-all duration-700",
                             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                         )}
                         style={{ transitionDelay: isVisible ? `${ei * 100}ms` : "0ms" }}
@@ -415,7 +415,7 @@ const MobileAct = ({ act }: { act: (typeof acts)[number] }) => {
                         )}>
                             {String(event.id).padStart(2, "0")}
                         </span>
-                        <div className="relative z-10 flex flex-col gap-2">
+                        <div className="relative z-10 flex flex-col gap-2 items-center">
                             <span
                                 className={cn("font-primary text-4xl", act.config.textClass)}
                                 style={{ textShadow: act.config.glowShadow }}
@@ -425,7 +425,7 @@ const MobileAct = ({ act }: { act: (typeof acts)[number] }) => {
                             <span className="font-secondary text-sm text-offwhite/60 tracking-widest uppercase">
                                 {event.tagline}
                             </span>
-                            <p className="font-secondary text-offwhite/80 leading-relaxed text-base mt-2">
+                            <p className="font-secondary text-offwhite/80 leading-relaxed text-base my-2 w-2/3 text-center">
                                 {event.description}
                             </p>
                             <div className="flex justify-center">

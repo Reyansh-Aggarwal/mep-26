@@ -76,7 +76,10 @@ export function CoreMemberCard({ member, accent, colorClass, index }: { member: 
 
             </div>
             <p
-                className="font-secondary font-bold text-xl text-offwhite tracking-wide uppercase text-center group-hover:text-yellow transition-colors duration-300"
+                className={cn(
+                    "font-secondary font-bold text-xl text-offwhite tracking-wide uppercase text-center group-hover:text-yellow transition-colors duration-300",
+                    member.name === "Atharv Sharma" && "")}
+
             >
                 {member.name}
             </p>

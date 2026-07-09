@@ -292,7 +292,7 @@ export const Alumni = () => {
 
             {/* Year rail — sticky horizontal timeline */}
             <div className="alumni-year-rail opacity-0 sticky top-0 z-10 bg-[#0a0a0a]/80 backdrop-blur-md border-y border-white/[0.05]">
-                <div className="w-full mx-auto flex gap-1 justify-center overflow-x-auto py-3 px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                <div className="w-full mx-auto flex flex-wrap gap-1 justify-center overflow-x-auto py-3 px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     {alumniData.map((yearData) => (
                         <YearPip
                             key={yearData.year}
