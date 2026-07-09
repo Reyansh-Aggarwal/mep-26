@@ -5,7 +5,7 @@ import { cn, type Member } from "../../utils.tsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Avatar({ image, name, size = "md", accent }: { image: string, name: string, size: string, accent: string }) {
+export function Avatar({ image, name, size = "md", accent }: { image: string, name: string, size?: string, accent: string }) {
     const initials = name
         .split(" ")
         .map((n) => n[0])
@@ -36,7 +36,7 @@ function Avatar({ image, name, size = "md", accent }: { image: string, name: str
     );
 }
 
-export function CoreMemberCard({ member, accent, colorClass, index }: { member: Member, accent: string, colorClass: string, index: number }) {
+export function CoreMemberCard({ member, accent, colorClass, index, onClick }: { member: Member, accent: string, colorClass: string, index: number, onClick?: () => void }) {
     const cardRef = useRef(null);
 
     useEffect(() => {
@@ -63,8 +63,9 @@ export function CoreMemberCard({ member, accent, colorClass, index }: { member: 
     return (
         <div
             ref={cardRef}
+            onClick={onClick}
             className={cn(
-                "group flex flex-col items-center gap-4 opacity-0 mb-8",
+                "group flex flex-col items-center gap-4 opacity-0 mb-8 cursor-focus",
                 member.role === "President" ? "basis-full md:basis-1/2" : member.role === "Vice-President" ? "basis-1/2 md:basis-1/2" : "basis-1/2 md:basis-1/3")}
         >
             <div className="relative">
@@ -90,7 +91,7 @@ export function CoreMemberCard({ member, accent, colorClass, index }: { member: 
     );
 }
 
-export function ExecMemberCard({ member, accent, index, isExpanded }: { member: Member, accent: string, index: number, isExpanded: boolean }) {
+export function ExecMemberCard({ member, accent, index, isExpanded, onClick }: { member: Member, accent: string, index: number, isExpanded: boolean, onClick?: () => void }) {
     const cardRef = useRef(null);
 
     useEffect(() => {
@@ -117,7 +118,8 @@ export function ExecMemberCard({ member, accent, index, isExpanded }: { member: 
     return (
         <div
             ref={cardRef}
-            className="group flex flex-col items-center gap-3 transition-all duration-500 ease-out opacity-0"
+            onClick={onClick}
+            className="group flex flex-col items-center gap-3 transition-all duration-500 ease-out opacity-0 cursor-focus"
         >
             <div className="relative">
                 {isExpanded && (

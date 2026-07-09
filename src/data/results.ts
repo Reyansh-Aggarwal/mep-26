@@ -125,14 +125,6 @@ export const resultsData: YearResult[] = [
                 ],
             },
             {
-                name: "Quizzardry",
-                colorClass: "text-[var(--color-quiz)]",
-                awards: [
-                    { title: "1st position", recipient: "Delhi Public School, RKP", rank: 1 },
-                    { title: "2nd position", recipient: "Loreto Convent", rank: 2 },
-                ],
-            },
-            {
                 name: "Psynapse (Stage Play)",
                 colorClass: "text-[var(--color-psynapse)]",
                 awards: [
@@ -140,6 +132,15 @@ export const resultsData: YearResult[] = [
                     { title: "2nd position", recipient: "Mater Dei", rank: 2 },
                 ],
             },
+            {
+                name: "Quizzardry",
+                colorClass: "text-[var(--color-quiz)]",
+                awards: [
+                    { title: "1st position", recipient: "Delhi Public School, RKP", rank: 1 },
+                    { title: "2nd position", recipient: "Loreto Convent", rank: 2 },
+                ],
+            },
+
         ],
     },
 ];

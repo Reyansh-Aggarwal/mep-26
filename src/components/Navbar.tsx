@@ -213,12 +213,12 @@ export const Navbar = () => {
                     <div
                         onClick={() => handleTransitionNav("/home", true)}
                         className={cn(
-                            "w-full px-10 md:text-right group ",
+                            "w-full px-10 md:text-right group cursor-focus",
                             currLocation.pathname === "/home" && "text-white/50"
                         )}
                     >
                         <span className="inline-grid relative items-center justify-center">
-                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-80">MEP'26</span>
+                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-60">MEP'26</span>
                             {currLocation.pathname === "/home" && <GlassCrack />}
                         </span>
                     </div>
@@ -226,12 +226,12 @@ export const Navbar = () => {
                     <div
                         onClick={() => handleTransitionNav("/members")}
                         className={cn(
-                            "w-full px-10 md:text-left group ",
+                            "w-full px-10 md:text-left group cursor-focus",
                             currLocation.pathname === "/members" && "text-white/50"
                         )}
                     >
                         <span className="inline-grid relative items-center justify-center">
-                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-80 ">OUR TEAM</span>
+                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-60 ">OUR TEAM</span>
                             {currLocation.pathname === "/members" && <GlassCrack />}
                         </span>
                     </div>
@@ -239,27 +239,24 @@ export const Navbar = () => {
                     <div
                         onClick={() => handleTransitionNav("/alumni")}
                         className={cn(
-                            "w-full px-10 md:text-right group ",
+                            "w-full px-10 md:text-right group cursor-focus",
                             currLocation.pathname === "/alumni" && "text-white/50"
                         )}
                     >
                         <span className="inline-grid relative items-center justify-center">
-                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-80">ALUMNI</span>
+                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-60">ALUMNI</span>
                             {currLocation.pathname === "/alumni" && <GlassCrack />}
                         </span>
-                    </div>
-                    <div className="cursor-focus p-4 bg-gray-800 rounded-lg">
-                        Hover me to see the cursor shrink!
                     </div>
                     <div
                         onClick={() => handleTransitionNav("/results")}
                         className={cn(
-                            "w-full px-10 md:text-left group ",
+                            "w-full px-10 md:text-left group cursor-focus",
                             currLocation.pathname === "/results" && "text-white/50"
                         )}
                     >
                         <span className="inline-grid relative items-center justify-center">
-                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-80">RESULTS</span>
+                            <span className="grid-area-[1/1] transition-opacity group-hover:opacity-60">RESULTS</span>
                             {currLocation.pathname === "/results" && <GlassCrack />}
                         </span>
                     </div>

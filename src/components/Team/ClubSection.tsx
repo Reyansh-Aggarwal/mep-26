@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "../../utils.tsx";
 import { CoreMemberCard, ExecMemberCard } from "./MemberCards";
+import { MemberModal } from "./MemberModal";
 import type { Club } from "../../utils.tsx";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,9 @@ export function ClubSection({ club, isLast, showExec = true }: { club: Club, isL
     const coreHeaderRef = useRef<HTMLParagraphElement>(null);
     const execHeaderRef = useRef<HTMLParagraphElement>(null);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [selectedMemberIndex, setSelectedMemberIndex] = useState<number | null>(null);
+
+    const allMembers = [...club.members, ...club.executives];
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -116,6 +120,7 @@ export function ClubSection({ club, isLast, showExec = true }: { club: Club, isL
                             accent={club.accentVar}
                             colorClass={club.colorClass}
                             index={i}
+                            onClick={() => setSelectedMemberIndex(i)}
                         />
                     ))}
                 </div>
@@ -176,6 +181,7 @@ export function ClubSection({ club, isLast, showExec = true }: { club: Club, isL
                             accent={club.accentVar}
                             index={i}
                             isExpanded={isExpanded}
+                            onClick={() => setSelectedMemberIndex(club.members.length + i)}
                         />
                     ))}
                 </div>
@@ -191,6 +197,18 @@ export function ClubSection({ club, isLast, showExec = true }: { club: Club, isL
                     </div>
                 )
             }
+
+            {/* Member Modal */}
+            {selectedMemberIndex !== null && (
+                <MemberModal
+                    members={allMembers}
+                    selectedIndex={selectedMemberIndex}
+                    accent={club.accentVar}
+                    colorClass={club.colorClass}
+                    onClose={() => setSelectedMemberIndex(null)}
+                    onNavigate={(newIndex) => setSelectedMemberIndex(newIndex)}
+                />
+            )}
         </section >
     );
 }
