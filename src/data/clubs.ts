@@ -35,9 +35,11 @@ import matrixLogo from "../assets/logos/matrix_logo.png";
 import ecommLogo from "../assets/logos/ecomm_logo.png";
 import psynapseLogo from "../assets/logos/psynapse_logo.png";
 
+import type { Club } from "../utils.tsx";
+
 export { matrixLogo, ecommLogo, psynapseLogo };
 
-export const clubData = [
+export const clubData: Club[] = [
     {
         name: "Matrix",
         colorClass: "text-[var(--color-matrix)]",
@@ -52,7 +54,14 @@ export const clubData = [
         executives: [
             { role: "Executive", name: "Saksham Sharma", image: MatrixExecSaksham },
             { role: "Executive", name: "Enoch Jom Puthenpura" },
-            { role: "Executive", name: "Priydarshini" }
+            { role: "Executive", name: "Suvarna Sharma" },
+            { role: "Executive", name: "Neiil Nirbhay Suri" },
+            { role: "Executive", name: "Rebecca Siju" },
+            { role: "Executive", name: "Aarya Gandhir" },
+            { role: "Executive", name: "Yashit Ahuja" },
+            { role: "Executive", name: "Nikhil Bhatia" },
+            { role: "Executive", name: "Priydarshini" },
+            { role: "Executive", name: "Shaurya Shekhar" }
         ]
     },
     {

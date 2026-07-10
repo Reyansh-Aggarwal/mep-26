@@ -36,7 +36,7 @@ export interface Club {
 export interface Member {
     role: string;
     name: string;
-    image: any
+    image?: any
 }
 
 export const ExternalRedirect = ({ url }: { url: string }) => {

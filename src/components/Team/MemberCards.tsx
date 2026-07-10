@@ -5,7 +5,7 @@ import { cn, type Member } from "../../utils.tsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function Avatar({ image, name, size = "md", accent }: { image: string, name: string, size?: string, accent: string }) {
+export function Avatar({ image, name, size = "md", accent }: { image?: string, name: string, size?: string, accent: string }) {
     const initials = name
         .split(" ")
         .map((n) => n[0])
