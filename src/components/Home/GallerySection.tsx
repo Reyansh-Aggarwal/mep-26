@@ -96,7 +96,7 @@ export const GallerySection = () => {
     return (
         <div
             ref={outerRef}
-            className="relative w-full md:h-[280vh]"
+            className="relative w-full md:h-[260vh]"
         >
             {/* Sticky viewport (desktop) / normal flow (mobile) */}
             <div
@@ -117,7 +117,7 @@ export const GallerySection = () => {
                     ref={trackRef}
                     className={cn(
                         "md:flex md:items-center md:w-max md:will-change-transform",
-                        "grid grid-cols-1 gap-6 px-4 py-24 md:gap-8 md:px-[12vw] md:py-0"
+                        "grid grid-cols-1 gap-6 px-4 py-24 md:gap-8 md:px-[37vw] md:py-0"
                     )}
                 >
                     {images.map((img, idx) => (
@@ -126,9 +126,9 @@ export const GallerySection = () => {
                             className={cn(
                                 "gallery-frame group relative overflow-hidden",
                                 "transition-colors duration-500 group-hover:border-yellow/40",
-                                "h-[56vw] md:h-[62vh] md:shrink-0 w-full",
-                                idx % 2 === 1 ? "md:mt-20 ml-[47dvw] md:ml-0" : "md:mb-20",
-                                idx === 8 ? "md:w-max" : "md:w-[44vh]"
+                                "h-[56vw] md:h-[52vh] md:shrink-0 w-full",
+                                idx % 2 === 1 ? "md:mt-20 ml-[24dvw] md:ml-0" : "md:mb-20",
+                                idx === 8 ? "md:w-max" : "md:w-max"
                             )}
                         >
                             <img
@@ -138,7 +138,7 @@ export const GallerySection = () => {
                                 className={cn(
                                     "h-full object-cover transition-transform duration-500 w-full",
                                     "border border-white/10",
-                                    idx === 8 ? "md:w-auto w-full" : "md:w-full w-1/2")}
+                                    idx === 8 ? "md:w-auto w-full" : "md:w-auto w-3/4")}
                             />
                             <span className="absolute bottom-3 left-4 font-primary text-sm text-offwhite/70 tracking-widest">
                                 {String(idx + 1).padStart(2, "0")}

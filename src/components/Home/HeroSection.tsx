@@ -17,6 +17,8 @@ export const HeroSection = (() => {
 
 
     useGSAP(() => {
+        let panScrollTrigger: ScrollTrigger | null = null;
+
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
         const matrixLettersRM = gsap.utils.toArray(".matrix-letter");
@@ -60,7 +62,7 @@ export const HeroSection = (() => {
             onComplete: () => {
                 window.dispatchEvent(new CustomEvent("heroAnimationComplete"));
 
-                ScrollTrigger.create({
+                panScrollTrigger = ScrollTrigger.create({
                     animation: scrollTl,
                     trigger: containerRef.current,
                     start: "top top",
@@ -231,6 +233,7 @@ export const HeroSection = (() => {
 
         return () => {
             window.removeEventListener("preloaderComplete", startAnimation);
+            panScrollTrigger?.kill();
         };
     }, []);
 

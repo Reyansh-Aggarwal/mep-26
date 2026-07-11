@@ -4,6 +4,7 @@ import { matrixLogo, ecommLogo, psynapseLogo } from "../../data/clubs.ts";
 import matrixShard from "../../assets/images/matrix-shard.png";
 import ecommShard from "../../assets/images/ecomm-shard.png";
 import psynapseShard from "../../assets/images/psynapse-shard.png";
+import quizShard from "../../assets/images/quiz-shard.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -165,7 +166,7 @@ const acts = [
     { key: "matrix", config: clubConfig.matrix, logo: matrixLogo, events: matrixEvents, shards: matrixShards },
     { key: "ecomm", config: clubConfig.ecomm, logo: ecommLogo, events: ecommEvents, shards: ecommShards },
     { key: "psynapse", config: clubConfig.psynapse, logo: psynapseLogo, events: psynapseEvents, shards: psynapseShards },
-    { key: "quiz", config: clubConfig.quiz, logo: undefined, events: quizEvent, shards: psynapseShards },
+    { key: "quiz", config: clubConfig.quiz, logo: undefined, events: quizEvent, shards: [quizShard] },
 ] as const;
 
 // Flatten into a single ordered list of event "beats" across all three acts.

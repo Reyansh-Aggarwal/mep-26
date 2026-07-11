@@ -10,7 +10,6 @@ export const MembersSection = () => {
     return (
         <div id="membersSection" className="min-h-screen w-full flex flex-col items-center relative overflow-hidden py-24 z-10 bg-black">
 
-
             {/* Clubs Grid */}
             <div className="flex flex-col items-center">
                 {clubs.map((club, idx) => (

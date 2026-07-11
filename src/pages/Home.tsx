@@ -5,7 +5,6 @@ import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 
 import { HeroSection } from "../components/Home/HeroSection";
-import dotBg from "../assets/images/dot-background.png";
 import { Footer } from "../components/Footer";
 import { Navbar } from "../components/Navbar";
 import { EventSection } from "../components/Home/EventSection";
@@ -13,6 +12,7 @@ import { GallerySection } from "../components/Home/GallerySection";
 import { MembersSection } from "../components/Home/MembersSection";
 import { Cursor } from "../components/Cursor";
 import { Ribbon } from "../components/Ribbon";
+import InteractiveDotBackground from "../components/InteractiveDotBackground";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -92,12 +92,9 @@ export const Home = () => {
     return (
         <ReactLenis root ref={lenisRef} options={{ autoRaf: false }}>
             <div className="relative min-h-screen bg-black font-secondary w-full cursor-auto md:cursor-none overflow-x-clip">
-                <div className="fixed inset-0 w-full h-full z-0 opacity-30 pointer-events-none">
-                    <img
-                        src={dotBg}
-                        alt=""
-                        className="w-full h-full object-cover"
-                    />
+                <div className="fixed inset-0 w-full h-full z-0 opacity-80 pointer-events-none">
+                    <InteractiveDotBackground />
+
                 </div>
 
                 <div className="relative z-10 w-full flex flex-col">

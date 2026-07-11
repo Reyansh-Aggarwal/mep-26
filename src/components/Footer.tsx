@@ -19,7 +19,7 @@ export const Footer = () => {
     return (
         <div
             className={cn(
-                "relative w-full bg-black overflow-hidden select-none",
+                "relative w-full overflow-hidden select-none",
                 "flex flex-col items-center justify-center pt-24 pb-12 z-10"
             )}>
 
