@@ -3,6 +3,8 @@ import { useEffect, lazy, Suspense } from "react";
 import { Preloader } from "./components/Preloader";
 import { ExternalRedirect } from "./utils.tsx";
 import { Results } from "./pages/Results.tsx";
+import { SpeedInsights } from "@vercel/speed-insights/react"
+import { Analytics } from "@vercel/analytics/react"
 
 const Home = lazy(() => import("./pages/Home").then((m) => ({ default: m.Home })));
 const Brochure = lazy(() => import("./pages/Brochure").then((m) => ({ default: m.Brochure })));
@@ -32,6 +34,8 @@ export default function App() {
           </Routes>
         </div>
       </Suspense>
+      <SpeedInsights />
+      <Analytics />
     </>
   )
 }

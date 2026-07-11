@@ -8,4 +8,12 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  optimizeDeps: {
+    // Force the React entry points so Vite doesn't pre-scan the package's
+    // Next.js exports, which pull `next/navigation` and fail to resolve.
+    include: [
+      '@vercel/speed-insights/react',
+      '@vercel/analytics/react',
+    ],
+  },
 })
