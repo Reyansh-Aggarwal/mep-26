@@ -14,6 +14,15 @@ import PsyGen from "../assets/images/members/psynapse/gen.jpeg"
 import PsyJoint from "../assets/images/members/psynapse/joint.jpeg"
 import PsyMedia from "../assets/images/members/psynapse/media.jpeg"
 import MatrixExecSaksham from "../assets/images/members/matrix/execs/saksham.jpg"
+import MatrixExecAarya from "../assets/images/members/matrix/execs/aarya.jpeg"
+import MatrixExecEnoch from "../assets/images/members/matrix/execs/enoch.jpeg"
+import MatrixExecNikhil from "../assets/images/members/matrix/execs/nikhil.jpeg"
+import MatrixExecPathak from "../assets/images/members/matrix/execs/pathak.jpeg"
+import MatrixExecPd from "../assets/images/members/matrix/execs/pd.jpeg"
+import MatrixExecSuvarna from "../assets/images/members/matrix/execs/suvarna.jpeg"
+import MatrixExecRebecca from "../assets/images/members/matrix/execs/rebecca.jpeg"
+import MatrixExecYashit from "../assets/images/members/matrix/execs/yashit.jpeg"
+import MatrixExecNeiil from "../assets/images/members/matrix/execs/neiil.jpeg"
 import EcommExecJamwal from "../assets/images/members/ecomm/execs/jamwal.jpeg"
 import EcommExecSaachi from "../assets/images/members/ecomm/execs/saachi.jpeg"
 import EcommExecAvreen from "../assets/images/members/ecomm/execs/avreen.jpeg"
@@ -53,15 +62,15 @@ export const clubData: Club[] = [
         ],
         executives: [
             { role: "Executive", name: "Saksham Sharma", image: MatrixExecSaksham },
-            { role: "Executive", name: "Enoch Jom Puthenpura" },
-            { role: "Executive", name: "Suvarna Sharma" },
-            { role: "Executive", name: "Neiil Nirbhay Suri" },
-            { role: "Executive", name: "Rebecca Siju" },
-            { role: "Executive", name: "Aarya Gandhir" },
-            { role: "Executive", name: "Yashit Ahuja" },
-            { role: "Executive", name: "Nikhil Bhatia" },
-            { role: "Executive", name: "Priydarshini" },
-            { role: "Executive", name: "Shaurya Shekhar" }
+            { role: "Executive", name: "Enoch Jom Puthenpura", image: MatrixExecEnoch },
+            { role: "Executive", name: "Suvarna Sharma", image: MatrixExecSuvarna },
+            { role: "Executive", name: "Neiil Nirbhay Suri", image: MatrixExecNeiil },
+            { role: "Executive", name: "Rebecca Siju", image: MatrixExecRebecca },
+            { role: "Executive", name: "Aarya Gandhir", image: MatrixExecAarya },
+            { role: "Executive", name: "Yashit Ahuja", image: MatrixExecYashit },
+            { role: "Executive", name: "Nikhil Bhatia", image: MatrixExecNikhil },
+            { role: "Executive", name: "Priydarshini", image: MatrixExecPd },
+            { role: "Executive", name: "Shaurya Shekhar", image: MatrixExecPathak }
         ]
     },
     {

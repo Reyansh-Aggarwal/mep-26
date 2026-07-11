@@ -17,7 +17,7 @@ export function Avatar({ image, name, size = "md", accent }: { image?: string, n
         <div
             className={cn(
                 `rounded-2xl overflow-hidden relative flex-shrink-0`,
-                size === "sm" ? "w-20 h-20" : size === "md" ? "w-36 h-36 md:w-44 md:h-44" : "w-44 h-44 md:w-56 md:h-56")}
+                size === "sm" ? "w-20 h-20" : size === "md" ? "w-36 h-36 md:w-44 md:h-44" : size == "lg" ? "w-44 h-44 md:w-56 md:h-56" : "w-64 h-64 md:w-72 md:h-72")}
         >
             {image ? (
                 <img src={image} alt={name} loading="lazy" className="w-full h-full object-cover" />
@@ -78,7 +78,7 @@ export function CoreMemberCard({ member, accent, colorClass, index, onClick }: {
             </div>
             <p
                 className={cn(
-                    "font-secondary font-bold text-xl text-offwhite tracking-wide uppercase text-center group-hover:text-yellow transition-colors duration-300",
+                    "font-secondary font-bold text-xl text-offwhite tracking-wide uppercase text-center transition-colors duration-300 group-hover:opacity-60",
                     member.name === "Atharv Sharma" && "group-hover:text-black")}
 
             >
@@ -131,7 +131,7 @@ export function ExecMemberCard({ member, accent, index, isExpanded, onClick }: {
                 <Avatar image={member.image} name={member.name} size={isExpanded ? "md" : "sm"} accent={accent} />
             </div>
             <p className={cn(
-                "font-secondary tracking-widest uppercase text-center transition-all duration-500 ease-out group-hover:text-yellow",
+                "font-secondary tracking-widest uppercase text-center transition-all duration-500 ease-out group-hover:opacity-60",
                 isExpanded ? "text-base font-bold text-offwhite" : "text-xs text-offwhite/70"
             )}>
                 {member.name}
