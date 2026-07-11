@@ -95,22 +95,22 @@ export function MemberModal({ members, selectedIndex, accent, colorClass, onClos
     return (
         <div
             ref={backdropRef}
-            className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-8 bg-black/80 backdrop-blur-md select-none cursor-none opacity-0"
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-8 bg-black/80 backdrop-blur-md select-none opacity-0"
             onClick={animateClose}
         >
             {/* Close */}
-            <button
+            <div
                 onClick={(e) => { e.stopPropagation(); animateClose(); }}
-                className="absolute top-6 right-6 p-2 text-white/50 hover:text-white transition-colors cursor-focus z-50"
+                className="cursor-none absolute top-6 right-6 p-2 text-white/50 hover:text-white transition-colors cursor-focus z-50"
                 aria-label="Close modal"
             >
                 <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
-            </button>
+            </div>
 
             {/* Left arrow */}
-            <button
+            <div
                 onClick={(e) => {
                     e.stopPropagation();
                     animateNavigate((selectedIndex - 1 + members.length) % members.length);
@@ -120,7 +120,7 @@ export function MemberModal({ members, selectedIndex, accent, colorClass, onClos
                 <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
-            </button>
+            </div>
 
             {/* Content */}
             <div
@@ -148,7 +148,7 @@ export function MemberModal({ members, selectedIndex, accent, colorClass, onClos
 
                 {/* Mobile arrows */}
                 <div className="flex sm:hidden justify-between w-full mt-8 px-8">
-                    <button
+                    <div
                         onClick={(e) => {
                             e.stopPropagation();
                             animateNavigate((selectedIndex - 1 + members.length) % members.length);
@@ -158,8 +158,8 @@ export function MemberModal({ members, selectedIndex, accent, colorClass, onClos
                         <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
-                    </button>
-                    <button
+                    </div>
+                    <div
                         onClick={(e) => {
                             e.stopPropagation();
                             animateNavigate((selectedIndex + 1) % members.length);
@@ -169,12 +169,12 @@ export function MemberModal({ members, selectedIndex, accent, colorClass, onClos
                         <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
-                    </button>
+                    </div>
                 </div>
             </div>
 
             {/* Right arrow */}
-            <button
+            <div
                 onClick={(e) => {
                     e.stopPropagation();
                     animateNavigate((selectedIndex + 1) % members.length);
@@ -184,7 +184,7 @@ export function MemberModal({ members, selectedIndex, accent, colorClass, onClos
                 <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
-            </button>
+            </div>
         </div>
     );
 }
