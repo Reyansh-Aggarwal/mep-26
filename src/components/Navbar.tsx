@@ -163,12 +163,12 @@ export const Navbar = () => {
         <>
             <div
                 ref={transitionOverlayRef}
-                className="fixed inset-0 bg-black z-50 pointer-events-none scale-y-0"
+                className="fixed inset-0 z-50 pointer-events-none scale-y-0"
             />
 
             <div id="navbar"
                 ref={navbarRef}
-                className={cn("fixed top-0 left-0 w-full h-fit px-4 py-4 z-20 bg-black/80 backdrop-blur-sm",
+                className={cn("fixed top-0 left-0 w-full h-fit px-4 py-4 z-20 bg-black/40 backdrop-blur-sm",
                     "select-none",
                     currLocation.pathname === "/home" && " -translate-y-full"
                 )}
