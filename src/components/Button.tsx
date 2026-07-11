@@ -8,7 +8,7 @@ interface ButtonProps {
 
 export const Button = ({ text, onclick, visibility }: ButtonProps) => {
     return (
-        <div id="brochure" className={cn("relative w-fit rounded-full group")}>
+        <div id="brochure" className={cn("relative w-full md:w-fit rounded-full group")}>
             <div onClick={() => { onclick() }}
                 className={cn(
                     "px-6 md:px-10 py-2.5 text-center flex cursor-focus",
@@ -17,9 +17,9 @@ export const Button = ({ text, onclick, visibility }: ButtonProps) => {
                     "font-secondary font-bold tracking-wider uppercase",
                     "shadow-[0_4px_0_#524f5f] [-webkit-text-stroke:1px_#ffffff40]",
                     "transition-all duration-200 cursor-none",
-                    "hover:text-white hover:border-yellow/40 hover:shadow-[0_4px_0_#726d84]",
+                    "hover:text-white hover:border-white/40 hover:shadow-[0_4px_0_#726d84]",
                     "active:translate-y-1 active:shadow-none active:bg-black active:text-white",
-                    visibility == "sm" ? "flex md:hidden py-4 text-xl" : visibility == "md" ? "hidden md:flex" : ""
+                    visibility == "sm" ? "flex md:hidden py-4 text-2xl w-full justify-center" : visibility == "md" ? "hidden md:flex justify-center" : ""
                 )}
             >
                 {text}
