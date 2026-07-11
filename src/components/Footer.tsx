@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-library.add(faEnvelope);
+library.add(faEnvelope, faPhone, faInstagram);
 
 export const Footer = () => {
     const navigate = useNavigate();

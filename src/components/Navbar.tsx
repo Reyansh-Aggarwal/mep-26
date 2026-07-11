@@ -261,7 +261,7 @@ export const Navbar = () => {
                         </span>
                     </div>
 
-                    <div className="flex flex-row justify-between w-full px-10 md:hidden text-lg h-fit items-center">
+                    <div className="flex flex-col gap-8 w-full px-10 md:hidden h-fit items-center">
                         <Button onclick={() => { handleTransitionNav("/brochure") }} text="VIEW BROCHURE" visibility="sm" />
                         <Button onclick={() => { handleTransitionNav("/register") }} text="REGISTER NOW" visibility="sm" />
                     </div>
