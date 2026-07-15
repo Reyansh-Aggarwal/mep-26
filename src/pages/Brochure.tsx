@@ -53,7 +53,7 @@ export const Brochure = () => {
     const pageHeight = containerHeight ? containerHeight - 32 : undefined;
 
     return (
-        <div className="flex flex-col h-dvh w-full bg-black overflow-hidden items-center cursor-none">
+        <div className="flex flex-col h-dvh w-full bg-black overflow-hidden items-center cursor-focus cursor-none">
             <style>{`
                 .brochure-scroll::-webkit-scrollbar {
                     width: 8px;

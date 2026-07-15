@@ -138,7 +138,7 @@ export function MemberModal({ members, selectedIndex, accent, colorClass, onClos
                 </div>
 
                 <div ref={infoRef} className="flex flex-col items-center gap-2 text-center mt-4 opacity-0">
-                    <h2 className="font-primary text-4xl md:text-5xl text-offwhite uppercase tracking-wider">
+                    <h2 className="font-secondary font-bold text-4xl md:text-5xl text-offwhite uppercase tracking-wider">
                         {member.name}
                     </h2>
                     <p className={cn("font-secondary text-lg tracking-[0.2em] uppercase", colorClass)}>

@@ -37,9 +37,6 @@ export const Home = () => {
         // are no-ops. `unlock` starts Lenis when the reveal finishes.
         const revealChrome = (delay: number, unlock: boolean) => {
             if (revealed) return;
-            const navbar = document.getElementById("navbar");
-            const buttonBar = document.getElementById("buttonBar");
-            if (!navbar || !buttonBar) return;
             revealed = true;
 
             revealTl = gsap.timeline({
@@ -48,20 +45,6 @@ export const Home = () => {
                     if (unlock) lenisRef.current?.lenis?.start();
                 }
             });
-
-            revealTl
-                .to(navbar, {
-                    yPercent: 0,
-                    opacity: 1,
-                    duration: 1.2,
-                    ease: "power3.out",
-                }, 0)
-                .to(buttonBar, {
-                    yPercent: 0,
-                    opacity: 1,
-                    duration: 1.2,
-                    ease: "power3.out",
-                }, 0);
         };
 
         // Natural end: reveal (if a skip hasn't already) and, since the intro is truly
@@ -104,7 +87,7 @@ export const Home = () => {
                     <Ribbon content={"EVENTS"} />
                     <EventSection />
                     <Ribbon content={"EVENTS"} />
-                    <div className="relative z-10 md:sticky md:top-0 md:z-0">
+                    <div className="relative z-10">
                         <GallerySection />
                     </div>
                     <div className="relative z-10 bg-black">
