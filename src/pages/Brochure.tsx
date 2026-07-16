@@ -6,7 +6,6 @@ import "react-pdf/dist/Page/TextLayer.css";
 import { Navbar } from "../components/Navbar";
 import { Cursor } from "../components/Cursor";
 import brochurePdf from "../assets/mep-brochure.pdf";
-import compressedBrochure from "../assets/mep-brochure_compressed.pdf";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -90,7 +89,7 @@ export const Brochure = () => {
                 data-lenis-prevent
                 className="brochure-scroll flex-1 min-h-0 w-full overflow-y-auto flex flex-col items-center gap-4 py-4">
                 <Document
-                    file={compressedBrochure}
+                    file={brochurePdf}
                     onLoadSuccess={({ numPages }) => setNumPages(numPages)}
                     className="flex flex-col items-center gap-4"
                     loading={
