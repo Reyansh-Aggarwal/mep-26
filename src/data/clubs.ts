@@ -33,10 +33,10 @@ import EcommExecShreyansh from "../assets/images/members/ecomm/execs/shreyansh.j
 import EcommExecSaira from "../assets/images/members/ecomm/execs/saira.jpeg"
 import PsyExecYashika from "../assets/images/members/psynapse/execs/yashika.jpeg"
 import PsyExecVrinda from "../assets/images/members/psynapse/execs/vrinda.jpeg"
-import PsyExecAkshita from "../assets/images/members/psynapse/execs/akshita.jpeg"
+import PsyExecSaanvi from "../assets/images/members/psynapse/execs/saanvi.jpeg"
 import PsyExecDiya from "../assets/images/members/psynapse/execs/diya.jpeg"
 import PsyExecAyanna from "../assets/images/members/psynapse/execs/ayanna.jpeg"
-import PsyExecEshita from "../assets/images/members/psynapse/execs/eshita.jpeg"
+import PsyExecBhaavya from "../assets/images/members/psynapse/execs/bhaavya.jpeg"
 import PsyExecAnika from "../assets/images/members/psynapse/execs/anika.jpeg"
 import PsyExecKhanak from "../assets/images/members/psynapse/execs/khanak.jpeg"
 
@@ -108,11 +108,11 @@ export const clubData: Club[] = [
         ],
         executives: [
             { name: "Vrinda Gulati", role: "executive", image: PsyExecVrinda },
-            { name: "Akshita Sharma", role: "executive", image: PsyExecAkshita },
+            { name: "Saanvi Kakarla", role: "executive", image: PsyExecSaanvi },
             { name: "Diya Pillai", role: "executive", image: PsyExecDiya },
             { name: "Ayanna Gupta", role: "executive", image: PsyExecAyanna },
             { name: "Yashika", role: "executive", image: PsyExecYashika },
-            { name: "Eshita", role: "executive", image: PsyExecEshita },
+            { name: "Bhaavya Uppal", role: "executive", image: PsyExecBhaavya },
             { name: "Anika Vishwakarma", role: "executive", image: PsyExecAnika },
             { name: "Khanak Choudhary", role: "executive", image: PsyExecKhanak }
         ]
