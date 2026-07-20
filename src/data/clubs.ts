@@ -33,7 +33,7 @@ import EcommExecShreyansh from "../assets/images/members/ecomm/execs/shreyansh.j
 import EcommExecSaira from "../assets/images/members/ecomm/execs/saira.jpeg"
 import PsyExecYashika from "../assets/images/members/psynapse/execs/yashika.jpeg"
 import PsyExecVrinda from "../assets/images/members/psynapse/execs/vrinda.jpeg"
-import PsyExecSaanvi from "../assets/images/members/psynapse/execs/saanvi.jpeg"
+import PsyExecSaanvi from "../assets/images/members/psynapse/execs/saanvi2.jpeg"
 import PsyExecDiya from "../assets/images/members/psynapse/execs/diya.jpeg"
 import PsyExecAyanna from "../assets/images/members/psynapse/execs/ayanna.jpeg"
 import PsyExecBhaavya from "../assets/images/members/psynapse/execs/bhaavya.jpeg"
