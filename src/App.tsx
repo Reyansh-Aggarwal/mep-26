@@ -5,6 +5,7 @@ import { ExternalRedirect } from "./utils.tsx";
 import { Results } from "./pages/Results.tsx";
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Analytics } from "@vercel/analytics/react"
+import { NotFound } from "./pages/NotFound.tsx";
 
 const Home = lazy(() => import("./pages/Home").then((m) => ({ default: m.Home })));
 const Brochure = lazy(() => import("./pages/Brochure").then((m) => ({ default: m.Brochure })));
@@ -31,6 +32,7 @@ export default function App() {
             <Route path="alumni" element={<Alumni />} />
             <Route path="results" element={<Results />} />
             <Route path="register" element={<ExternalRedirect url="https://prettyform.addxt.com/a/form/vf/1FAIpQLScY9AS4102YUC6AMyXR7HiuaxUSHpXgSTHP8Pi-gQb42RBOFw" />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </Suspense>
